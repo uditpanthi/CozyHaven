@@ -1,0 +1,72 @@
+.main-Hotel{
+  margin-top: 90px;
+}
+.rooms-section{
+  z-index: 10;
+}
+.hotel-card {
+  display: flex;
+  width: 70vw;
+  border: 1px solid #eaeaea;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  margin-bottom: 20px;
+}
+
+.hotel-card:hover {
+  transform: scale(1.03);
+}
+
+.hotel-card img {
+  width: 300px; /* Fixed width for the image */
+  height: 300px; /* Fixed height for the image */
+  object-fit: cover; /* Maintain aspect ratio and cover the container */
+  border-radius: 8px 0 0 8px;
+}
+
+.hotel-info {
+  z-index: 10;
+  padding: 20px;
+  width: 100%; /* Set width to 100% to match the card width */
+  position: relative; /* Position relative for absolute positioning of prices */
+}
+.hotel-info h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 1.4rem;
+  color: #ffffff;
+}
+
+.hotel-info p {
+  margin: 5px 0;
+  font-size: 1rem;
+  color: #ffffff;
+}
+.carousel-status {
+  display: none; /* Hide the status indicator */
+}
+.carousel .thumb{
+  display: none;
+}
+.price-range {
+  position: absolute;
+  bottom: 20px; /* Adjust as needed */
+  right: 20px; /* Adjust as needed */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.price-range span:nth-child(1) {
+  font-size: 1rem;
+  color: #7e6666;
+  text-decoration: line-through red; 
+  margin-bottom: 5px; 
+}
+
+.price-range span:last-child {
+  font-size: 2rem;
+  margin-bottom: 0; /* Remove margin from last price */
+}

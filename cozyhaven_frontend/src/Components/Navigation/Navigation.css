@@ -1,0 +1,89 @@
+nav {
+    height: 130px;
+    width: 100%;
+    /* background-color: black; */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    font-weight: 900;
+    position: fixed;
+    z-index: 899;
+  }
+  nav #nav-buttons {
+    display: flex;
+    padding: 1vh;
+    gap: 20px;
+  }
+  nav h4 a {
+    text-decoration: none;
+    font-weight: 500;
+    color: white;
+  }
+  nav #nav-buttons h4 a:hover {
+    color: #95c11e;
+  }
+  nav #login-signup {
+    display: flex;
+    padding: 1vh;
+    gap: 20px;
+    text-align: center;
+  }
+  nav #login-signup h4 {
+    padding: 0.6rem;
+  }
+  nav #login-signup h4:last-child {
+    padding-left: 1.5vw;
+    padding-right: 1.5vw;
+    border: 1.5px solid #95c11e;
+    border-radius: 800px;
+    font-weight: 500;
+    transition: all ease 0.4s;
+    position: relative;
+    overflow: hidden;
+  }
+  nav #login-signup h4:last-child:after {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: #95c11e;
+    left: 0;
+    bottom: -100%;
+    border-radius: 50%;
+    transition: all ease 0.4s;
+  }
+  nav #login-signup h4:last-child:hover::after {
+    bottom: 0;
+    border-radius: 0;
+    color: #000;
+  }
+  nav #login-signup h4 a:last-child {
+    text-decoration: none;
+    position: relative;
+    z-index: 10;
+  }
+  nav #login-signup h4:nth-child(1) a:hover {
+    color: #95c11e;
+  }
+  nav #login-signup h4:last-child a:hover {
+    color: #000;
+    font-weight: 600;
+  }
+
+  @media (max-width: 607px) {
+    nav #nav-buttons {
+      display: none;
+    }
+    nav #nav-buttons {
+      display: none;
+    }
+    nav #login-signup {
+      gap: 2px;
+    }
+    nav {
+      /* padding: 2px; */
+      position: absolute;
+      justify-content: space-between;
+    }
+  }

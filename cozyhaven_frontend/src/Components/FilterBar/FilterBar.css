@@ -1,0 +1,31 @@
+#filterbar {
+  position: fixed;
+  top: 120px;
+  left: 0;
+  width: 200px;
+  height: calc(100% - 80px);
+  /* background-color: #f9f9f9;  */
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.filter-option {
+  margin-bottom: 10px;
+}
+
+.filter-option h4 {
+  margin-bottom: 5px;
+}
+
+.filter-option label {
+  display: block;
+  margin-left: 5px;
+}
+
+.filter-option input[type="checkbox"] {
+  margin-right: 5px;
+}

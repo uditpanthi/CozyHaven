@@ -1,0 +1,36 @@
+/* UserReservations.css */
+
+.user-reservations-container {
+    margin: 20px;
+    padding: 20px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+  }
+  
+  .user-reservations-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .reservation-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .reservation-table th,
+  .reservation-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .reservation-table th {
+    background-color: #817f7f;
+  }
+  
+  .error-message {
+    color: #ff0000;
+    font-style: italic;
+  }
+  

@@ -1,0 +1,65 @@
+.user-profile-container {
+    max-width: 600px;
+    margin: 0 auto;
+    margin-top: 10vh;
+    padding: 20px;
+    /* background-color: rgba(255, 255, 255, 0.9); */
+    border: 2px solid white;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .user-profile-container h2 {
+    text-align: center;
+  }
+  
+  .profile-section {
+    margin-bottom: 20px;
+  }
+  
+  .profile-section h3 {
+    margin-bottom: 10px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    display: block;
+    font-weight: bold;
+  }
+  
+  .form-group input[type="text"],
+  .form-group input[type="email"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .form-group button {
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .form-group button + button {
+    margin-left: 10px; /* Add margin between buttons */
+  }
+  
+  .form-group button:hover {
+    background-color: #0056b3;
+  }
+  
+  .success-message {
+    color: green;
+  }
+  
+  .error-message {
+    color: red;
+  }
+  

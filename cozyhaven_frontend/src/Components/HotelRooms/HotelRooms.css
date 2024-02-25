@@ -1,0 +1,168 @@
+/* Rooms.css */
+
+/* General styles */
+.rooms {
+  z-index: 10;
+}
+
+/* Room list */
+.room-list {
+  height: 100vh;
+  width: 70vw;
+}
+
+/* Hotel rooms container */
+.hotelrooms-container {
+  gap: 30px;
+  min-height: 100vh;
+  margin-top: 80px;
+  padding: 30px;
+}
+
+/* Hotel info */
+.hotelrooms-container .hotel-info {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+/* Rooms and reviews layout */
+.rooms-and-reviews {
+  display: flex;
+  /* justify-content: space-between; */
+  gap: 50px;
+}
+
+/* Reviews list */
+.reviews-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid white;
+  border-radius: 5px;
+  padding: 20px;
+}
+
+.reviews-list p {
+  font-size: 1rem;
+}
+
+/* Room item */
+.room-item {
+  width: 75vw;
+  min-height: 34vh;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+/* Room details */
+.room-details {
+  display: flex;
+  margin-bottom: 5px;
+  gap: 2rem;
+}
+
+/* Room image */
+.room-details #img {
+  height: 300px;
+  width: 400px;
+}
+
+.room-details img {
+  height: 300px;
+  width: 300px;
+}
+
+/* Room info */
+.room-details p {
+  margin: 5px 0;
+}
+
+.room-details p:first-child {
+  font-weight: bold;
+}
+
+/* Error message */
+.error-message {
+  color: red;
+  font-style: italic;
+}
+
+.reviews-list {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+}
+
+.review-info {
+  margin-bottom: 20px;
+}
+
+.review-info p {
+  margin: 0;
+  padding: 5px 0;
+}
+
+.review {
+  margin-bottom: 20px;
+}
+
+.review p {
+  margin: 0;
+  padding: 5px 0;
+}
+
+.review .comment {
+  font-weight: bold;
+}
+
+.review .rating {
+  color: #ffc107; /* Add color for the rating */
+}
+
+.put-review {
+  margin-top: 20px;
+}
+
+.put-review h2 {
+  margin-bottom: 10px;
+}
+
+.put-review label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.put-review input{
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: none;
+  background-color: transparent;
+}
+.put-review textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: none;
+}
+
+.put-review button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.put-review button:hover {
+  background-color: #0056b3;
+}

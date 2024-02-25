@@ -1,0 +1,115 @@
+
+#cursor-blur {
+    height: 500px;
+    width: 500px;
+    background-color: rgba(150, 193, 30, 0.3);
+    border-radius: 50%;
+    position: fixed;
+    filter: blur(80px);
+    z-index: -1;
+    transition: all linear 0.4s;
+}
+#registration-page {
+    /* background-color: #000000; */
+    padding: 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+#registration-page h2{
+-webkit-text-stroke: 2px white;
+  color: black;
+  font-size: 3rem;
+  font-family: 'Basement Grotesque';
+}
+
+#registration-form {
+    display: flex;
+    flex-wrap: wrap;
+    flex-grow: 1;
+    align-items: center;
+    overflow: scroll;
+    scrollbar-width: none;
+    justify-content: space-between;
+    position: relative;
+    background-color: #333; 
+    border-radius: 20px;
+    box-shadow: 0 0 200px rgba(0, 0, 0, 0.1);
+    padding: 4rem;
+    /* height: 30vh; */
+    width: 50%;
+    gap: 3rem;
+    z-index: 2;
+}
+#registration-page a{
+    width: 100%;
+    /* background-color: #95c11e;  */
+    color: #1997d1;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+#registration-form #gender{
+    width: 20vh;
+}
+#registration-form h2 {
+    text-align: center;
+    color: #95c11e; /* Accent color */
+    margin-bottom: 20px;
+}
+
+.input-group {
+    flex-grow: 1;
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #fff; /* Text color */
+}
+#address{
+    resize: none;
+    height: 10vh;
+}
+
+#registration-form input,
+select,
+textarea {
+    text-transform: none;
+    width: 100%;
+    padding: 10px;
+    background-color: #444; /* Input background color */
+    color: #fff; /* Input text color */
+    border: 1px solid #555; /* Input border color */
+    border-radius: 20px;
+    margin-top: 5px;
+}
+
+#registration-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #95c11e; /* Accent color */
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#registration-form button:hover {
+    color: #000000;
+    background-color: #7e9b14; /* Darker accent color on hover */
+}
+
+/* Add responsiveness for small screens */
+@media only screen and (max-width: 600px) {
+    #registration-form {
+        width: 90%;
+    }
+}
