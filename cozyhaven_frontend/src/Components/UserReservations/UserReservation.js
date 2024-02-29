@@ -3,8 +3,8 @@ import React, { useState, useEffect } from 'react';
 
 // Define the BookingStatus enum
 const BookingStatus = {
-  0: 'Pending',
-  1: 'CheckedOut',
+  0: 'Checkout',
+  1: 'Pending',
   2: 'Approved',
   3: 'Cancelled'
 };
@@ -38,7 +38,7 @@ const UserReservations = () => {
 
   return (
     <div className="user-reservations-container">
-      <h2 className="user-reservations-title">All Reservations by User: {username}</h2>
+      {/* <h2 className="user-reservations-title">All Reservations by User: {username}</h2> */}
       {error && <p className="error-message">Error: {error}</p>}
       <table className="reservation-table">
         <thead>
@@ -61,7 +61,7 @@ const UserReservations = () => {
               <td>{reservation.checkOutDate.split('T')[0]}</td>
               <td>{reservation.adults}</td>
               <td>{reservation.children}</td>
-              <td>{reservation.totalPrice}</td>
+              <td>₹{reservation.totalPrice}</td>
               <td>{BookingStatus[reservation.status]}</td>
               <td>{reservation.bookedDate.split('T')[0]}</td>
             </tr>

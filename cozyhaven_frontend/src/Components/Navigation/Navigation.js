@@ -22,6 +22,8 @@ const Navigation = () => {
   const handleLogout = () => {
     sessionStorage.removeItem("token"); // Remove token from sessionStorage
     sessionStorage.removeItem("username"); // Remove username from sessionStorage
+    sessionStorage.removeItem("role");
+    sessionStorage.removeItem("userId");
   };
 
   return (

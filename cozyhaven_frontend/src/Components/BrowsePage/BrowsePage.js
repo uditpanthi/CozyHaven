@@ -11,10 +11,10 @@ const BrowsePage = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const destination = queryParams.get("location");
-  
+
   useEffect(() => {
     CursorAnimation();
-    window.scrollTo(0, 0); // Scroll to the top of the page
+    window.scrollTo(0, 0);
     fetchHotelsByLocation();
   }, [destination]);
 
@@ -26,47 +26,101 @@ const BrowsePage = () => {
     try {
       let response;
       if (!destination) {
-        response = await fetch('http://localhost:5108/api/Hotel/GetAllHotels');
+        response = await fetch("http://localhost:5108/api/Hotel/GetAllHotels");
       } else {
         response = await fetch(
           `http://localhost:5108/api/Hotel/GetHotelsByLocation?location=${destination}`
         );
       }
-  
+
       if (!response.ok) {
         throw new Error("Failed to fetch hotels");
       }
-      
+
       const data = await response.json();
       if (data.$values.length === 0) {
-        // No hotels found at the specified location
         setHotels([]);
       } else {
-        // Hotels found, update the state
         setHotels(data.$values);
       }
     } catch (error) {
       setError(error.message);
     }
   };
-  
 
   const handleInputChange = (e) => {
-    setQuery(e.target.value);
+    const query = e.target.value.toLowerCase();
+    const filteredHotels = hotels.filter((hotel) => {
+      const nameMatch = hotel.name.toLowerCase().includes(query);
+      const cityMatch = hotel.city.toLowerCase().includes(query);
+      return nameMatch || cityMatch;
+    });
+    setQuery(query);
+    // Reset hotels to the original list when the input is cleared
+    if (query === "") {
+      fetchHotelsByLocation();
+    } else {
+      setHotels(filteredHotels);
+    }
   };
 
-  const filteredItems = hotels.filter((hotel) => {
-    const nameMatch = hotel.name.toLowerCase().includes(query.toLowerCase());
-    const cityMatch = hotel.city.toLowerCase().includes(query.toLowerCase());
-    return nameMatch || cityMatch;
-  });
+  const handleFiltersUpdate = async (filters) => {
+    const { location, amenities, priceRange, rating } = filters;
+  
+    try {
+      let response;
+      if (amenities.length > 0) {
+        const amenitiesQuery = amenities.join(",");
+        response = await fetch(
+          `http://localhost:5108/api/Hotel/HotelAmenities?id=1&amenities=${amenitiesQuery}`
+        );
+      } else {
+        response = await fetch("http://localhost:5108/api/Hotel/GetAllHotels");
+      }
+  
+      if (!response.ok) {
+        throw new Error("Failed to fetch hotels by amenities");
+      }
+  
+      const data = await response.json();
+      let filteredHotels = [];
+  
+      if (data && data.$values) {
+        filteredHotels = data.$values.filter((hotel) => {
+          if (location && hotel.city !== location) {
+            return false;
+          }
+  
+          if (priceRange && (hotel.startingPrice < priceRange[0] || hotel.startingPrice > priceRange[1])) {
+            return false;
+          }
+  
+          if (rating) {
+            const reviews = hotel.reviews.$values;
+            const totalRatings = reviews.reduce((acc, review) => acc + review.rating, 0);
+            const averageRating = totalRatings / reviews.length;
+            if (averageRating < rating) {
+              return false;
+            }
+          }
+  
+          return true;
+        });
+      }
+  
+      setHotels(filteredHotels);
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+  
 
   return (
     <>
       <div className="browse-page">
         <div id="cursor-blur"></div>
         <Navigation />
-        <FilterBar />
+        <FilterBar updateFilters={handleFiltersUpdate} />
         <div className="hotel-list">
           <input
             type="text"
@@ -76,9 +130,13 @@ const BrowsePage = () => {
             className="search-input"
           />
           {hotels.length === 0 ? (
-            <p>No hotels available at this location</p>
+            <p>
+              <br/>
+              <br/>
+              <br/>
+              No hotels available </p>
           ) : (
-            <Hotels hotels={filteredItems} />
+            <Hotels hotels={hotels} />
           )}
         </div>
       </div>

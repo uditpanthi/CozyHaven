@@ -91,7 +91,7 @@ namespace COZYHAVEN.Migrations
                             HotelId = 1,
                             Address = "123 Main Street",
                             City = "Example City",
-                            Description = "A cozy place to stay.",
+                            Description = "The car parking and the Wi-Fi are always free, so you can stay in touch and come and go as you please. Strategically situated in Malsi, allowing you access and proximity to local attractions and sights. Don't leave before paying a visit to the famous Jolly Grant Airport. Rated with 4 stars, this high-quality property provides guests with access to restaurant and fitness center on-site.",
                             ImageURLs = "https://plus.unsplash.com/premium_photo-1670360414903-19e5832f8bc4?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D,https://images.unsplash.com/photo-1489171078254-c3365d6e359f?q=80&w=1931&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
                             Name = "Cozy Inn",
                             NumberOfRooms = 20,
@@ -104,13 +104,26 @@ namespace COZYHAVEN.Migrations
                             HotelId = 2,
                             Address = "456 Elm Street",
                             City = "Another City",
-                            Description = "Experience luxury at its finest.",
+                            Description = "The car parking and the Wi-Fi are always free, so you can stay in touch and come and go as you please. Strategically situated in Khurbura Mohalla, allowing you access and proximity to local attractions and sights. Don't leave before paying a visit to the famous Jolly Grant Airport. This 4-star property features restaurant to make your stay more indulgent and memorable.",
                             ImageURLs = "https://images.unsplash.com/photo-1625244724120-1fd1d34d00f6?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D,https://plus.unsplash.com/premium_photo-1661843652801-66305e3c980c?q=80&w=2037&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
                             Name = "Luxury Resort",
                             NumberOfRooms = 10,
                             OwnerId = 1,
                             StartingPrice = 1500.0,
                             prePrice = 3000.0
+                        },
+                        new
+                        {
+                            HotelId = 3,
+                            Address = "4 Rajnikunj",
+                            City = "Dehradun",
+                            Description = "A perfect value for money place, middle of shopping paradise. Very spacious rooms, courteous staff, free parking and above all very tasty food. Though the hotel is slightly outside the main city periphery but still it offers convenient access to it with all key facilities around., whether steer good, bar or lounges, pacific mall etc. overall my family loves the stay in Lemon Tree Dehradun.",
+                            ImageURLs = "https://images.unsplash.com/photo-1596436889106-be35e843f974?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D,https://images.unsplash.com/photo-1543968332-f99478b1ebdc?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                            Name = "PP Resort",
+                            NumberOfRooms = 50,
+                            OwnerId = 1,
+                            StartingPrice = 500.0,
+                            prePrice = 2000.0
                         });
                 });
 
@@ -126,7 +139,7 @@ namespace COZYHAVEN.Migrations
 
                     b.HasIndex("AmenityId");
 
-                    b.ToTable("HotelAmenity");
+                    b.ToTable("HotelAmenities");
                 });
 
             modelBuilder.Entity("CozyHaven.Models.Payment", b =>
@@ -165,7 +178,7 @@ namespace COZYHAVEN.Migrations
                         {
                             PaymentId = 1,
                             Amount = 250f,
-                            PaymentDate = new DateTime(2024, 2, 23, 21, 53, 12, 340, DateTimeKind.Local).AddTicks(6061),
+                            PaymentDate = new DateTime(2024, 2, 27, 9, 47, 55, 822, DateTimeKind.Local).AddTicks(7151),
                             PaymentMethod = "Credit Card",
                             ReservationId = 1,
                             Status = 1
@@ -221,9 +234,9 @@ namespace COZYHAVEN.Migrations
                         {
                             ReservationId = 1,
                             Adults = 2,
-                            BookedDate = new DateTime(2024, 2, 23, 21, 53, 12, 340, DateTimeKind.Local).AddTicks(6050),
-                            CheckInDate = new DateTime(2024, 2, 23, 0, 0, 0, 0, DateTimeKind.Local),
-                            CheckOutDate = new DateTime(2024, 2, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            BookedDate = new DateTime(2024, 2, 27, 9, 47, 55, 822, DateTimeKind.Local).AddTicks(7141),
+                            CheckInDate = new DateTime(2024, 2, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            CheckOutDate = new DateTime(2024, 2, 29, 0, 0, 0, 0, DateTimeKind.Local),
                             Children = 0,
                             RoomId = 1,
                             Status = 2,
@@ -268,7 +281,7 @@ namespace COZYHAVEN.Migrations
                         {
                             ReviewId = 1,
                             Comment = "Great experience!",
-                            DatePosted = new DateTime(2024, 2, 23, 21, 53, 12, 340, DateTimeKind.Local).AddTicks(6019),
+                            DatePosted = new DateTime(2024, 2, 27, 9, 47, 55, 822, DateTimeKind.Local).AddTicks(7112),
                             HotelId = 1,
                             Rating = 4.5f,
                             UserId = 1
@@ -277,7 +290,7 @@ namespace COZYHAVEN.Migrations
                         {
                             ReviewId = 2,
                             Comment = "Excellent service!",
-                            DatePosted = new DateTime(2024, 2, 23, 21, 53, 12, 340, DateTimeKind.Local).AddTicks(6020),
+                            DatePosted = new DateTime(2024, 2, 27, 9, 47, 55, 822, DateTimeKind.Local).AddTicks(7113),
                             HotelId = 2,
                             Rating = 5f,
                             UserId = 2
@@ -330,7 +343,7 @@ namespace COZYHAVEN.Migrations
                             HotelId = 1,
                             ImageURLs = "https://plus.unsplash.com/premium_photo-1670360414903-19e5832f8bc4?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D,https://images.unsplash.com/photo-1489171078254-c3365d6e359f?q=80&w=1931&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
                             PricePerNight = 100f,
-                            RoomSize = 30.5f,
+                            RoomSize = 30f,
                             RoomType = "Standard"
                         },
                         new
@@ -343,6 +356,28 @@ namespace COZYHAVEN.Migrations
                             PricePerNight = 150f,
                             RoomSize = 40f,
                             RoomType = "Deluxe"
+                        },
+                        new
+                        {
+                            RoomId = 3,
+                            Available = true,
+                            Capacity = 10,
+                            HotelId = 3,
+                            ImageURLs = "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D,https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                            PricePerNight = 1080f,
+                            RoomSize = 30f,
+                            RoomType = "luxury"
+                        },
+                        new
+                        {
+                            RoomId = 4,
+                            Available = true,
+                            Capacity = 5,
+                            HotelId = 3,
+                            ImageURLs = "https://images.unsplash.com/photo-1621293954908-907159247fc8?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D,https://plus.unsplash.com/premium_photo-1661923086373-73176f7c004a?q=80&w=1925&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                            PricePerNight = 953f,
+                            RoomSize = 15f,
+                            RoomType = "Standard"
                         });
                 });
 
@@ -412,7 +447,7 @@ namespace COZYHAVEN.Migrations
                             Key = new byte[0],
                             LastName = "Doe",
                             Password = new byte[0],
-                            RegistrationDate = new DateTime(2024, 2, 23, 21, 53, 12, 340, DateTimeKind.Local).AddTicks(5913),
+                            RegistrationDate = new DateTime(2024, 2, 27, 9, 47, 55, 822, DateTimeKind.Local).AddTicks(7004),
                             UserType = 2,
                             Username = "john_doe"
                         },
@@ -426,7 +461,7 @@ namespace COZYHAVEN.Migrations
                             Key = new byte[0],
                             LastName = "Smith",
                             Password = new byte[0],
-                            RegistrationDate = new DateTime(2024, 2, 23, 21, 53, 12, 340, DateTimeKind.Local).AddTicks(5915),
+                            RegistrationDate = new DateTime(2024, 2, 27, 9, 47, 55, 822, DateTimeKind.Local).AddTicks(7007),
                             UserType = 1,
                             Username = "jane_smith"
                         });

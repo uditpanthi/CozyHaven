@@ -9,6 +9,7 @@ namespace CozyHaven.Interfaces
         public Task<LoginUserDTO> Register(RegisterUserDTO user);
         public Task<List<User>> GetAllUsers();
         public Task<User> GetUser(string username);
+        public Task<User> GetUserbyId(int userId);
         //public Task<User> AddUser(User user);
         public Task<User> DeleteUser(string username);
         public Task<User> UpdatePassword(string username,string password);
@@ -17,5 +18,6 @@ namespace CozyHaven.Interfaces
         public Task<ICollection<Review>> GetUserReviews(string username);
         public Task<User> GetUserByUsernameOrEmail(string usernameOrEmail);
         public Task<List<User>> GetHotelOwners();
+       
     }
 }

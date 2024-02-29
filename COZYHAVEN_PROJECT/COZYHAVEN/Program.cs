@@ -103,6 +103,8 @@ namespace CozyHaven
             builder.Services.AddScoped<IHotelService, HotelService>();
             builder.Services.AddScoped<IRoomService, RoomService>();
             builder.Services.AddScoped<IUserService, UserService>();
+            builder.Services.AddScoped<IHotelAmenityService, HotelAmenityService>();
+
 
 
             #endregion 

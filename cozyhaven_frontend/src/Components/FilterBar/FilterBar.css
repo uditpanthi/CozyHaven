@@ -1,31 +1,98 @@
-#filterbar {
+/* Filter Bar Container */
+.filter-bar {
   position: fixed;
   top: 120px;
-  left: 0;
-  width: 200px;
-  height: calc(100% - 80px);
-  /* background-color: #f9f9f9;  */
+  left: 20px;
+  width: 235px;
+  max-height: calc(100vh - 140px); /* Adjust according to your layout */
   padding: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  border: 2px solid white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow-y: auto; /* Enable vertical scrolling */
 }
 
+/* Hide scrollbar */
+.filter-bar::-webkit-scrollbar {
+  width: 0; /* hide scrollbar width */
+  height: 0; /* hide scrollbar height */
+}
+
+/* Filter Option */
 .filter-option {
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .filter-option h4 {
-  margin-bottom: 5px;
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #ffffff; /* Adjusted color for consistency */
 }
 
-.filter-option label {
-  display: block;
-  margin-left: 5px;
+.filter-option select,
+.filter-option input[type="range"] {
+  width: 100%;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ced4da;
 }
 
-.filter-option input[type="checkbox"] {
+.filter-option select {
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.filter-option input[type="range"] {
+  background-color: #ddd;
+}
+
+.filter-option input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #007bff;
+  cursor: pointer;
+}
+
+.filter-option input[type="range"]::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #007bff;
+  cursor: pointer;
+}
+
+.amenity-buttons {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.amenity-buttons button {
+  color: #fff;
+  padding: 8px 12px;
   margin-right: 5px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.amenity-buttons button.active {
+  background-color: #0056b3;
+}
+
+/* Rating Buttons */
+.rating-buttons .rating-icon {
+  font-size: 24px;
+  color: #ffc107; /* Color for empty stars */
+}
+
+.rating-buttons .rating-icon:hover,
+.rating-buttons .rating-icon:hover ~ .rating-icon {
+  color: #ffdd00; /* Color for hovered stars and those before them */
+}
+
+.rating-buttons .rating-icon.active,
+.rating-buttons .rating-icon.active ~ .rating-icon {
+  color: #ffae00; /* Color for filled stars and those before them */
 }

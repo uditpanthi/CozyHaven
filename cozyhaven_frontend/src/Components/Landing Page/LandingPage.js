@@ -110,7 +110,6 @@ const LandingPage = () => {
         src={process.env.PUBLIC_URL + "/hotel vid.mp4"}
       ></video>
       <Navigation />
-      
       <div id="cursor-blur"></div>
       {/* <div id="cursor"></div> */}
       <div id="page1">

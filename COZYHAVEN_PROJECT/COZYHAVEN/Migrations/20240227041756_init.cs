@@ -71,7 +71,7 @@ namespace COZYHAVEN.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "HotelAmenity",
+                name: "HotelAmenities",
                 columns: table => new
                 {
                     HotelId = table.Column<int>(type: "int", nullable: false),
@@ -79,15 +79,15 @@ namespace COZYHAVEN.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_HotelAmenity", x => new { x.HotelId, x.AmenityId });
+                    table.PrimaryKey("PK_HotelAmenities", x => new { x.HotelId, x.AmenityId });
                     table.ForeignKey(
-                        name: "FK_HotelAmenity_Amenities_AmenityId",
+                        name: "FK_HotelAmenities_Amenities_AmenityId",
                         column: x => x.AmenityId,
                         principalTable: "Amenities",
                         principalColumn: "AmenityId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_HotelAmenity_Hotels_HotelId",
+                        name: "FK_HotelAmenities_Hotels_HotelId",
                         column: x => x.HotelId,
                         principalTable: "Hotels",
                         principalColumn: "HotelId",
@@ -203,30 +203,35 @@ namespace COZYHAVEN.Migrations
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "UserId", "ContactNumber", "DateofBirth", "Email", "FirstName", "Key", "LastName", "Password", "RegistrationDate", "UserType", "Username" },
-                values: new object[] { 1, "1234567890", new DateTime(1990, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "john@example.com", "John", new byte[0], "Doe", new byte[0], new DateTime(2024, 2, 23, 21, 53, 12, 340, DateTimeKind.Local).AddTicks(5913), 2, "john_doe" });
+                values: new object[] { 1, "1234567890", new DateTime(1990, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "john@example.com", "John", new byte[0], "Doe", new byte[0], new DateTime(2024, 2, 27, 9, 47, 55, 822, DateTimeKind.Local).AddTicks(7004), 2, "john_doe" });
 
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "UserId", "ContactNumber", "DateofBirth", "Email", "FirstName", "Key", "LastName", "Password", "RegistrationDate", "UserType", "Username" },
-                values: new object[] { 2, "9876543210", new DateTime(1985, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "jane@example.com", "Jane", new byte[0], "Smith", new byte[0], new DateTime(2024, 2, 23, 21, 53, 12, 340, DateTimeKind.Local).AddTicks(5915), 1, "jane_smith" });
+                values: new object[] { 2, "9876543210", new DateTime(1985, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "jane@example.com", "Jane", new byte[0], "Smith", new byte[0], new DateTime(2024, 2, 27, 9, 47, 55, 822, DateTimeKind.Local).AddTicks(7007), 1, "jane_smith" });
 
             migrationBuilder.InsertData(
                 table: "Hotels",
                 columns: new[] { "HotelId", "Address", "City", "Description", "ImageURLs", "Name", "NumberOfRooms", "OwnerId", "StartingPrice", "prePrice" },
-                values: new object[] { 1, "123 Main Street", "Example City", "A cozy place to stay.", "https://plus.unsplash.com/premium_photo-1670360414903-19e5832f8bc4?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D,https://images.unsplash.com/photo-1489171078254-c3365d6e359f?q=80&w=1931&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", "Cozy Inn", 20, 1, 1000.0, 2000.0 });
+                values: new object[] { 1, "123 Main Street", "Example City", "The car parking and the Wi-Fi are always free, so you can stay in touch and come and go as you please. Strategically situated in Malsi, allowing you access and proximity to local attractions and sights. Don't leave before paying a visit to the famous Jolly Grant Airport. Rated with 4 stars, this high-quality property provides guests with access to restaurant and fitness center on-site.", "https://plus.unsplash.com/premium_photo-1670360414903-19e5832f8bc4?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D,https://images.unsplash.com/photo-1489171078254-c3365d6e359f?q=80&w=1931&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", "Cozy Inn", 20, 1, 1000.0, 2000.0 });
 
             migrationBuilder.InsertData(
                 table: "Hotels",
                 columns: new[] { "HotelId", "Address", "City", "Description", "ImageURLs", "Name", "NumberOfRooms", "OwnerId", "StartingPrice", "prePrice" },
-                values: new object[] { 2, "456 Elm Street", "Another City", "Experience luxury at its finest.", "https://images.unsplash.com/photo-1625244724120-1fd1d34d00f6?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D,https://plus.unsplash.com/premium_photo-1661843652801-66305e3c980c?q=80&w=2037&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", "Luxury Resort", 10, 1, 1500.0, 3000.0 });
+                values: new object[] { 2, "456 Elm Street", "Another City", "The car parking and the Wi-Fi are always free, so you can stay in touch and come and go as you please. Strategically situated in Khurbura Mohalla, allowing you access and proximity to local attractions and sights. Don't leave before paying a visit to the famous Jolly Grant Airport. This 4-star property features restaurant to make your stay more indulgent and memorable.", "https://images.unsplash.com/photo-1625244724120-1fd1d34d00f6?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D,https://plus.unsplash.com/premium_photo-1661843652801-66305e3c980c?q=80&w=2037&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", "Luxury Resort", 10, 1, 1500.0, 3000.0 });
+
+            migrationBuilder.InsertData(
+                table: "Hotels",
+                columns: new[] { "HotelId", "Address", "City", "Description", "ImageURLs", "Name", "NumberOfRooms", "OwnerId", "StartingPrice", "prePrice" },
+                values: new object[] { 3, "4 Rajnikunj", "Dehradun", "A perfect value for money place, middle of shopping paradise. Very spacious rooms, courteous staff, free parking and above all very tasty food. Though the hotel is slightly outside the main city periphery but still it offers convenient access to it with all key facilities around., whether steer good, bar or lounges, pacific mall etc. overall my family loves the stay in Lemon Tree Dehradun.", "https://images.unsplash.com/photo-1596436889106-be35e843f974?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D,https://images.unsplash.com/photo-1543968332-f99478b1ebdc?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", "PP Resort", 50, 1, 500.0, 2000.0 });
 
             migrationBuilder.InsertData(
                 table: "Reviews",
                 columns: new[] { "ReviewId", "Comment", "DatePosted", "HotelId", "Rating", "UserId" },
                 values: new object[,]
                 {
-                    { 1, "Great experience!", new DateTime(2024, 2, 23, 21, 53, 12, 340, DateTimeKind.Local).AddTicks(6019), 1, 4.5f, 1 },
-                    { 2, "Excellent service!", new DateTime(2024, 2, 23, 21, 53, 12, 340, DateTimeKind.Local).AddTicks(6020), 2, 5f, 2 }
+                    { 1, "Great experience!", new DateTime(2024, 2, 27, 9, 47, 55, 822, DateTimeKind.Local).AddTicks(7112), 1, 4.5f, 1 },
+                    { 2, "Excellent service!", new DateTime(2024, 2, 27, 9, 47, 55, 822, DateTimeKind.Local).AddTicks(7113), 2, 5f, 2 }
                 });
 
             migrationBuilder.InsertData(
@@ -234,23 +239,25 @@ namespace COZYHAVEN.Migrations
                 columns: new[] { "RoomId", "Available", "Capacity", "HotelId", "ImageURLs", "PricePerNight", "RoomSize", "RoomType" },
                 values: new object[,]
                 {
-                    { 1, true, 2, 1, "https://plus.unsplash.com/premium_photo-1670360414903-19e5832f8bc4?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D,https://images.unsplash.com/photo-1489171078254-c3365d6e359f?q=80&w=1931&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", 100f, 30.5f, "Standard" },
-                    { 2, true, 3, 2, "https://plus.unsplash.com/premium_photo-1670360414903-19e5832f8bc4?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D,https://images.unsplash.com/photo-1489171078254-c3365d6e359f?q=80&w=1931&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", 150f, 40f, "Deluxe" }
+                    { 1, true, 2, 1, "https://plus.unsplash.com/premium_photo-1670360414903-19e5832f8bc4?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D,https://images.unsplash.com/photo-1489171078254-c3365d6e359f?q=80&w=1931&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", 100f, 30f, "Standard" },
+                    { 2, true, 3, 2, "https://plus.unsplash.com/premium_photo-1670360414903-19e5832f8bc4?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D,https://images.unsplash.com/photo-1489171078254-c3365d6e359f?q=80&w=1931&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", 150f, 40f, "Deluxe" },
+                    { 3, true, 10, 3, "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D,https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", 1080f, 30f, "luxury" },
+                    { 4, true, 5, 3, "https://images.unsplash.com/photo-1621293954908-907159247fc8?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D,https://plus.unsplash.com/premium_photo-1661923086373-73176f7c004a?q=80&w=1925&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", 953f, 15f, "Standard" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Reservations",
                 columns: new[] { "ReservationId", "Adults", "BookedDate", "CheckInDate", "CheckOutDate", "Children", "RoomId", "Status", "TotalPrice", "UserId" },
-                values: new object[] { 1, 2, new DateTime(2024, 2, 23, 21, 53, 12, 340, DateTimeKind.Local).AddTicks(6050), new DateTime(2024, 2, 23, 0, 0, 0, 0, DateTimeKind.Local), new DateTime(2024, 2, 25, 0, 0, 0, 0, DateTimeKind.Local), 0, 1, 2, 250f, 1 });
+                values: new object[] { 1, 2, new DateTime(2024, 2, 27, 9, 47, 55, 822, DateTimeKind.Local).AddTicks(7141), new DateTime(2024, 2, 27, 0, 0, 0, 0, DateTimeKind.Local), new DateTime(2024, 2, 29, 0, 0, 0, 0, DateTimeKind.Local), 0, 1, 2, 250f, 1 });
 
             migrationBuilder.InsertData(
                 table: "Payments",
                 columns: new[] { "PaymentId", "Amount", "PaymentDate", "PaymentMethod", "ReservationId", "Status" },
-                values: new object[] { 1, 250f, new DateTime(2024, 2, 23, 21, 53, 12, 340, DateTimeKind.Local).AddTicks(6061), "Credit Card", 1, 1 });
+                values: new object[] { 1, 250f, new DateTime(2024, 2, 27, 9, 47, 55, 822, DateTimeKind.Local).AddTicks(7151), "Credit Card", 1, 1 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_HotelAmenity_AmenityId",
-                table: "HotelAmenity",
+                name: "IX_HotelAmenities_AmenityId",
+                table: "HotelAmenities",
                 column: "AmenityId");
 
             migrationBuilder.CreateIndex(
@@ -304,7 +311,7 @@ namespace COZYHAVEN.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "HotelAmenity");
+                name: "HotelAmenities");
 
             migrationBuilder.DropTable(
                 name: "Payments");

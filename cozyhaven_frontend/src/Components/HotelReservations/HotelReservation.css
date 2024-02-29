@@ -1,0 +1,62 @@
+/* hotelReservations.css */
+
+/* Style for the container div */
+.hotel-reservations-container {
+    margin: 20px;
+  }
+  
+  /* Style for the error message */
+  .error-message {
+    color: red;
+  }
+  
+  /* Style for the success message */
+  .success-message {
+    color: green;
+  }
+  
+  /* Style for the heading */
+  .reservations-heading {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  /* Style for the list */
+  .reservations-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  /* Style for each reservation item */
+  .reservation-item {
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+  }
+  
+  /* Style for the reservation details */
+  .reservation-details {
+    margin-bottom: 10px;
+  }
+  
+  /* Style for the select dropdown */
+  .status-dropdown {
+    margin-right: 10px;
+  }
+  
+  /* Style for the update button */
+  .update-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  /* Hover effect for the update button */
+  .update-button:hover {
+    background-color: #0056b3;
+  }
+  

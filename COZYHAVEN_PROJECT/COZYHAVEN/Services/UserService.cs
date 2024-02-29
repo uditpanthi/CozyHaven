@@ -180,5 +180,33 @@ namespace CozyHaven.Services
             return users.Where(user => user.UserType == UserType.HotelOwner).ToList();
         }
 
+        public async Task<User> GetUserbyId(int userId)
+        {
+            try
+            {
+                _logger.LogInformation("Getting user by ID: {UserId}", userId);
+
+                var users = await _repo.GetAll();
+
+                var user = users.FirstOrDefault(u => u.UserId == userId);
+
+                if (user != null)
+                {
+                    _logger.LogInformation("User found by ID: {UserId}", userId);
+                    return user;
+                }
+                else
+                {
+                    _logger.LogWarning("User not found by ID: {UserId}", userId);
+                    throw new UserNotFoundException($"User with ID {userId} not found");
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error occurred while getting user by ID: {UserId}", userId);
+                throw; 
+            }
+        }
+
     }
 }

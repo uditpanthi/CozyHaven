@@ -1,156 +1,160 @@
-import React, { useState } from "react";
-import "./FilterBar.css";
+import React, { useState, useEffect } from "react";
+import "./FilterBar.css"; // Import your CSS file for FilterBar
+import Rating from "react-rating";
+import Button from "../Button/Button";
 
-const FilterBar = () => {
-  const [priceFilters, setPriceFilters] = useState({
-    cheap: false,
-    moderate: false,
-    expensive: false
-  });
+const FilterBar = ({ updateFilters }) => {
+  const [locations, setLocations] = useState([]);
+  const [amenities, setAmenities] = useState([]);
+  const [minPrice, setMinPrice] = useState(0); // Min price
+  const [maxPrice, setMaxPrice] = useState(2000); // Max price
+  const [selectedAmenities, setSelectedAmenities] = useState([]);
+  const [selectedRating, setSelectedRating] = useState(null);
+  const [selectedLocation, setSelectedLocation] = useState(""); // Manage selected location directly
 
-  const [locationFilters, setLocationFilters] = useState({
-    downtown: false,
-    suburb: false,
-    countryside: false
-  });
+  useEffect(() => {
+    // Fetch locations and amenities
+    fetch(`http://localhost:5108/api/Hotel/GetAllHotels`)
+      .then((response) => response.json())
+      .then((data) => {
+        if (!data.$values || !Array.isArray(data.$values)) {
+          throw new Error("Cities data is not in the expected format");
+        }
+        const cities = data.$values.map((hotel) => hotel.city);
+        setLocations(cities);
+      })
+      .catch((error) => {
+        console.error("Error fetching cities:", error);
+      });
 
-  const [roomTypeFilters, setRoomTypeFilters] = useState({
-    single: false,
-    double: false,
-    suite: false
-  });
+    fetch(`http://localhost:5108/api/Amenity/all`)
+      .then((response) => response.json())
+      .then((data) => {
+        if (!data.$values || !Array.isArray(data.$values)) {
+          throw new Error("Amenities data is not in the expected format");
+        }
+        const amenities = data.$values.map((amenity) => amenity.name);
+        setAmenities(amenities);
+      })
+      .catch((error) => {
+        console.error("Error fetching amenities:", error);
+      });
+  }, []);
 
-  const [facilityFilters, setFacilityFilters] = useState({
-    wifi: false,
-    parking: false,
-    pool: false
-  });
-
-  const handlePriceChange = (filter) => {
-    setPriceFilters({ ...priceFilters, [filter]: !priceFilters[filter] });
+  const handleLocationChange = (event) => {
+    setSelectedLocation(event.target.value);
+    updateFilters({
+      location: event.target.value,
+      amenities: selectedAmenities,
+      priceRange: [minPrice, maxPrice],
+      rating: selectedRating
+    });
   };
 
-  const handleLocationChange = (filter) => {
-    setLocationFilters({ ...locationFilters, [filter]: !locationFilters[filter] });
+  const handleAmenityChange = (amenity) => {
+    setSelectedAmenities((prevState) =>
+      prevState.includes(amenity)
+        ? prevState.filter((item) => item !== amenity)
+        : [...prevState, amenity]
+    );
+    updateFilters({
+      location: selectedLocation,
+      amenities: selectedAmenities,
+      priceRange: [minPrice, maxPrice],
+      rating: selectedRating
+    });
   };
 
-  const handleRoomTypeChange = (filter) => {
-    setRoomTypeFilters({ ...roomTypeFilters, [filter]: !roomTypeFilters[filter] });
+  const handleMinPriceChange = (event) => {
+    setMinPrice(parseInt(event.target.value));
+    updateFilters({
+      location: selectedLocation,
+      amenities: selectedAmenities,
+      priceRange: [parseInt(event.target.value), maxPrice],
+      rating: selectedRating
+    });
   };
 
-  const handleFacilityChange = (filter) => {
-    setFacilityFilters({ ...facilityFilters, [filter]: !facilityFilters[filter] });
+  const handleMaxPriceChange = (event) => {
+    setMaxPrice(parseInt(event.target.value));
+    updateFilters({
+      location: selectedLocation,
+      amenities: selectedAmenities,
+      priceRange: [minPrice, parseInt(event.target.value)],
+      rating: selectedRating
+    });
+  };
+
+  const handleRatingChange = (rating) => {
+    setSelectedRating(rating);
+    updateFilters({
+      location: selectedLocation,
+      amenities: selectedAmenities,
+      priceRange: [minPrice, maxPrice],
+      rating: rating
+    });
   };
 
   return (
-    <div id="filterbar">
+    <div className="filter-bar">
       <div className="filter-option">
-        <h4>Price</h4>
-        <label>
-          <input
-            type="checkbox"
-            checked={priceFilters.cheap}
-            onChange={() => handlePriceChange("cheap")}
-          />
-          Cheap
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            checked={priceFilters.moderate}
-            onChange={() => handlePriceChange("moderate")}
-          />
-          Moderate
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            checked={priceFilters.expensive}
-            onChange={() => handlePriceChange("expensive")}
-          />
-          Expensive
-        </label>
+        <h4>Price Range</h4>
+        <input
+          type="range"
+          min={0}
+          max={2000}
+          value={minPrice}
+          onChange={handleMinPriceChange}
+          step={10}
+        />
+        <input
+          type="range"
+          min={0}
+          max={2000}
+          value={maxPrice}
+          onChange={handleMaxPriceChange}
+          step={10}
+        />
+        <span>${minPrice}</span> - <span>${maxPrice}</span>
       </div>
+
       <div className="filter-option">
         <h4>Location</h4>
-        <label>
-          <input
-            type="checkbox"
-            checked={locationFilters.downtown}
-            onChange={() => handleLocationChange("downtown")}
-          />
-          Downtown
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            checked={locationFilters.suburb}
-            onChange={() => handleLocationChange("suburb")}
-          />
-          Suburb
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            checked={locationFilters.countryside}
-            onChange={() => handleLocationChange("countryside")}
-          />
-          Countryside
-        </label>
+        <select value={selectedLocation} onChange={handleLocationChange}>
+          <option value="">All Locations</option>
+          {locations.map((city, index) => (
+            <option key={index} value={city}>
+              {city}
+            </option>
+          ))}
+        </select>
       </div>
+
+      {/* <div className="filter-option">
+        <h4>Amenities</h4>
+        <div className="amenity-buttons">
+          {amenities.map((amenity, index) => (
+            <Button
+              key={index}
+              onClick={() => handleAmenityChange(amenity)}
+              className={selectedAmenities.includes(amenity) ? "active" : ""}
+            >
+              {amenity}
+            </Button>
+          ))}
+        </div>
+      </div> */}
+
       <div className="filter-option">
-        <h4>Room Type</h4>
-        <label>
-          <input
-            type="checkbox"
-            checked={roomTypeFilters.single}
-            onChange={() => handleRoomTypeChange("single")}
+        <h4>Rating</h4>
+        <div className="rating-buttons">
+          <Rating
+            initialRating={selectedRating}
+            emptySymbol={<span className="rating-icon">&#9734;</span>}
+            fullSymbol={<span className="rating-icon">&#9733;</span>}
+            onClick={(value) => handleRatingChange(value)}
           />
-          Single
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            checked={roomTypeFilters.double}
-            onChange={() => handleRoomTypeChange("double")}
-          />
-          Double
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            checked={roomTypeFilters.suite}
-            onChange={() => handleRoomTypeChange("suite")}
-          />
-          Suite
-        </label>
-      </div>
-      <div className="filter-option">
-        <h4>Facilities</h4>
-        <label>
-          <input
-            type="checkbox"
-            checked={facilityFilters.wifi}
-            onChange={() => handleFacilityChange("wifi")}
-          />
-          Wifi
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            checked={facilityFilters.parking}
-            onChange={() => handleFacilityChange("parking")}
-          />
-          Parking
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            checked={facilityFilters.pool}
-            onChange={() => handleFacilityChange("pool")}
-          />
-          Pool
-        </label>
+        </div>
       </div>
     </div>
   );

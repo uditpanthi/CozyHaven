@@ -172,8 +172,8 @@ namespace CozyHaven.Controllers
             }
         }
 
-        [HttpGet("{usernameOrEmail}")]
-        public async Task<ActionResult<User>> GetUserByUsernameOrEmail(string usernameOrEmail)
+        [HttpGet("by-username-or-email/{usernameOrEmail}")]
+        public async Task<IActionResult> GetUserByUsernameOrEmail(string usernameOrEmail)
         {
             try
             {
@@ -206,7 +206,25 @@ namespace CozyHaven.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
-
+        [HttpGet("{userId}")]
+        public async Task<IActionResult> GetUserById(int userId)
+        {
+            try
+            {
+                var user = await _userService.GetUserbyId(userId);
+                return Ok(user);
+            }
+            catch (UserNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                // Log any other unexpected errors
+                // Log.Error("An error occurred while getting user by ID", ex);
+                return StatusCode(500, "An error occurred while getting user by ID");
+            }
+        }
 
     }
 }

@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import "../UserProfile/UserProfile.css";
 import Navigation from "../Navigation/Navigation";
 import Button from "../Button/Button";
-import UserReservations from "../UserReservations/UserReservation";
+import { CursorAnimation } from "../CursorAnimation/CursorAnimation";
+import Footer from "../Footer/Footer";
+import DropdownSection from "../DropdownComponents/DropdownSection";
 
 const UserProfile = () => {
   const [userDetails, setUserDetails] = useState({});
@@ -11,6 +13,10 @@ const UserProfile = () => {
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   
+  useEffect(() => {
+    CursorAnimation();
+  }, []);
+
   // Define username state
   var Tusername=sessionStorage.getItem('username');
   const [username, setUsername] = useState(Tusername);
@@ -36,6 +42,7 @@ const UserProfile = () => {
       .catch((error) => {
         console.error("Error fetching user details: ", error);
       });
+      sessionStorage.setItem("userId",userDetails.userId)
   };
 
   const handleInputChange = (e) => {
@@ -52,7 +59,6 @@ const UserProfile = () => {
   };
 
   const handleSaveClick = () => {
-    // Save updated user details to API
     fetch(`http://localhost:5108/api/User/UpdateUserProfile/${username}`, {
       method: "PUT",
       headers: {
@@ -82,8 +88,8 @@ const UserProfile = () => {
 
   return (
     <>
-      <Navigation />
-      .
+    <div id="cursor-blur"></div>
+      <Navigation/>.
       <div className="user-profile-container">
         <h2>User Profile</h2>
         {editMode ? (
@@ -157,7 +163,11 @@ const UserProfile = () => {
       </div>
       <br/>
       <br/>
-      <UserReservations/>
+      <DropdownSection/>
+      {/* <UserReservations/>
+      <UserReview/>
+      <HotelReservations hotelId="3" /> */}
+      <Footer/>
     </>
   );
 };

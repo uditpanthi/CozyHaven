@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Button from "../Button/Button";
-import { Link, useParams } from "react-router-dom"; // Import Link from react-router-dom
+import { Link, useParams } from "react-router-dom";
 import { Carousel } from "react-responsive-carousel";
 import "../HotelRooms/HotelRooms.css";
 import Navigation from "../Navigation/Navigation";
@@ -12,59 +12,57 @@ const HotelRooms = () => {
   useEffect(() => {
     CursorAnimation();
   }, []);
-  
+
   const { hotelId } = useParams();
+
   const [rooms, setRooms] = useState([]);
   const [hotel, setHotel] = useState(null);
   const [reviews, setReviews] = useState([]);
   const [error, setError] = useState(null);
-  const [user, setUser]=useState(null);
+  const [user, setUser] = useState(null);
   const [reviewForm, setReviewForm] = useState({
     rating: 0,
     comment: "",
   });
-  // Get username from sessionStorage
+
   const username = sessionStorage.getItem("username");
 
-  useEffect(()=>{
+  useEffect(() => {
     const fetchUser = async () => {
       try {
         if (username) {
-        const userResponse = await fetch(`http://localhost:5108/api/User/GetByUsername?username=${username}`);
-        if (!userResponse.ok) {
-          throw new Error("Failed to fetch user data");
+          const userResponse = await fetch(`http://localhost:5108/api/User/GetByUsername?username=${username}`);
+          if (!userResponse.ok) {
+            throw new Error("Failed to fetch user data");
+          }
+          const userData = await userResponse.json();
+          setUser(userData);
         }
-        const userData = await userResponse.json();
-        setUser(userData);
-      } 
-    }
-      catch (error) {
+      } catch (error) {
         setError(error.message);
       }
     };
     fetchUser();
-  },[username]);
+  }, [username]);
 
   useEffect(() => {
     const fetchHotelAndRooms = async () => {
       try {
         const [roomsResponse, hotelResponse, reviewResponse] =
           await Promise.all([
-            fetch(
-              `http://localhost:5108/api/Hotel/GetRoomsByHotelId?hotelId=${hotelId}`
-            ),
+            fetch(`http://localhost:5108/api/Hotel/GetRoomsByHotelId?hotelId=${hotelId}`),
             fetch(`http://localhost:5108/api/Hotel/GetById?id=${hotelId}`),
             fetch(`http://localhost:5108/api/Hotel/HotelReviews?id=${hotelId}`),
           ]);
-  
+
         if (!roomsResponse.ok || !hotelResponse.ok || !reviewResponse.ok) {
           throw new Error("Failed to fetch data");
         }
-  
+
         const roomsData = await roomsResponse.json();
         const hotelData = await hotelResponse.json();
         const reviewData = await reviewResponse.json();
-  
+
         setRooms(roomsData.$values);
         setHotel(hotelData);
         setReviews(reviewData.$values);
@@ -72,11 +70,10 @@ const HotelRooms = () => {
         setError(error.message);
       }
     };
-  
+
     fetchHotelAndRooms();
-    
   }, [hotelId]);
-  
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setReviewForm({
@@ -84,6 +81,7 @@ const HotelRooms = () => {
       [name]: value,
     });
   };
+
   const handleSubmitReview = async () => {
     try {
       const response = await fetch(
@@ -121,14 +119,10 @@ const HotelRooms = () => {
     }
   };
 
-  if (error) {
-    return <div className="error-message">Error: {error}</div>;
-  }
-
   return (
     <>
-    <div id="cursor-blur"></div>
       <Navigation />
+      <div id="cursor-blur"></div>
       .
       <div className="hotelrooms-container">
         <div className="hotel-info">
@@ -155,7 +149,6 @@ const HotelRooms = () => {
                       <p>Room Size: {room.roomSize}</p>
                       <p>Capacity: {room.capacity}</p>
                       <p>Price per Night: {room.pricePerNight}</p>
-                      {/* Replace button with Link to ReservationPage */}
                       <Link to={`/reservation/${room.roomId}?username=${username}`}>
                         <Button>Book now</Button>
                       </Link>
@@ -205,11 +198,9 @@ const HotelRooms = () => {
                       onChange={handleInputChange}
                     />
                   </div>
-                  <Link to={'/addReview'}>
-                    <Button type="button" onClick={handleSubmitReview}>
-                      Submit Review
-                    </Button>
-                  </Link>
+                  <Button type="button" onClick={handleSubmitReview}>
+                    Submit Review
+                  </Button>
                 </form>
               </div>
             </div>

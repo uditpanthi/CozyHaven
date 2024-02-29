@@ -9,6 +9,7 @@ import PrivateRoute from "./Components/PrivateRouting/PrivateRoute";
 import ReservationPage from "./Components/ReservationPage/ReservationPage";
 import UserProfile from "./Components/UserProfile/UserProfile";
 import BrowseUsingSearch from "./Components/BrowsePageUsingSearch/BrowseUsingSearch";
+import OwnerDashboard from "./Components/OwnerDashboard/OwnerDashboard";
 
 const App = () => {
   return (
@@ -16,16 +17,18 @@ const App = () => {
       <Routes>
         <Route path="/userprofile" element={<UserProfile />} />
         <Route path="/" element={<LandingPage />} />
+        <Route path="/OwnerDashboard" element={<OwnerDashboard />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/browsepage" element={<BrowsePage />} />
         <Route path="/browsepage/:location" element={<BrowsePage />} />
+        <Route path="/browse-using-search" element={<BrowseUsingSearch />} />
         <Route path="/hotelrooms/:hotelId" element={<HotelRooms />} />
         <Route element={<PrivateRoute />}>
-          <Route path='/reservation/:roomId' element={<ReservationPage />} /> {/* Define route with roomId parameter */}
+          <Route path='/reservation/:roomId' element={<ReservationPage />} /> 
           <Route path='/addReview' element={<ReservationPage />} />
         </Route>
-        <Route path="/browse-using-search" element={<BrowseUsingSearch />} />
+        <Route path="/ownerdashboard" element={<OwnerDashboard />} />
       </Routes>
     </Router>
   );

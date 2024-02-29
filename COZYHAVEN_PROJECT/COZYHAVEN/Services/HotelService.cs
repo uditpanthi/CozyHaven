@@ -3,6 +3,7 @@ using CozyHaven.Models;
 using CozyHaven.Repository;
 using CozyHaven.Models.DTOs;
 using CozyHaven.Exceptions;
+using COZYHAVEN.Models.DTOs;
 
 namespace CozyHaven.Services
 {
@@ -12,13 +13,15 @@ namespace CozyHaven.Services
         private readonly ILogger<HotelService> _logger;
         private readonly IRoomService _roomService;
         private readonly IReservationService _reservationService;
+        private readonly IHotelAmenityService _hotelAmenityService;
 
-        public HotelService(IRepository<int, Hotel> repository, ILogger<HotelService> logger, IRoomService roomRepo, IReservationService reservationRepo)
+        public HotelService(IRepository<int, Hotel> repository, ILogger<HotelService> logger, IRoomService roomRepo, IReservationService reservationRepo, IHotelAmenityService hotelAmenityService)
         {
             _repository = repository;
             _logger = logger;
             _roomService = roomRepo;
             _reservationService = reservationRepo;
+            _hotelAmenityService = hotelAmenityService;
         }
 
         public async Task<Hotel> AddHotel(HotelDTO hotel, int ownerId)
@@ -84,17 +87,23 @@ namespace CozyHaven.Services
             }
             throw new HotelNotFoundException();
         }
-        public async Task<Hotel> UpdateHotelOwner(int id, int ownerId)
+        public async Task<List<Hotel>> GetHotelsByOwner(int ownerId)
         {
-            _logger.LogInformation("Updating owner for hotel with ID: {HotelId}", id);
-            var hotel = await GetHotel(id);
-            if (hotel != null)
+            _logger.LogInformation("Fetching hotels for owner with ID: {OwnerId}", ownerId);
+
+            try
             {
-                hotel.OwnerId = ownerId;
-                await _repository.Update(hotel);
-                return hotel;
+                var allHotels = await _repository.GetAll();
+
+                var hotelsForOwner = allHotels.Where(h => h.OwnerId == ownerId).ToList();
+
+                return hotelsForOwner;
             }
-            throw new HotelNotFoundException();
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error occurred while fetching hotels for owner with ID: {OwnerId}", ownerId);
+                throw;
+            }
         }
         public async Task<ICollection<Review>> GetHotelReviews(int hotelId)
         {
@@ -106,17 +115,24 @@ namespace CozyHaven.Services
             }
             throw new HotelNotFoundException();
         }
-        public async Task<ICollection<HotelAmenity>> GetHotelAmenities(int hotelId)
+        public async Task<List<HotelAmenityDTO>> GetHotelAmenities(int hotelId)
         {
-            _logger.LogInformation("Getting amenities for hotel with ID: {HotelId}", hotelId);
-            var hotel = await GetHotel(hotelId);
+            var hotel = await _repository.GetById(hotelId);
             if (hotel != null)
             {
-                return hotel.HotelAmenities;
+                var amenityDTOs = hotel.HotelAmenities.Select(ha => new HotelAmenityDTO
+                {
+                    AmenityId = ha.AmenityId,
+                    AmenityName = ha.Amenity.Name
+                    // Map other properties if needed
+                }).ToList();
+
+                return amenityDTOs;
             }
-            throw new HotelNotFoundException();
+            return null;
         }
-        
+
+
         public async Task<ICollection<Room>> GetRoomsByHotelId(int hotelId)
         {
             _logger.LogInformation("Getting rooms for hotel with ID: {HotelId}", hotelId);
@@ -136,6 +152,11 @@ namespace CozyHaven.Services
                 existingHotel.Name = hotelDTO.Name;
                 existingHotel.Address = hotelDTO.Address;
                 existingHotel.Description = hotelDTO.Description;
+                existingHotel.NumberOfRooms= hotelDTO.NumberOfRooms;
+                existingHotel.prePrice = hotelDTO.prePrice;
+                existingHotel.StartingPrice = hotelDTO.StartingPrice;
+                existingHotel.ImageURLs=existingHotel.ImageURLs;
+           
 
                 await _repository.Update(existingHotel);
                 _logger.LogInformation("Hotel details updated successfully: {HotelId}", hotelDTO.Id);
@@ -144,28 +165,6 @@ namespace CozyHaven.Services
             throw new HotelNotFoundException();
         }
 
-        //public async Task<ICollection<Reservation>> GetHotelReservations(int hotelId)
-        //{
-        //    _logger.LogInformation("Getting reservations for hotel with ID: {HotelId}", hotelId);
-
-        //    var hotel = await GetHotel(hotelId);
-
-        //    if (hotel != null && hotel.Rooms != null)
-        //    {
-        //        var reservations = hotel.Rooms
-        //            .Where(room => room.Reservations != null && room.Reservations.Any())
-        //            .SelectMany(room => room.Reservations)
-        //            .ToList();
-
-        //        _logger.LogInformation("Found {Count} reservations for hotel with ID: {HotelId}", reservations.Count, hotelId);
-
-        //        return reservations;
-        //    }
-
-        //    _logger.LogInformation("No reservations found for hotel with ID: {HotelId}", hotelId);
-
-        //    throw new HotelNotFoundException();
-        //}
         public async Task<ICollection<Reservation>> GetHotelReservations(int hotelId)
         {
             var rooms = await _roomService.GetAllRooms();
@@ -233,6 +232,8 @@ namespace CozyHaven.Services
 
             return availableHotels;
         }
+
+        
 
         //public async Task<List<Hotel>> GetHotelsByCriteria(string location, DateTime checkin, DateTime checkout, int capacity)
         //{

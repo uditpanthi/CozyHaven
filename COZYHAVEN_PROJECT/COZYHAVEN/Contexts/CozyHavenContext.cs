@@ -20,6 +20,7 @@ namespace CozyHaven.Contexts
         public DbSet<Reservation> Reservations { get; set; }
         public DbSet<Payment> Payments { get; set; }
         public DbSet<Review> Reviews { get; set; }
+        public DbSet<HotelAmenity> HotelAmenities { get; set; }
 
         public static void Seed(ModelBuilder modelBuilder)
         {
@@ -54,29 +55,67 @@ namespace CozyHaven.Contexts
             );
 
             modelBuilder.Entity<Room>().HasData(
-                new Room
-                {
-                    RoomId = 1,
-                    HotelId = 1, // Assuming Hotel with Id = 1 exists
-                    RoomSize = 30.5f,
-                    RoomType = "Standard",
-                    PricePerNight = 100.0f,
-                    Capacity = 2,
-                    ImageURLs = new List<string> { "https://plus.unsplash.com/premium_photo-1670360414903-19e5832f8bc4?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D,https://images.unsplash.com/photo-1489171078254-c3365d6e359f?q=80&w=1931&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-                    Available = true
-                },
-                new Room
-                {
-                    RoomId = 2,
-                    HotelId = 2, // Assuming Hotel with Id = 2 exists
-                    RoomSize = 40.0f,
-                    RoomType = "Deluxe",
-                    PricePerNight = 150.0f,
-                    Capacity = 3,
-                    ImageURLs = new List<string> { "https://plus.unsplash.com/premium_photo-1670360414903-19e5832f8bc4?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D,https://images.unsplash.com/photo-1489171078254-c3365d6e359f?q=80&w=1931&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-                    Available = true
-                }
-            );
+        new Room
+        {
+            RoomId = 1,
+            HotelId = 1,
+            RoomSize = 30,
+            RoomType = "Standard",
+            PricePerNight = 100,
+            ImageURLs = new List<string>
+            {
+                "https://plus.unsplash.com/premium_photo-1670360414903-19e5832f8bc4?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                "https://images.unsplash.com/photo-1489171078254-c3365d6e359f?q=80&w=1931&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            },
+            Capacity = 2,
+            Available = true
+        },
+        new Room
+        {
+            RoomId = 2,
+            HotelId = 2,
+            RoomSize = 40,
+            RoomType = "Deluxe",
+            PricePerNight = 150,
+            ImageURLs = new List<string>
+            {
+                "https://plus.unsplash.com/premium_photo-1670360414903-19e5832f8bc4?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                "https://images.unsplash.com/photo-1489171078254-c3365d6e359f?q=80&w=1931&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            },
+            Capacity = 3,
+            Available = true
+        },
+        new Room
+        {
+            RoomId = 3,
+            HotelId = 3,
+            RoomSize = 30,
+            RoomType = "luxury",
+            PricePerNight = 1080,
+            ImageURLs = new List<string>
+            {
+                "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            },
+            Capacity = 10,
+            Available = true
+        },
+        new Room
+        {
+            RoomId = 4,
+            HotelId = 3,
+            RoomSize = 15,
+            RoomType = "Standard",
+            PricePerNight = 953,
+            ImageURLs = new List<string>
+            {
+                "https://images.unsplash.com/photo-1621293954908-907159247fc8?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                "https://plus.unsplash.com/premium_photo-1661923086373-73176f7c004a?q=80&w=1925&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            },
+            Capacity = 5,
+            Available = true
+        }
+    );
 
             modelBuilder.Entity<Review>().HasData(new Review
             {
@@ -122,33 +161,59 @@ namespace CozyHaven.Contexts
                 Status = PaymentStatus.Approved
             }
            );
-            modelBuilder.Entity<Hotel>().HasData(new Hotel
+            modelBuilder.Entity<Hotel>().HasData(
+        new Hotel
+        {
+            HotelId = 1,
+            OwnerId = 1,
+            Name = "Cozy Inn",
+            Address = "123 Main Street",
+            City = "Example City",
+            Description = "The car parking and the Wi-Fi are always free, so you can stay in touch and come and go as you please. Strategically situated in Malsi, allowing you access and proximity to local attractions and sights. Don't leave before paying a visit to the famous Jolly Grant Airport. Rated with 4 stars, this high-quality property provides guests with access to restaurant and fitness center on-site.",
+            ImageURLs = new List<string>
             {
-                HotelId = 1,
-                OwnerId = 1, 
-                Name = "Cozy Inn",
-                Address = "123 Main Street",
-                City = "Example City",
-                NumberOfRooms = 20,
-                Description = "A cozy place to stay.",
-                ImageURLs = new List<string> { "https://plus.unsplash.com/premium_photo-1670360414903-19e5832f8bc4?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D,https://images.unsplash.com/photo-1489171078254-c3365d6e359f?q=80&w=1931&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-                prePrice = 2000,
-                StartingPrice = 1000,
+                "https://plus.unsplash.com/premium_photo-1670360414903-19e5832f8bc4?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                "https://images.unsplash.com/photo-1489171078254-c3365d6e359f?q=80&w=1931&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             },
-                new Hotel
-                {
-                    HotelId = 2,
-                    OwnerId = 1, 
-                    Name = "Luxury Resort",
-                    Address = "456 Elm Street",
-                    City = "Another City",
-                    NumberOfRooms = 10,
-                    Description = "Experience luxury at its finest.",
-                    ImageURLs = new List<string> { "https://images.unsplash.com/photo-1625244724120-1fd1d34d00f6?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D,https://plus.unsplash.com/premium_photo-1661843652801-66305e3c980c?q=80&w=2037&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-                    prePrice = 3000,
-                    StartingPrice = 1500,
-                }
-            );
+            NumberOfRooms = 20,
+            prePrice = 2000,
+            StartingPrice = 1000
+        },
+        new Hotel
+        {
+            HotelId = 2,
+            OwnerId = 1,
+            Name = "Luxury Resort",
+            Address = "456 Elm Street",
+            City = "Another City",
+            Description = "The car parking and the Wi-Fi are always free, so you can stay in touch and come and go as you please. Strategically situated in Khurbura Mohalla, allowing you access and proximity to local attractions and sights. Don't leave before paying a visit to the famous Jolly Grant Airport. This 4-star property features restaurant to make your stay more indulgent and memorable.",
+            ImageURLs = new List<string>
+            {
+                "https://images.unsplash.com/photo-1625244724120-1fd1d34d00f6?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                "https://plus.unsplash.com/premium_photo-1661843652801-66305e3c980c?q=80&w=2037&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            },
+            NumberOfRooms = 10,
+            prePrice = 3000,
+            StartingPrice = 1500
+        },
+        new Hotel
+        {
+            HotelId = 3,
+            OwnerId = 1,
+            Name = "PP Resort",
+            Address = "4 Rajnikunj",
+            City = "Dehradun",
+            Description = "A perfect value for money place, middle of shopping paradise. Very spacious rooms, courteous staff, free parking and above all very tasty food. Though the hotel is slightly outside the main city periphery but still it offers convenient access to it with all key facilities around., whether steer good, bar or lounges, pacific mall etc. overall my family loves the stay in Lemon Tree Dehradun.",
+            ImageURLs = new List<string>
+            {
+                "https://images.unsplash.com/photo-1596436889106-be35e843f974?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                "https://images.unsplash.com/photo-1543968332-f99478b1ebdc?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            },
+            NumberOfRooms = 50,
+            prePrice = 2000,
+            StartingPrice = 500
+        }
+    );
 
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)

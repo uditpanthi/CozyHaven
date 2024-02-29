@@ -1,0 +1,41 @@
+.dropdown-section-container {
+  margin-top: 20px;
+}
+
+.dropdown-section h2 {
+  text-align: left;
+  cursor: pointer;
+  padding: 10px;
+  border: 2px solid white;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  position: relative;
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-section h2:hover {
+  background-color: #5c5f59dd;
+}
+
+.dropdown-section h2::after {
+  content: "▼"; /* Downward arrow character */
+  color: white;
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  transition: ease-in-out 1.3s;
+}
+
+.dropdown-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 1.3s cubic-bezier(0.42, 0, 0.58, 1);
+}
+
+.dropdown-content.open {
+  max-height: 1000px; /* Adjust the value based on your content's height */
+  transition: max-height 1.5s cubic-bezier(0.42, 0, 0.58, 1); /* Slow down opening */
+}
+
+

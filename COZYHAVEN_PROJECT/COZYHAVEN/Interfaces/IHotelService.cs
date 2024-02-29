@@ -1,5 +1,6 @@
 ﻿using CozyHaven.Models;
 using CozyHaven.Models.DTOs;
+using COZYHAVEN.Models.DTOs;
 
 namespace CozyHaven.Interfaces
 {
@@ -11,9 +12,9 @@ namespace CozyHaven.Interfaces
         public Task<Hotel> UpdateHotelDescription(int id, string description);
         public Task<Hotel> DeleteHotel(int id);
         //public Task<List<Hotel>> GetHotelsByDestinationId(int destinationId);
-        public Task<Hotel> UpdateHotelOwner(int hotelid, int ownerId);
+        public Task<List<Hotel>> GetHotelsByOwner(int ownerId);
         public Task<ICollection<Review>> GetHotelReviews(int hotelId);
-        public Task<ICollection<HotelAmenity>> GetHotelAmenities(int hotelId);
+        Task<List<HotelAmenityDTO>> GetHotelAmenities(int hotelId);
         public Task<ICollection<Room>> GetRoomsByHotelId(int hotelId);
         public Task<Hotel> UpdateHotelDetails(HotelDTO hotelDTO);
         public Task<Hotel> UpdateHotelDetails(Hotel hotel);

@@ -16,6 +16,7 @@ const ReservationPage = () => {
     totalPrice: 0,
     status: 0
   });
+  const [confirmationBoxVisible, setConfirmationBoxVisible] = useState(false);
 
   useEffect(() => {
     const fetchUserByUsername = async () => {
@@ -77,6 +78,15 @@ const ReservationPage = () => {
   };
 
   const handleSubmitReservation = async () => {
+    if (reservation.checkInDate === reservation.checkOutDate) {
+      alert("Check-out date cannot be the same as check-in date.");
+      return; 
+    }
+    setConfirmationBoxVisible(true);
+  };
+  
+
+  const confirmReservation = async () => {
     try {
       const response = await fetch(`http://localhost:5108/api/Reservation/AddReservation?username=${username}`, {
         method: 'POST',
@@ -89,10 +99,16 @@ const ReservationPage = () => {
         throw new Error('Failed to add reservation');
       }
       console.log('Reservation added successfully');
+      setConfirmationBoxVisible(false);
     } catch (error) {
       console.error('Error adding reservation:', error.message);
     }
   };
+
+  const cancelReservation = () => {
+    setConfirmationBoxVisible(false);
+  };
+
 
   return (
     <div className="reservation-page">
@@ -145,6 +161,16 @@ const ReservationPage = () => {
         <button className="submit-button" type="button" onClick={handleSubmitReservation}>
           Make Reservation
         </button>
+        {confirmationBoxVisible && (
+          <div className="confirmation-box">
+            <h3>Confirm Reservation</h3>
+            <p>Are you sure you want to make this reservation?</p>
+            <div className="confirmation-box-buttons">
+              <button className="confirm-button" onClick={confirmReservation}>Confirm</button>
+              <button className="cancel-button" onClick={cancelReservation}>Cancel</button>
+            </div>
+          </div>
+        )}
       </form>
     </div>
   );

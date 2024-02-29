@@ -13,10 +13,13 @@ namespace CozyHaven.Controllers
     public class HotelController : ControllerBase
     {
         private readonly IHotelService _hotelService;
+        private readonly IHotelAmenityService _hotelAmenityService;
 
-        public HotelController(IHotelService hotelService)
+        public HotelController(IHotelService hotelService, IHotelAmenityService hotelAmenityService)
         {
             _hotelService = hotelService;
+            _hotelAmenityService = hotelAmenityService;
+
         }
 
         [HttpGet("GetAllHotels")]
@@ -121,12 +124,12 @@ namespace CozyHaven.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
-        [HttpGet("UpdateHotelOwner")]
-        public async Task<IActionResult> UpdateHotelOwner(int id, int ownerId)
+        [HttpGet("GetHotelsByOwner")]
+        public async Task<IActionResult> GetHotelsByOwner(int ownerId)
         {
             try
             {
-                var updatedHotel = await _hotelService.UpdateHotelOwner(id, ownerId);
+                var updatedHotel = await _hotelService.GetHotelsByOwner(ownerId);
                 return Ok(updatedHotel);
             }
             catch (HotelNotFoundException ex)
@@ -154,7 +157,7 @@ namespace CozyHaven.Controllers
         {
             try
             {
-                var amenities = await _hotelService.GetHotelAmenities(id);
+                var amenities = await _hotelAmenityService.GetHotelAmenities(id);
                 return Ok(amenities);
             }
             catch (HotelNotFoundException ex)

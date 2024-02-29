@@ -18,8 +18,9 @@ namespace COZYHAVENTEST
     {
         private Mock<IRepository<int, Hotel>> _mockRepository;
         private Mock<ILogger<HotelService>> _mockLogger;
-        private Mock<IRepository<int, Room>> _mockRoomRepo;
-        private Mock<IRepository<int, Reservation>> _mockReservationRepo;
+        private Mock<IRoomService> _mockRoomRepo;
+        private Mock<IReservationService> _mockReservationRepo;
+        private Mock<IHotelAmenityService> _mockHotelAmenityRepo;
         private IHotelService _hotelService;
 
         [SetUp]
@@ -27,9 +28,10 @@ namespace COZYHAVENTEST
         {
             _mockRepository = new Mock<IRepository<int, Hotel>>();
             _mockLogger = new Mock<ILogger<HotelService>>();
-            _mockRoomRepo = new Mock<IRepository<int, Room>>();
-            _mockReservationRepo = new Mock<IRepository<int, Reservation>>();
-            _hotelService = new HotelService(_mockRepository.Object, _mockLogger.Object, _mockRoomRepo.Object, _mockReservationRepo.Object);
+            _mockRoomRepo = new Mock<IRoomService>();
+            _mockReservationRepo = new Mock<IReservationService>();
+            _mockHotelAmenityRepo = new Mock<IHotelAmenityService>();
+            _hotelService = new HotelService(_mockRepository.Object, _mockLogger.Object, _mockRoomRepo.Object, _mockReservationRepo.Object,_mockHotelAmenityRepo.Object);
         }
 
         [Test]
@@ -187,8 +189,8 @@ namespace COZYHAVENTEST
             var hotelId = 1; // Example hotel ID
             var rooms = new List<Room> { }; // Example list of rooms
             var reservations = new List<Reservation> { }; // Example list of reservations
-            _mockRoomRepo.Setup(repo => repo.GetAll()).ReturnsAsync(rooms); // Mock room repository setup
-            _mockReservationRepo.Setup(repo => repo.GetAll()).ReturnsAsync(reservations); // Mock reservation repository setup
+            _mockRoomRepo.Setup(repo => repo.GetAllRooms()).ReturnsAsync(rooms); // Mock room repository setup
+            _mockReservationRepo.Setup(repo => repo.GetAllReservations()).ReturnsAsync(reservations); // Mock reservation repository setup
 
             // Act
             var result = await _hotelService.GetHotelReservations(hotelId);
