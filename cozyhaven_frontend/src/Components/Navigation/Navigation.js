@@ -16,12 +16,15 @@ const Navigation = () => {
       scrub: 1,
     },
   });
-  var isLoggedIn = sessionStorage.getItem("token");
-  var username = sessionStorage.getItem("username");
+
+  // Retrieve user information from session storage
+  const isLoggedIn = sessionStorage.getItem("token");
+  const role = sessionStorage.getItem("role");
 
   const handleLogout = () => {
-    sessionStorage.removeItem("token"); // Remove token from sessionStorage
-    sessionStorage.removeItem("username"); // Remove username from sessionStorage
+    // Clear session storage on logout
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("username");
     sessionStorage.removeItem("role");
     sessionStorage.removeItem("userId");
   };
@@ -30,26 +33,30 @@ const Navigation = () => {
     <nav>
       <h2>CozyHaven</h2>
       <div id="nav-buttons">
-        <h4>
-          <Link to="/">Home</Link>
-        </h4>
-        <h4>
-          <Link to="/browsepage">Hotels</Link>
-        </h4>
-        <h4>
-          <a href="#page3">Blog</a>
-        </h4>
-        <h4>
-          <a href="#footer">Contact</a>
-        </h4>
+        {/* Conditionally render navigation links based on user role */}
+        {isLoggedIn && (role === "admin" || role === "HotelOwner") ? null : (
+          <>
+            <h4>
+              <Link to="/">Home</Link>
+            </h4>
+            <h4>
+              <Link to="/browsepage">Hotels</Link>
+            </h4>
+            <h4>
+              <a href="#page3">Blog</a>
+            </h4>
+            <h4>
+              <a href="#footer">Contact</a>
+            </h4>
+          </>
+        )}
       </div>
       <div id="login-signup">
         {isLoggedIn ? (
           <>
+            {/* Render user-specific links */}
             <h4>
-            <Link to={'/userprofile'}>
-              {username}
-            </Link>
+              <Link to={"/userprofile"}>{sessionStorage.getItem("username")}</Link>
             </h4>
             <h4>
               <Link onClick={handleLogout} to={"/"}>

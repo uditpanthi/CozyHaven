@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Rating from "react-rating";
 import "../Reviews/Review.css";
+import ConfirmDelete from "../ConfirmDelete/ConfirmDelete";
 
 const UserReviews = () => {
   const [reviews, setReviews] = useState([]);
@@ -132,17 +133,16 @@ const UserReviews = () => {
             <p className="review-comment">Comment: {review.comment}</p>
             <p className="hotel-name">Hotel: {hotelNames[review.hotelId]}</p>
             <div className="review-buttons">
-              <button
-                className="delete-button"
-                onClick={() => handleDeleteReview(review.reviewId)}
+              <ConfirmDelete
+                onDelete={() => handleDeleteReview(review.reviewId)}
               >
                 Delete Review
-              </button>
+              </ConfirmDelete>
             </div>
           </li>
         ))}
       </ul>
-      {/* Confirmation box */}
+      {/* Confirmation box
       {confirmationBoxVisible && (
         <div className="confirmation-box">
           <h3>Confirm Deletion</h3>
@@ -154,7 +154,7 @@ const UserReviews = () => {
             </button>
           </div>
         </div>
-      )}
+      )} */}
     </div>
   );
 };

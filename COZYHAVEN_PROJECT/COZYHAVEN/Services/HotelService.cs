@@ -151,6 +151,7 @@ namespace CozyHaven.Services
             {
                 existingHotel.Name = hotelDTO.Name;
                 existingHotel.Address = hotelDTO.Address;
+                existingHotel.City= hotelDTO.City;
                 existingHotel.Description = hotelDTO.Description;
                 existingHotel.NumberOfRooms= hotelDTO.NumberOfRooms;
                 existingHotel.prePrice = hotelDTO.prePrice;

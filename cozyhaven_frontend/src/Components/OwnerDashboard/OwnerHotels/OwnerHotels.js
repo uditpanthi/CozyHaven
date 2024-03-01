@@ -2,30 +2,23 @@ import React, { useState, useEffect } from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import Button from "../../Button/Button";
-import AddHotelForm from "./AddHotelForm";
-import "./OwnerHotels.css";
+import "./Owner.css";
+import EditHotelForm from "./EditHotel";
+import { Link } from "react-router-dom";
+import ConfirmDelete from "../../ConfirmDelete/ConfirmDelete";
 
 const OwnerHotels = () => {
   const [hotels, setHotels] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [showAddHotelForm, setShowAddHotelForm] = useState(false);
   const [editableHotel, setEditableHotel] = useState(null);
   const [error, setError] = useState(null);
   const [updatedHotelData, setUpdatedHotelData] = useState({});
+  const [ownerId, setOwnerId] = useState();
 
   useEffect(() => {
     fetchOwnerHotels();
   }, []);
-  
-  useEffect(() => {
-    // Set updatedHotelData to the default hotel data when editableHotel changes
-    if (editableHotel !== null) {
-      const hotelToUpdate = hotels.find(hotel => hotel.hotelId === editableHotel);
-      if (hotelToUpdate) {
-        setUpdatedHotelData({ ...hotelToUpdate });
-      }
-    }
-  }, [editableHotel, hotels]);
+
   const fetchOwnerHotels = async () => {
     try {
       const username = sessionStorage.getItem("username");
@@ -56,6 +49,7 @@ const OwnerHotels = () => {
         throw new Error("Hotels data is not an array.");
       }
 
+      setOwnerId(ownerId);
       setHotels(hotelsData.$values);
       setLoading(false);
     } catch (error) {
@@ -65,34 +59,27 @@ const OwnerHotels = () => {
     }
   };
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setUpdatedHotelData({
-      ...updatedHotelData,
-      [name]: value,
-    });
+  const handleEditHotel = (hotelId) => {
+    setEditableHotel(hotelId);
+    // Set default values for the hotel being edited
+    const hotelToEdit = hotels.find((hotel) => hotel.hotelId === hotelId);
+    if (hotelToEdit) {
+      setUpdatedHotelData({ ...hotelToEdit });
+    }
+  };
+
+  const handleCancelEdit = () => {
+    setEditableHotel(null);
   };
 
   const handleSaveEdit = async (hotelId) => {
     try {
-      const username = sessionStorage.getItem("username");
-      if (!username) {
-        throw new Error("Username not found in session storage.");
-      }
+      // Find the hotel object by ID
+      const hotelToUpdate = hotels.find((hotel) => hotel.hotelId === hotelId);
 
-      const userResponse = await fetch(
-        `http://localhost:5108/api/User/GetByUsername?username=${username}`
-      );
-      if (!userResponse.ok) {
-        throw new Error(
-          `Failed to retrieve user details for username: ${username}`
-        );
+      if (!hotelToUpdate) {
+        throw new Error(`Hotel with ID ${hotelId} not found.`);
       }
-      const userData = await userResponse.json();
-      const ownerId = userData.userId;
-      console.log(ownerId);
-      console.log(hotelId);
-      console.log(updatedHotelData);
 
       const response = await fetch(
         `http://localhost:5108/api/Hotel/UpdateHotelDetails`,
@@ -102,12 +89,22 @@ const OwnerHotels = () => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            hotelId,
+            id: hotelId,
             ownerId,
-            ...updatedHotelData,
+            name: updatedHotelData.name,
+            description: updatedHotelData.description,
+            address: updatedHotelData.address,
+            city: updatedHotelData.city,
+            numberOfRooms: updatedHotelData.numberOfRooms,
+            prePrice: updatedHotelData.prePrice,
+            startingPrice: updatedHotelData.startingPrice,
+            imageURLs: hotelToUpdate.imageURLs,
           }),
         }
       );
+
+      const responseData = await response.json(); // Log response data for debugging
+      console.log(responseData);
 
       if (!response.ok) {
         throw new Error("Failed to update hotel details.");
@@ -121,39 +118,52 @@ const OwnerHotels = () => {
     }
   };
 
-  const handleAddHotel = async (newHotelData) => {
-    try {
-      // Implement add hotel logic here
-    } catch (error) {
-      console.error("Error adding new hotel:", error);
-    }
-  };
-
   const handleHotelDetails = (hotelId) => {
     console.log("View details for hotel with ID:", hotelId);
   };
 
-  const handleEditHotel = (hotelId) => {
-    setEditableHotel(hotelId);
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setUpdatedHotelData({
+      ...updatedHotelData,
+      [name]: value,
+    });
   };
 
-  const handleCancelEdit = () => {
-    setEditableHotel(null);
+  const handleDeleteHotel = async (hotelId) => {
+    try {
+      // Confirm deletion with the user
+      const confirmDelete = window.confirm(
+        "Are you sure you want to delete this hotel?"
+      );
+      if (!confirmDelete) {
+        return; // If user cancels deletion, do nothing
+      }
+
+      const response = await fetch(
+        `http://localhost:5108/api/Hotel/DeleteHotel?id=${hotelId}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to delete hotel.");
+      }
+
+      // Remove the deleted hotel from the state
+      setHotels(hotels.filter((hotel) => hotel.hotelId !== hotelId));
+    } catch (error) {
+      console.error("Error deleting hotel:", error);
+      setError("Failed to delete hotel. Please try again.");
+    }
   };
 
   return (
     <div className="main-Hotel-owner">
-      {showAddHotelForm ? (
-        <AddHotelForm
-          onAddHotel={(newHotelData) => {
-            handleAddHotel(newHotelData);
-            setShowAddHotelForm(false);
-          }}
-          onCancel={() => setShowAddHotelForm(false)}
-        />
-      ) : (
-        <Button onClick={() => setShowAddHotelForm(true)}>+ Add Hotel</Button>
-      )}
+      <Link to={`/addHotel/${ownerId}`}>
+        <Button>+ Add Hotel</Button>
+      </Link>
 
       {loading ? (
         <p>Loading...</p>
@@ -166,88 +176,13 @@ const OwnerHotels = () => {
           {hotels.map((hotel) => (
             <div className="hotel-owner-card" key={hotel.hotelId}>
               {editableHotel === hotel.hotelId ? (
-                <div className="editable-hotel">
-                  <Carousel>
-                    {hotel.imageURLs.$values.map((imageUrl, index) => (
-                      <div key={index}>
-                        <img src={imageUrl} alt={hotel.name} />
-                      </div>
-                    ))}
-                  </Carousel>
-                  <p>
-                    Hotel name : <br />
-                    <input
-                      type="text"
-                      name="name"
-                      value={updatedHotelData.name || hotel.name}
-                      onChange={handleInputChange}
-                    />
-                  </p>
-                  <br />
-                  <p>
-                    Address : <br />
-                    <input
-                      type="text"
-                      name="address"
-                      value={
-                        updatedHotelData.address ||
-                        `${hotel.address}, ${hotel.city}`
-                      }
-                      onChange={handleInputChange}
-                    />
-                    <br />
-                  </p>
-                  <p>
-                    Description : <br />
-                    <textarea
-                      name="description"
-                      value={updatedHotelData.description || hotel.description}
-                      onChange={handleInputChange}
-                    />
-                  </p>
-                  <br />
-                  <p>
-                    Number of Rooms: <br />
-                    <input
-                      type="text"
-                      name="numberOfRooms"
-                      value={
-                        updatedHotelData.numberOfRooms || hotel.numberOfRooms
-                      }
-                      onChange={handleInputChange}
-                    />
-                  </p>
-                  <br />
-                  <p>
-                    Last Price: <br />
-                    <input
-                      type="text"
-                      name="prePrice"
-                      value={updatedHotelData.prePrice || hotel.prePrice}
-                      onChange={handleInputChange}
-                    />
-                  </p>
-                  <br />
-                  <p>
-                    New Price: <br />
-                    <input
-                      type="text"
-                      name="startingPrice"
-                      value={
-                        updatedHotelData.startingPrice || hotel.startingPrice
-                      }
-                      onChange={handleInputChange}
-                    />
-                  </p>
-
-                  <br />
-                  <div>
-                    <Button onClick={() => handleSaveEdit(hotel.hotelId)}>
-                      Save
-                    </Button>
-                    <Button onClick={() => handleCancelEdit()}>Cancel</Button>
-                  </div>
-                </div>
+                <EditHotelForm
+                  hotel={hotel}
+                  onSaveEdit={() => handleSaveEdit(hotel.hotelId)}
+                  onCancelEdit={handleCancelEdit}
+                  handleInputChange={handleInputChange}
+                  updatedHotelData={updatedHotelData}
+                />
               ) : (
                 <div className="hotel-info">
                   <Carousel>
@@ -268,12 +203,17 @@ const OwnerHotels = () => {
                   <br />
                   <p>Last Price: {hotel.prePrice}</p>
                   <p>New Price: {hotel.startingPrice}</p>
-                  <Button onClick={() => setEditableHotel(hotel.hotelId)}>
+                  <Button onClick={() => handleEditHotel(hotel.hotelId)}>
                     Edit
                   </Button>
-                  <Button onClick={() => handleHotelDetails(hotel.hotelId)}>
-                    View Details
-                  </Button>
+                  <Link to={`/ownerHotelsRooms/${hotel.hotelId}`}>
+                    <Button onClick={() => handleHotelDetails(hotel.hotelId)}>
+                      View Details
+                    </Button>
+                  </Link>
+                  <ConfirmDelete onDelete={() => handleDeleteHotel(hotel.hotelId)}>
+                    Delete
+                  </ConfirmDelete>
                 </div>
               )}
             </div>

@@ -22,13 +22,11 @@
 /* Hotel info */
 .hotelrooms-container .hotel-info {
   display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  align-items: center;
+  justify-content: space-between;
 }
 
 /* Rooms and reviews layout */
-.rooms-and-reviews {
+.leftbig-and-rightsml{
   display: flex;
   /* justify-content: space-between; */
   gap: 50px;

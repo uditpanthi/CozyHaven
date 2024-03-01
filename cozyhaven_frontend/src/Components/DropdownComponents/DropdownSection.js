@@ -44,7 +44,7 @@ const DropdownSection = () => {
       </div>
 
       {/* Hotel Reservations Dropdown Section */}
-      <div className="dropdown-section">
+      {/* <div className="dropdown-section">
         <h2 onClick={() => toggleDropdown("hotelReservations")} aria-expanded={dropdownVisible.hotelReservations} >
           Hotel Reservations
         </h2>
@@ -53,7 +53,7 @@ const DropdownSection = () => {
             <HotelReservations hotelId="3" />
           )}
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

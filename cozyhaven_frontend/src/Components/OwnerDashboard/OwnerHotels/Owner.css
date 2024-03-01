@@ -1,0 +1,210 @@
+/* AddHotelForm.css */
+
+.add-form {
+    max-width: 400px;
+    margin: auto;
+    margin-top: 100px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  
+  
+  .add-form input[type="text"],
+  .add-form textarea,
+  .add-form input[type="number"],
+  .add-form input[type="file"] {
+    width: 100%;
+    overflow:  hidden;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-sizing: border-box;
+    background-color: #929292;
+    resize: none;
+    color: white;
+  }
+  
+  .add-form input[type="file"] {
+
+    border: none;
+    background-color: transparent;
+  }
+  .add-form input[type="text"]::placeholder,
+.add-form textarea::placeholder,
+.add-form input[type="number"]::placeholder {
+  /* Adjust placeholder color and opacity */
+  color: #ffffff; /* Placeholder text color */
+  opacity: 0.7; /* Placeholder opacity */
+}
+  
+/* AddHotelForm.css */
+
+.add-room-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: black;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  z-index: 9999; /* Ensure the popup appears on top */
+}
+
+.add-room-popup h3 {
+  color: #95c221;
+  margin-top: 0;
+}
+
+.add-room-popup p {
+  margin-bottom: 20px;
+}
+
+.add-room-popup button {
+  margin-right: 10px;
+}
+
+/* AddRooms.css */
+
+.success-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgb(53, 52, 52);
+  border: 1px solid #ccc;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 9999;
+}
+
+.success-popup p {
+  margin-bottom: 10px;
+}
+
+.success-popup button {
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.success-popup button:hover {
+  background-color: #0056b3;
+}
+.main-Hotel-owner {
+  margin-left: 280px;
+}
+
+.hotel-owner-card {
+  padding: 2vh;
+  display: flex;
+  min-height: 30vh;
+  width: 70vw;
+  border: 1px solid #eaeaea;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.hotel-owner-card:hover {
+  background-color: #141414;
+  /* transition: ease-in 0.3s; */
+}
+
+.hotel-owner-card img {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 8px 0 0 8px;
+}
+
+.hotel-owner-info {
+  z-index: 10;
+  padding: 20px;
+  width: 100%;
+  position: relative;
+}
+
+.hotel-owner-info h2 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 1.4rem;
+  color: #000000; /* Updated color */
+}
+
+.hotel-owner-info p {
+  margin: 5px 0;
+  font-size: 1rem;
+  color: #666666; /* Updated color */
+}
+
+.carousel-status {
+  display: none;
+}
+
+.carousel .thumb {
+  display: none;
+}
+
+.price-range {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.price-range span:nth-child(1) {
+  font-size: 1rem;
+  color: #7e6666;
+  text-decoration: line-through red;
+  margin-bottom: 5px;
+}
+
+.price-range span:last-child {
+  font-size: 2rem;
+  margin-bottom: 0;
+}
+
+.editable-hotel input[type="text"]{
+  min-width: 65vw;
+  padding: 5px;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  color: #fffefe;
+  background-color: #333;
+  resize: none;
+}
+.editable-hotel textarea {
+  min-width: 30vw;
+  min-height: 8vh;
+  padding: 5px;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  color: #fffefe;
+  background-color: #333;
+  resize: none;
+}
+
+input[type="text"]:focus,
+textarea:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+
+
+
+  

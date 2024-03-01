@@ -10,6 +10,9 @@ import ReservationPage from "./Components/ReservationPage/ReservationPage";
 import UserProfile from "./Components/UserProfile/UserProfile";
 import BrowseUsingSearch from "./Components/BrowsePageUsingSearch/BrowseUsingSearch";
 import OwnerDashboard from "./Components/OwnerDashboard/OwnerDashboard";
+import AddHotelForm from "./Components/OwnerDashboard/OwnerHotels/AddHotelForm";
+import AddRooms from "./Components/OwnerDashboard/AddRooms/AddRooms";
+import OwnerHotelsRooms from "./Components/OwnerDashboard/OwnerHotelRooms/OwnerHotelsRooms";
 
 const App = () => {
   return (
@@ -29,6 +32,9 @@ const App = () => {
           <Route path='/addReview' element={<ReservationPage />} />
         </Route>
         <Route path="/ownerdashboard" element={<OwnerDashboard />} />
+        <Route path="/addHotel/:ownerId" element={<AddHotelForm/>}/>
+        <Route path="/addRooms/:hotelId" element={<AddRooms/>}/>
+        <Route path="/ownerHotelsRooms/:hotelId" element={<OwnerHotelsRooms/>}/>
       </Routes>
     </Router>
   );

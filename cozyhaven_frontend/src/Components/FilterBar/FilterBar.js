@@ -47,7 +47,7 @@ const FilterBar = ({ updateFilters }) => {
       location: event.target.value,
       amenities: selectedAmenities,
       priceRange: [minPrice, maxPrice],
-      rating: selectedRating
+      rating: selectedRating,
     });
   };
 
@@ -61,7 +61,7 @@ const FilterBar = ({ updateFilters }) => {
       location: selectedLocation,
       amenities: selectedAmenities,
       priceRange: [minPrice, maxPrice],
-      rating: selectedRating
+      rating: selectedRating,
     });
   };
 
@@ -71,7 +71,7 @@ const FilterBar = ({ updateFilters }) => {
       location: selectedLocation,
       amenities: selectedAmenities,
       priceRange: [parseInt(event.target.value), maxPrice],
-      rating: selectedRating
+      rating: selectedRating,
     });
   };
 
@@ -81,7 +81,7 @@ const FilterBar = ({ updateFilters }) => {
       location: selectedLocation,
       amenities: selectedAmenities,
       priceRange: [minPrice, parseInt(event.target.value)],
-      rating: selectedRating
+      rating: selectedRating,
     });
   };
 
@@ -91,7 +91,7 @@ const FilterBar = ({ updateFilters }) => {
       location: selectedLocation,
       amenities: selectedAmenities,
       priceRange: [minPrice, maxPrice],
-      rating: rating
+      rating: rating,
     });
   };
 
@@ -122,7 +122,7 @@ const FilterBar = ({ updateFilters }) => {
         <h4>Location</h4>
         <select value={selectedLocation} onChange={handleLocationChange}>
           <option value="">All Locations</option>
-          {locations.map((city, index) => (
+          {[...new Set(locations)].map((city, index) => (
             <option key={index} value={city}>
               {city}
             </option>

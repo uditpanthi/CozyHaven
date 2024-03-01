@@ -46,7 +46,6 @@ const UserProfile = () => {
   };
 
   const handleInputChange = (e) => {
-    // Update the updatedUserDetails state when input fields change
     setUpdatedUserDetails({
       ...updatedUserDetails,
       [e.target.name]: e.target.value,
@@ -54,7 +53,6 @@ const UserProfile = () => {
   };
 
   const handleEditClick = () => {
-    // Enable edit mode when edit button is clicked
     setEditMode(true);
   };
 
@@ -81,7 +79,6 @@ const UserProfile = () => {
   };
 
   const handleCancelClick = () => {
-    // Cancel editing and revert to original user details
     setUpdatedUserDetails(userDetails);
     setEditMode(false);
   };

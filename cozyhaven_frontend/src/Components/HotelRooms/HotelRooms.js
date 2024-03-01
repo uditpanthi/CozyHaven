@@ -127,9 +127,11 @@ const HotelRooms = () => {
       <div className="hotelrooms-container">
         <div className="hotel-info">
           {hotel && <h1>Welcome to {hotel.name}</h1>}
-          {hotel && <p>Welcome to {hotel.description}</p>}
         </div>
-        <div className="rooms-and-reviews">
+        <br/>
+          {hotel && <p>{hotel.description}</p>}
+        <br/>
+        <div className="leftbig-and-rightsml">
           <div className="rooms-list">
             <ul>
               {rooms.map((room) => (

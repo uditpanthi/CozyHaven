@@ -24,7 +24,7 @@
   border-radius: 8px 0 0 8px;
 }
 
-.hotel-info {
+.hotel-card .hotel-info {
   z-index: 10;
   padding: 20px;
   width: 100%;
@@ -73,5 +73,38 @@
   margin-bottom: 0;
 }
 
+.hotel-amenities {
+  margin-top: 20px;
+  
+}
+
+.hotel-amenities h2 {
+  font-size: 20px;
+  text-align: left;
+  
+}
+
+.hotel-amenities ul {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  gap: 10px;
+}
+
+.hotel-amenities li {
+  border: 2px solid #454644;
+  border-radius: 20px;
+  padding: 1vh;
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.hotel-amenities li::before {
+  content: "\2022"; 
+  color: #333; 
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
+}
 
 
