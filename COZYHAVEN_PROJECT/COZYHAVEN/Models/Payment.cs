@@ -31,7 +31,7 @@ namespace CozyHaven.Models
     {
         Pending,
         Approved,
-        Cancle
+        Cancelled
     }
 }
 

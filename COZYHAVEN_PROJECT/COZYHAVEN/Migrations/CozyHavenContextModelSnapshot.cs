@@ -178,7 +178,7 @@ namespace COZYHAVEN.Migrations
                         {
                             PaymentId = 1,
                             Amount = 250f,
-                            PaymentDate = new DateTime(2024, 2, 27, 9, 47, 55, 822, DateTimeKind.Local).AddTicks(7151),
+                            PaymentDate = new DateTime(2024, 3, 2, 11, 34, 17, 514, DateTimeKind.Local).AddTicks(9548),
                             PaymentMethod = "Credit Card",
                             ReservationId = 1,
                             Status = 1
@@ -234,9 +234,9 @@ namespace COZYHAVEN.Migrations
                         {
                             ReservationId = 1,
                             Adults = 2,
-                            BookedDate = new DateTime(2024, 2, 27, 9, 47, 55, 822, DateTimeKind.Local).AddTicks(7141),
-                            CheckInDate = new DateTime(2024, 2, 27, 0, 0, 0, 0, DateTimeKind.Local),
-                            CheckOutDate = new DateTime(2024, 2, 29, 0, 0, 0, 0, DateTimeKind.Local),
+                            BookedDate = new DateTime(2024, 3, 2, 11, 34, 17, 514, DateTimeKind.Local).AddTicks(9534),
+                            CheckInDate = new DateTime(2024, 3, 2, 0, 0, 0, 0, DateTimeKind.Local),
+                            CheckOutDate = new DateTime(2024, 3, 4, 0, 0, 0, 0, DateTimeKind.Local),
                             Children = 0,
                             RoomId = 1,
                             Status = 2,
@@ -281,7 +281,7 @@ namespace COZYHAVEN.Migrations
                         {
                             ReviewId = 1,
                             Comment = "Great experience!",
-                            DatePosted = new DateTime(2024, 2, 27, 9, 47, 55, 822, DateTimeKind.Local).AddTicks(7112),
+                            DatePosted = new DateTime(2024, 3, 2, 11, 34, 17, 514, DateTimeKind.Local).AddTicks(9495),
                             HotelId = 1,
                             Rating = 4.5f,
                             UserId = 1
@@ -290,7 +290,7 @@ namespace COZYHAVEN.Migrations
                         {
                             ReviewId = 2,
                             Comment = "Excellent service!",
-                            DatePosted = new DateTime(2024, 2, 27, 9, 47, 55, 822, DateTimeKind.Local).AddTicks(7113),
+                            DatePosted = new DateTime(2024, 3, 2, 11, 34, 17, 514, DateTimeKind.Local).AddTicks(9497),
                             HotelId = 2,
                             Rating = 5f,
                             UserId = 2
@@ -447,7 +447,7 @@ namespace COZYHAVEN.Migrations
                             Key = new byte[0],
                             LastName = "Doe",
                             Password = new byte[0],
-                            RegistrationDate = new DateTime(2024, 2, 27, 9, 47, 55, 822, DateTimeKind.Local).AddTicks(7004),
+                            RegistrationDate = new DateTime(2024, 3, 2, 11, 34, 17, 514, DateTimeKind.Local).AddTicks(9210),
                             UserType = 2,
                             Username = "john_doe"
                         },
@@ -461,7 +461,7 @@ namespace COZYHAVEN.Migrations
                             Key = new byte[0],
                             LastName = "Smith",
                             Password = new byte[0],
-                            RegistrationDate = new DateTime(2024, 2, 27, 9, 47, 55, 822, DateTimeKind.Local).AddTicks(7007),
+                            RegistrationDate = new DateTime(2024, 3, 2, 11, 34, 17, 514, DateTimeKind.Local).AddTicks(9214),
                             UserType = 1,
                             Username = "jane_smith"
                         });

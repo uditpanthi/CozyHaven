@@ -87,6 +87,18 @@ namespace CozyHaven.Services
             }
             throw new HotelNotFoundException();
         }
+        public async Task<Hotel> UpdateHotelOwner(int id, int ownerId)
+        {
+            _logger.LogInformation("Updating owner for hotel with ID: {HotelId}", id);
+            var hotel = await GetHotel(id);
+            if (hotel != null)
+            {
+                hotel.OwnerId = ownerId;
+                await _repository.Update(hotel);
+                return hotel;
+            }
+            throw new HotelNotFoundException();
+        }
         public async Task<List<Hotel>> GetHotelsByOwner(int ownerId)
         {
             _logger.LogInformation("Fetching hotels for owner with ID: {OwnerId}", ownerId);

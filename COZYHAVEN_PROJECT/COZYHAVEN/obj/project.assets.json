@@ -2833,19 +2833,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\win 10\\.nuget\\packages\\": {}
+    "C:\\Users\\being\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\PROJECTS\\FINAL COZY HAVEN\\COZYHAVEN_PROJECT\\COZYHAVEN\\COZYHAVEN.csproj",
+      "projectUniqueName": "D:\\CozyHaven\\COZYHAVEN_PROJECT\\COZYHAVEN\\COZYHAVEN.csproj",
       "projectName": "COZYHAVEN",
-      "projectPath": "D:\\PROJECTS\\FINAL COZY HAVEN\\COZYHAVEN_PROJECT\\COZYHAVEN\\COZYHAVEN.csproj",
-      "packagesPath": "C:\\Users\\win 10\\.nuget\\packages\\",
-      "outputPath": "D:\\PROJECTS\\FINAL COZY HAVEN\\COZYHAVEN_PROJECT\\COZYHAVEN\\obj\\",
+      "projectPath": "D:\\CozyHaven\\COZYHAVEN_PROJECT\\COZYHAVEN\\COZYHAVEN.csproj",
+      "packagesPath": "C:\\Users\\being\\.nuget\\packages\\",
+      "outputPath": "D:\\CozyHaven\\COZYHAVEN_PROJECT\\COZYHAVEN\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\win 10\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\being\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -2913,7 +2913,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101\\RuntimeIdentifierGraph.json"
       }
     }
   }

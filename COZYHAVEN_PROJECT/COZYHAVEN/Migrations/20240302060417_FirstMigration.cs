@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace COZYHAVEN.Migrations
 {
-    public partial class init : Migration
+    public partial class FirstMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -203,12 +203,12 @@ namespace COZYHAVEN.Migrations
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "UserId", "ContactNumber", "DateofBirth", "Email", "FirstName", "Key", "LastName", "Password", "RegistrationDate", "UserType", "Username" },
-                values: new object[] { 1, "1234567890", new DateTime(1990, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "john@example.com", "John", new byte[0], "Doe", new byte[0], new DateTime(2024, 2, 27, 9, 47, 55, 822, DateTimeKind.Local).AddTicks(7004), 2, "john_doe" });
+                values: new object[] { 1, "1234567890", new DateTime(1990, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "john@example.com", "John", new byte[0], "Doe", new byte[0], new DateTime(2024, 3, 2, 11, 34, 17, 514, DateTimeKind.Local).AddTicks(9210), 2, "john_doe" });
 
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "UserId", "ContactNumber", "DateofBirth", "Email", "FirstName", "Key", "LastName", "Password", "RegistrationDate", "UserType", "Username" },
-                values: new object[] { 2, "9876543210", new DateTime(1985, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "jane@example.com", "Jane", new byte[0], "Smith", new byte[0], new DateTime(2024, 2, 27, 9, 47, 55, 822, DateTimeKind.Local).AddTicks(7007), 1, "jane_smith" });
+                values: new object[] { 2, "9876543210", new DateTime(1985, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "jane@example.com", "Jane", new byte[0], "Smith", new byte[0], new DateTime(2024, 3, 2, 11, 34, 17, 514, DateTimeKind.Local).AddTicks(9214), 1, "jane_smith" });
 
             migrationBuilder.InsertData(
                 table: "Hotels",
@@ -230,8 +230,8 @@ namespace COZYHAVEN.Migrations
                 columns: new[] { "ReviewId", "Comment", "DatePosted", "HotelId", "Rating", "UserId" },
                 values: new object[,]
                 {
-                    { 1, "Great experience!", new DateTime(2024, 2, 27, 9, 47, 55, 822, DateTimeKind.Local).AddTicks(7112), 1, 4.5f, 1 },
-                    { 2, "Excellent service!", new DateTime(2024, 2, 27, 9, 47, 55, 822, DateTimeKind.Local).AddTicks(7113), 2, 5f, 2 }
+                    { 1, "Great experience!", new DateTime(2024, 3, 2, 11, 34, 17, 514, DateTimeKind.Local).AddTicks(9495), 1, 4.5f, 1 },
+                    { 2, "Excellent service!", new DateTime(2024, 3, 2, 11, 34, 17, 514, DateTimeKind.Local).AddTicks(9497), 2, 5f, 2 }
                 });
 
             migrationBuilder.InsertData(
@@ -248,12 +248,12 @@ namespace COZYHAVEN.Migrations
             migrationBuilder.InsertData(
                 table: "Reservations",
                 columns: new[] { "ReservationId", "Adults", "BookedDate", "CheckInDate", "CheckOutDate", "Children", "RoomId", "Status", "TotalPrice", "UserId" },
-                values: new object[] { 1, 2, new DateTime(2024, 2, 27, 9, 47, 55, 822, DateTimeKind.Local).AddTicks(7141), new DateTime(2024, 2, 27, 0, 0, 0, 0, DateTimeKind.Local), new DateTime(2024, 2, 29, 0, 0, 0, 0, DateTimeKind.Local), 0, 1, 2, 250f, 1 });
+                values: new object[] { 1, 2, new DateTime(2024, 3, 2, 11, 34, 17, 514, DateTimeKind.Local).AddTicks(9534), new DateTime(2024, 3, 2, 0, 0, 0, 0, DateTimeKind.Local), new DateTime(2024, 3, 4, 0, 0, 0, 0, DateTimeKind.Local), 0, 1, 2, 250f, 1 });
 
             migrationBuilder.InsertData(
                 table: "Payments",
                 columns: new[] { "PaymentId", "Amount", "PaymentDate", "PaymentMethod", "ReservationId", "Status" },
-                values: new object[] { 1, 250f, new DateTime(2024, 2, 27, 9, 47, 55, 822, DateTimeKind.Local).AddTicks(7151), "Credit Card", 1, 1 });
+                values: new object[] { 1, 250f, new DateTime(2024, 3, 2, 11, 34, 17, 514, DateTimeKind.Local).AddTicks(9548), "Credit Card", 1, 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_HotelAmenities_AmenityId",

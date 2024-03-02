@@ -122,14 +122,6 @@ const OwnerHotels = () => {
     console.log("View details for hotel with ID:", hotelId);
   };
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setUpdatedHotelData({
-      ...updatedHotelData,
-      [name]: value,
-    });
-  };
-
   const handleDeleteHotel = async (hotelId) => {
     try {
       // Confirm deletion with the user
@@ -159,6 +151,14 @@ const OwnerHotels = () => {
     }
   };
 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setUpdatedHotelData({
+      ...updatedHotelData,
+      [name]: value,
+    });
+  };
+
   return (
     <div className="main-Hotel-owner">
       <Link to={`/addHotel/${ownerId}`}>
@@ -184,7 +184,7 @@ const OwnerHotels = () => {
                   updatedHotelData={updatedHotelData}
                 />
               ) : (
-                <div className="hotel-info">
+                <div className="hotel-owner-info">
                   <Carousel>
                     {hotel.imageURLs.$values.map((imageUrl, index) => (
                       <div key={index}>

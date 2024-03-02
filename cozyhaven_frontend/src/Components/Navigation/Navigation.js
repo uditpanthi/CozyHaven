@@ -4,7 +4,7 @@ import "../Navigation/Navigation.css";
 import gsap from "gsap";
 
 const Navigation = () => {
-  gsap.to("nav", {
+  gsap.to("#nav", {
     backgroundColor: "#000",
     duration: 0.5,
     height: "110px",
@@ -30,7 +30,7 @@ const Navigation = () => {
   };
 
   return (
-    <nav>
+    <div id="nav">
       <h2>CozyHaven</h2>
       <div id="nav-buttons">
         {/* Conditionally render navigation links based on user role */}
@@ -75,7 +75,7 @@ const Navigation = () => {
           </>
         )}
       </div>
-    </nav>
+    </div>
   );
 };
 

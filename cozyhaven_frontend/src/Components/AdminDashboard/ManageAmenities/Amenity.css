@@ -1,0 +1,166 @@
+.admin-amenity-header {
+    /* margin-right: 30px;
+    margin-top: 15px;
+    margin-left: 280px;
+    margin-bottom: 30px; */
+    margin: 15px 30px 30px 280px;
+    padding: 10px;
+    border:2px solid white;
+    border-radius: 10px;
+  }
+  
+  .admin-amenity-header h2 {
+    margin: 0;
+  }
+  
+  .add-amenity{
+    margin-top: 10px;
+    gap: 10px;
+  }
+
+  .admin-amenity-btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    user-select: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+  
+  .admin-amenity-btn:hover {
+    color: #fff;
+    background-color: #0056b3;
+    border-color: #004e99;
+  }
+  
+  .admin-amenity-btn:focus,
+  .admin-amenity-btn.focus {
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: -2px;
+  }
+  
+  .admin-amenity-btn:active,
+  .admin-amenity-btn.active,
+  .show > .admin-amenity-btn.dropdown-toggle {
+    color: #fff;
+    background-color: #0056b3;
+    border-color: #004e99;
+  }
+  
+  .admin-amenity-btn:active:focus,
+  .admin-amenity-btn:active.focus,
+  .show > .admin-amenity-btn.dropdown-toggle:focus,
+  .show > .admin-amenity-btn.dropdown-toggle.focus {
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: -2px;
+  }
+  
+  .admin-amenity-btn.disabled,
+  .admin-amenity-btn:disabled {
+    pointer-events: none;
+    opacity: 0.65;
+  }
+  
+  .admin-amenity-btn:not(:disabled):not(.disabled):active,
+  .admin-amenity-btn:not(:disabled):not(.disabled).active,
+  .show > .admin-amenity-btn.dropdown-toggle:not(:disabled):not(.disabled):active {
+    background-color: #0069d9;
+    border-color: #0062cc;
+  }
+  
+  .admin-amenity-btn:not(:disabled):not(.disabled):active:focus,
+  .admin-amenity-btn:not(:disabled):not(.disabled).active:focus,
+  .show > .admin-amenity-btn.dropdown-toggle:not(:disabled):not(.disabled):active:focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+  }
+  
+  .admin-amenity-btn-outline-primary {
+    color: #007bff;
+    background-color: transparent;
+    background-image: none;
+    border-color: #007bff;
+  }
+  
+  .admin-amenity-btn-outline-primary:hover {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+  
+  .admin-amenity-btn-outline-primary:focus,
+  .admin-amenity-btn-outline-primary.focus {
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+  }
+  
+  .admin-amenity-btn-outline-primary.disabled,
+  .admin-amenity-btn-outline-primary:disabled {
+    color: #007bff;
+    background-color: transparent;
+  }
+  
+  .admin-amenity-btn-group .admin-amenity-btn + .admin-amenity-btn {
+    margin-left: 3.5px;
+  }
+  
+  .admin-amenity-list {
+    display: flex;
+    flex-direction: column;
+    padding-left: 0;
+    margin-bottom: 0;
+  }
+  
+  .admin-amenity-item {
+    margin-top: 20px;
+    position: relative;
+    display: block;
+    padding: 0.75rem 1.25rem;
+    border: 1px solid white;
+    border-radius: 10px;
+  }
+  
+  
+  .admin-amenity-item:hover {
+    z-index: 1;
+  }
+  
+  .admin-amenity-item > span {
+    margin-right: 10px;
+  }
+  
+  .admin-amenity-form-control {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: block;
+    width: 100%;
+    height: calc(1.5em + 0.75rem + 2px);
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color:#929292;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  }
+  
+  .admin-amenity-form-control:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  }
+  

@@ -13,6 +13,7 @@ import OwnerDashboard from "./Components/OwnerDashboard/OwnerDashboard";
 import AddHotelForm from "./Components/OwnerDashboard/OwnerHotels/AddHotelForm";
 import AddRooms from "./Components/OwnerDashboard/AddRooms/AddRooms";
 import OwnerHotelsRooms from "./Components/OwnerDashboard/OwnerHotelRooms/OwnerHotelsRooms";
+import AdminDashboard from "./Components/AdminDashboard/Admindashboard";
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
       <Routes>
         <Route path="/userprofile" element={<UserProfile />} />
         <Route path="/" element={<LandingPage />} />
+        <Route path="/AdminDashboard" element={<AdminDashboard />} />
         <Route path="/OwnerDashboard" element={<OwnerDashboard />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

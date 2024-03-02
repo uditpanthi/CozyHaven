@@ -12,6 +12,7 @@ namespace CozyHaven.Interfaces
         public Task<Hotel> UpdateHotelDescription(int id, string description);
         public Task<Hotel> DeleteHotel(int id);
         //public Task<List<Hotel>> GetHotelsByDestinationId(int destinationId);
+        public Task<Hotel> UpdateHotelOwner(int hotelid, int ownerId);
         public Task<List<Hotel>> GetHotelsByOwner(int ownerId);
         public Task<ICollection<Review>> GetHotelReviews(int hotelId);
         Task<List<HotelAmenityDTO>> GetHotelAmenities(int hotelId);

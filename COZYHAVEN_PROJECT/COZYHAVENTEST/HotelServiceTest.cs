@@ -38,16 +38,16 @@ namespace COZYHAVENTEST
         public async Task AddHotel_ValidHotelDTO_ReturnsAddedHotel()
         {
             // Arrange
-            var hotelDTO = new HotelDTO { ImageURLs = new List<string> { "url1", "url2" } }; // Example hotel DTO with image URLs
-            var ownerId = 1; // Example owner ID
-            var addedHotel = new Hotel(); // Example added hotel
-            _mockRepository.Setup(repo => repo.Add(It.IsAny<Hotel>())).ReturnsAsync(addedHotel); // Mock repository setup
+            var hotelDTO = new HotelDTO { ImageURLs = new List<string> { "url1", "url2" } }; 
+            var ownerId = 1;
+            var addedHotel = new Hotel(); 
+            _mockRepository.Setup(repo => repo.Add(It.IsAny<Hotel>())).ReturnsAsync(addedHotel); 
 
             // Act
             var result = await _hotelService.AddHotel(hotelDTO, ownerId);
 
             // Assert
-            Assert.IsNotNull(result); // Check if the result is not null
+            Assert.IsNotNull(result); 
         }
 
 
@@ -55,9 +55,9 @@ namespace COZYHAVENTEST
         public async Task DeleteHotel_ExistingHotelId_ReturnsDeletedHotel()
         {
             // Arrange
-            var hotelId = 1; // Example hotel ID
-            var hotelToDelete = new Hotel(); // Example hotel to delete
-            _mockRepository.Setup(repo => repo.Delete(hotelId)).ReturnsAsync(hotelToDelete); // Mock repository setup
+            var hotelId = 1; 
+            var hotelToDelete = new Hotel(); 
+            _mockRepository.Setup(repo => repo.Delete(hotelId)).ReturnsAsync(hotelToDelete); 
 
             // Act & Assert
             HotelNotFoundException exception = null;
@@ -71,7 +71,7 @@ namespace COZYHAVENTEST
             }
 
             // Assert
-            Assert.IsNotNull(exception); // Check if the exception is not null
+            Assert.IsNotNull(exception);
         }
 
 
@@ -79,29 +79,29 @@ namespace COZYHAVENTEST
         public async Task GetAllHotels_ReturnsListOfHotels()
         {
             // Arrange
-            var hotels = new List<Hotel> { }; // Example list of hotels
-            _mockRepository.Setup(repo => repo.GetAll()).ReturnsAsync(hotels); // Mock repository setup
+            var hotels = new List<Hotel> { }; 
+            _mockRepository.Setup(repo => repo.GetAll()).ReturnsAsync(hotels); 
 
             // Act
             var result = await _hotelService.GetAllHotels();
 
             // Assert
-            Assert.AreEqual(hotels, result); // Check if the returned list of hotels matches the expected list
+            Assert.AreEqual(hotels, result); 
         }
 
         [Test]
         public async Task GetHotel_ExistingHotelId_ReturnsHotel()
         {
             // Arrange
-            var hotelId = 1; // Example hotel ID
-            var hotel = new Hotel { }; // Example hotel
-            _mockRepository.Setup(repo => repo.GetById(hotelId)).ReturnsAsync(hotel); // Mock repository setup
+            var hotelId = 1; 
+            var hotel = new Hotel { }; 
+            _mockRepository.Setup(repo => repo.GetById(hotelId)).ReturnsAsync(hotel);
 
             // Act
             var result = await _hotelService.GetHotel(hotelId);
 
             // Assert
-            Assert.AreEqual(hotel, result); // Check if the returned hotel matches the expected hotel
+            Assert.AreEqual(hotel, result); 
         }
 
         [Test]
@@ -117,7 +117,7 @@ namespace COZYHAVENTEST
             var result = await _hotelService.UpdateHotelDescription(hotelId, "New Description");
 
             // Assert
-            Assert.IsNotNull(result); // Check if the result is not null
+            Assert.IsNotNull(result); 
         }
 
 
