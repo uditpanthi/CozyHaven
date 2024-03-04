@@ -5,10 +5,14 @@ import { Carousel } from "react-responsive-carousel";
 import Navigation from "../../Navigation/Navigation";
 import Footer from "../../Footer/Footer";
 import { CursorAnimation } from "../../CursorAnimation/CursorAnimation";
-import ConfirmDelete from "../../ConfirmDelete/ConfirmDelete";
+import ConfirmBox from "../../ConfirmDelete/ConfirmDelete";
+import EditRoom from "../../OwnerDashboard/OwnerHotelRooms/EditRooms";
+import OwnerSidebar from "../OwnerSidebar/OwnerSidebar";
+import AdminSidebar from "../../AdminDashboard/AdminSidebar/AdminSidebar";
 
 const OwnerHotelsRooms = () => {
   useEffect(() => {
+    window.scrollTo(0, 0);
     CursorAnimation();
   }, []);
 
@@ -20,7 +24,52 @@ const OwnerHotelsRooms = () => {
   const [hotelAmenities, setHotelAmenities] = useState([]);
   const [error, setError] = useState(null);
   const [selectedAmenity, setSelectedAmenity] = useState(null);
-  const [showSuccessPopup, setShowSuccessPopup] = useState(false); // State for showing success popup
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedRoom, setEditedRoom] = useState(null);
+  const [successMessage, setSuccessMessage] = useState("");
+
+  const handleEditRoom = (room) => {
+    setIsEditing(true);
+    setEditedRoom(room);
+  };
+
+  const handleSaveEdit = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:5108/api/Room/UpdateDetails`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(editedRoom),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to save changes");
+      }
+
+      // Refresh room data after successful edit
+      const updatedRoomsResponse = await fetch(
+        `http://localhost:5108/api/Hotel/GetRoomsByHotelId?hotelId=${hotelId}`
+      );
+      const updatedRoomsData = await updatedRoomsResponse.json();
+      setRooms(updatedRoomsData.$values);
+
+      // Reset editing state and edited room
+      setIsEditing(false);
+      setEditedRoom(null);
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
+  const handleCancelEdit = () => {
+    setIsEditing(false);
+    setEditedRoom(null);
+  };
 
   useEffect(() => {
     const fetchHotelAndRooms = async () => {
@@ -77,8 +126,6 @@ const OwnerHotelsRooms = () => {
       if (!response.ok) {
         throw new Error("Failed to delete room");
       }
-
-      // Filter out the deleted room from the state
       setRooms((prevRooms) =>
         prevRooms.filter((room) => room.roomId !== roomId)
       );
@@ -88,6 +135,20 @@ const OwnerHotelsRooms = () => {
   };
 
   const handleAddAmenityToHotel = async () => {
+    if (!selectedAmenity) {
+      setSuccessMessage("Please select an amenity to add.");
+      return;
+    }
+
+    const amenityAlreadyAdded = hotelAmenities.some(
+      (hotelAmenity) => hotelAmenity.amenityId === selectedAmenity
+    );
+
+    if (amenityAlreadyAdded) {
+      setSuccessMessage("This amenity is already added to the hotel.");
+      return;
+    }
+
     try {
       const response = await fetch(
         `http://localhost:5108/api/Amenity/add-amenity-to-hotel?hotelId=${hotelId}&amenityId=${selectedAmenity}`,
@@ -100,35 +161,46 @@ const OwnerHotelsRooms = () => {
         throw new Error("Failed to add amenity to hotel");
       }
 
-      // Refresh hotel amenities
       const hotelAmenitiesResponse = await fetch(
         `http://localhost:5108/api/Hotel/HotelAmenities?id=${hotelId}`
       );
       const hotelAmenitiesData = await hotelAmenitiesResponse.json();
       setHotelAmenities(hotelAmenitiesData.$values);
 
-      // Show success popup
-      setShowSuccessPopup(true);
+      setSuccessMessage("Amenity added successfully!");
     } catch (error) {
-      setError(error.message);
+      setSuccessMessage("Error adding amenity to hotel. Please try again later.");
     }
   };
+  
 
   const handleClosePopup = () => {
     setShowSuccessPopup(false);
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setEditedRoom((prevRoom) => ({
+      ...prevRoom,
+      [name]: value,
+    }));
   };
 
   if (error) {
     return <p>Error: {error}</p>;
   }
 
+  const userRole = sessionStorage.getItem('role')
+
   return (
     <div id="ownerHotel">
-      <Navigation />.<div id="cursor-blur"></div>
+      <Navigation />.
+      {userRole === 'HotelOwner' ? <OwnerSidebar /> : <AdminSidebar />}
+      <div id="cursor-blur"></div>
       <div className="hotelrooms-container">
         <div className="hotel-info">
           {hotel && <h1>Welcome to {hotel.name}</h1>}
-          <Link>
+          <Link to={`/manageReservations/${hotelId}`}>
             <Button>View Reservations</Button>
           </Link>
         </div>
@@ -162,18 +234,30 @@ const OwnerHotelsRooms = () => {
                       </Carousel>
                     </div>
                     <div className="room-info">
-                      <p>Room Type: {room.roomType}</p>
-                      <p>Room Size: {room.roomSize}</p>
-                      <p>Capacity: {room.capacity}</p>
-                      <p>Price per Night: {room.pricePerNight}</p>
-                      <Link to={`/edit-room/${room.roomId}`}>
-                        <Button>Edit Room</Button>
-                      </Link>
-                      <ConfirmDelete
-                        onDelete={() => handleDeleteRoom(room.roomId)}
+                      {isEditing && editedRoom.roomId === room.roomId ? (
+                        <EditRoom
+                          room={editedRoom}
+                          onSaveEdit={handleSaveEdit}
+                          onCancelEdit={handleCancelEdit}
+                          handleInputChange={handleInputChange}
+                          updatedRoomData={editedRoom}
+                        />
+                      ) : (
+                        <>
+                          <p>Room Type: {room.roomType}</p>
+                          <p>Room Size: {room.roomSize}</p>
+                          <p>Capacity: {room.capacity}</p>
+                          <p>Price per Night: {room.pricePerNight}</p>
+                          <Button onClick={() => handleEditRoom(room)}>
+                            Edit Room
+                          </Button>
+                        </>
+                      )}
+                      <ConfirmBox
+                        confirmVar="delete"
+                        onConfirm={() => handleDeleteRoom(room.roomId)}
                       >
-                        Delete Room
-                      </ConfirmDelete>
+                      </ConfirmBox>
                     </div>
                   </div>
                 </li>
@@ -181,27 +265,26 @@ const OwnerHotelsRooms = () => {
             </ul>
           </div>
           <div className="amenities">
-            <h2>Add Amenities</h2>
-            <select onChange={(e) => setSelectedAmenity(e.target.value)}>
-              <option value="">Select an amenity</option>
-              {amenities.map((amenity) => (
-                <option key={amenity.amenityId} value={amenity.amenityId}>
-                  {amenity.name}
-                </option>
-              ))}
-            </select>
-            <br />
-            <br />
-            <Button onClick={handleAddAmenityToHotel}>
-              Add Amenity to Hotel
-            </Button>
-            {showSuccessPopup && (
-              <div className="success-popup">
-                <p>Amenity added successfully!</p>
-                <Button onClick={handleClosePopup}>OK</Button>
-              </div>
-            )}
-          </div>
+          <h2>Add Amenities</h2>
+          <select onChange={(e) => setSelectedAmenity(e.target.value)}>
+            <option value="">Select an amenity</option>
+            {amenities.map((amenity) => (
+              <option key={amenity.amenityId} value={amenity.amenityId}>
+                {amenity.name}
+              </option>
+            ))}
+          </select>
+          <br />
+          <br />
+          <Button onClick={handleAddAmenityToHotel}>
+            Add Amenity to Hotel
+          </Button>
+          {successMessage && (
+            <div className="success-message">
+              <p>{successMessage}</p>
+            </div>
+          )}
+        </div>
         </div>
       </div>
       <Footer />

@@ -24,12 +24,14 @@
     color: black;
     font-size: 3rem;
     font-family: 'Basement Grotesque';
+    transition: all 0.3s;
+  }
+  #login-page h2:hover{
+    -webkit-text-stroke: 2px #95c11e;
+    color: #95c11e;
   }
   
   #login-form {
-    /* display: flex; */
-    /* flex-direction: column; */
-    /* flex-wrap: wrap; */
     flex-grow: 0;
     align-items: flex-start;
     overflow: scroll;
@@ -40,7 +42,6 @@
     border-radius: 20px;
     box-shadow: 0 0 200px rgba(0, 0, 0, 0.1);
     padding: 3rem;
-    /* height: 30vh; */
     width: 350px;
     gap: 3rem;
     z-index: 2;
@@ -48,7 +49,7 @@
   
   h2 {
     text-align: center;
-    color: #95c11e; /* Accent color */
+    color: #95c11e;
     margin-bottom: 20px;
   }
   

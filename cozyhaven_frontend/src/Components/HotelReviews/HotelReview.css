@@ -1,0 +1,46 @@
+.hotel-reviews-container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  .hotel-reviews-container h4{
+    -webkit-text-stroke: 2px white;
+    color: black;
+    font-size: 3rem;
+    font-family: 'Basement Grotesque';
+    transition: all 0.3s;
+  }
+  .hotel-reviews-container h4:hover{
+    -webkit-text-stroke: 2px #95c11e;
+    color: #95c11e;
+  }
+  
+  .hotel-reviews-container ul{
+    width: 70vw;
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+  }
+
+  .hotel-reviews-container li{
+    display: flex;
+  }
+  
+  .review {
+    max-width: 320px;
+    margin-bottom: 20px;
+    border: 2px solid ;
+    border-radius: 20px;
+    padding: 10px;
+  }
+  
+  .comment {
+    margin-bottom: 10px;
+  }
+  
+  .star-icon,
+  .ri-star-fill {
+    font-size: 20px;
+    color: #ffd700;
+  }
+  

@@ -140,7 +140,7 @@ const AddHotelForm = ({ onAddHotel }) => {
       <input type="file" onChange={handleImageChange} multiple />{" "}
       {/* Input for selecting multiple images */}
       <Button onClick={handleAddHotel}>Add Hotel</Button>
-      <Link to="/ownerDashboard">
+      <Link to="/managehotels">
         <Button>Cancel</Button>
       </Link>
 

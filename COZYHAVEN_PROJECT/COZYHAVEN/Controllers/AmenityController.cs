@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
+
 
 namespace CozyHaven.Controllers
 {
@@ -17,12 +19,13 @@ namespace CozyHaven.Controllers
     {
         private readonly IAmenityService _amenityService;
         private readonly IHotelService _hotelService;
+        private readonly ILogger<AmenityController> _logger;
 
-
-        public AmenityController(IAmenityService amenityService, IHotelService hotelService)
+        public AmenityController(IAmenityService amenityService, IHotelService hotelService, ILogger<AmenityController> logger)
         {
             _amenityService = amenityService;
             _hotelService = hotelService;
+            _logger = logger;
         }
 
         [HttpPost("add")]
@@ -76,7 +79,7 @@ namespace CozyHaven.Controllers
             }
             catch (Exception ex)
             {
-                // Log the exception
+                _logger.LogError(ex, "An error occurred while updating amenity with ID {AmenityId}", id);
                 return StatusCode(500, "Internal server error");
             }
         }
@@ -100,22 +103,74 @@ namespace CozyHaven.Controllers
                     return NotFound("Amenity not found.");
                 }
 
-                if (hotel.HotelAmenities.Any(ha => ha.AmenityId == amenityId))
+                if (hotel.HotelAmenities != null && hotel.HotelAmenities.Any(ha => ha.AmenityId == amenityId))
                 {
                     return Conflict("Amenity is already added to the hotel.");
                 }
 
-                hotel.HotelAmenities.Add(new HotelAmenity { HotelId = hotelId, AmenityId = amenityId });
+                if (hotel.HotelAmenities != null)
+                {
+                    hotel.HotelAmenities.Add(new HotelAmenity { HotelId = hotelId, AmenityId = amenityId });
+                }
+                else
+                {
+                    hotel.HotelAmenities = new List<HotelAmenity>(); 
+                    hotel.HotelAmenities.Add(new HotelAmenity { HotelId = hotelId, AmenityId = amenityId });
+                }
 
                 await _hotelService.UpdateHotelDetails(hotel);
 
                 return Ok("Amenity added to hotel successfully.");
             }
-            catch (Exception ex)
+            catch
             {
                 return StatusCode(500, "An error occurred while adding the amenity to the hotel.");
             }
         }
 
+        [HttpPost("delete-amenity-from-hotel")]
+        public async Task<IActionResult> DeleteAmenityFromHotel(int hotelId, int amenityId)
+        {
+            try
+            {
+                var hotel = await _hotelService.GetHotel(hotelId);
+
+                if (hotel == null)
+                {
+                    return NotFound("Hotel not found.");
+                }
+
+                var amenity = await _amenityService.GetAmenity(amenityId);
+
+                if (amenity == null)
+                {
+                    return NotFound("Amenity not found.");
+                }
+
+                if (hotel.HotelAmenities != null)
+                {
+                    var hotelAmenity = hotel.HotelAmenities.FirstOrDefault(ha => ha.AmenityId == amenityId);
+
+                    if (hotelAmenity == null)
+                    {
+                        return NotFound("Amenity is not associated with the hotel.");
+                    }
+
+                    hotel.HotelAmenities.Remove(hotelAmenity);
+
+                    await _hotelService.UpdateHotelDetails(hotel);
+
+                    return Ok("Amenity deleted from hotel successfully.");
+                }
+                else
+                {
+                    return StatusCode(500, "An error occurred while deleting the amenity from the hotel.");
+                }
+            }
+            catch
+            {
+                return StatusCode(500, "An error occurred while deleting the amenity from the hotel.");
+            }
+        }
     }
 }

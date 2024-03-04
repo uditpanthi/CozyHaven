@@ -1,4 +1,5 @@
 ﻿using CozyHaven.Contexts;
+using CozyHaven.Exceptions;
 using CozyHaven.Interfaces;
 using CozyHaven.Models;
 using Microsoft.EntityFrameworkCore;
@@ -16,7 +17,7 @@ namespace CozyHaven.Repository
         public async Task<Payment> Add(Payment item)
         {
             _context.Payments.Add(item);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return item;
 
         }
@@ -30,19 +31,27 @@ namespace CozyHaven.Repository
                 _context.SaveChanges();
                 return payment;
             }
-            return null;
+            else
+            {
+                throw new PaymentNotFoundException($"Payment with ID {key} not found.");
+            }
         }
 
         public async Task<List<Payment>> GetAll()
         {
-            return _context.Payments.ToList();
+            return await Task.FromResult(_context.Payments.ToList());
         }
 
         public async Task<Payment> GetById(int key)
         {
-            var payment = _context.Payments.FirstOrDefault(b => b.PaymentId == key);
+            var payment = await Task.FromResult(_context.Payments.FirstOrDefault(b => b.PaymentId == key));
+            if (payment == null)
+            {
+                throw new PaymentNotFoundException($"Payment with ID {key} not found.");
+            }
             return payment;
         }
+
 
         public async Task<Payment> Update(Payment item)
         {
@@ -53,7 +62,10 @@ namespace CozyHaven.Repository
                 _context.SaveChanges();
                 return item;
             }
-            return null;
+            else
+            {
+                throw new PaymentNotFoundException($"Payment with ID {item.PaymentId} not found.");
+            }
         }
     }
 }

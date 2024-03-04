@@ -206,5 +206,50 @@ textarea:focus {
 
 
 
+.editable-room {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+}
+
+.editable-room p {
+  margin-bottom: 10px;
+}
+
+.editable-room input[type="text"] {
+  width: calc(100% - 20px);
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  color: black;
+}
+
+.editable-room div {
+  margin-top: 15px;
+}
+
+@media screen and (max-width: 1468px) {
+  /* .leftbig-and-rightsml {
+    flex-direction: column;
+  } */
+  .reviews-list{
+    width: 65vw;
+  }
+
+  .room-list {
+    width: 100%;
+  }
+
+  .amenities {
+    order: -1; /* Move amenities section to the top */
+  }
+}
+
+
+
+
 
   

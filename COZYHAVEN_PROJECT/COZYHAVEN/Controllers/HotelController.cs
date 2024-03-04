@@ -77,8 +77,7 @@ namespace CozyHaven.Controllers
         {
             try
             {
-                // Extract the OwnerId from the hotelDTO or any other source
-                int ownerId = hotel.OwnerId; // Update this based on where the OwnerId is coming from
+                int ownerId = hotel.OwnerId;
 
                 var addedHotel = await _hotelService.AddHotel(hotel, ownerId);
                 return Ok(addedHotel);

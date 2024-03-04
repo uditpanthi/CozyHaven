@@ -21,14 +21,10 @@ const LandingPage = () => {
   
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
-    // GSAP animation for navigation bar
-    
-
-    // GSAP animation for '.main' element
     gsap.to(".main", {
       backgroundColor: "#000",
       scrollTrigger: {
-        trigger: "#main",
+        trigger: ".main",
         scroller: "body",
         start: "top -25%",
         end: "top -70%",
@@ -36,21 +32,6 @@ const LandingPage = () => {
       },
     });
 
-    // GSAP animation for '.card' elements
-    // gsap.from(".card", {
-    //   scale: 0.8,
-    //   duration: 1,
-    //   stagger: 0.1,
-    //   scrollTrigger: {
-    //     trigger: ".card",
-    //     scroller: "body",
-    //     start: "top 70%",
-    //     end: "top 65%",
-    //     scrub: 1,
-    //   },
-    // });
-
-    // GSAP animation for '#colon1' element
     gsap.from("#colon1", {
       y: -70,
       x: -70,
@@ -63,7 +44,6 @@ const LandingPage = () => {
       },
     });
 
-    // GSAP animation for '#colon2' element
     gsap.from("#colon2", {
       y: 70,
       x: 70,
@@ -76,7 +56,6 @@ const LandingPage = () => {
       },
     });
 
-    // GSAP animation for '#page4 h1' element
     gsap.from("#page4 h1", {
       y: 50,
       scrollTrigger: {
@@ -88,7 +67,6 @@ const LandingPage = () => {
       },
     });
 
-    // Clean up when unmounting the component
     // return () => {
     //   // Kill any ongoing animations
     //   gsap.killTweensOf(".main");
@@ -157,7 +135,7 @@ const LandingPage = () => {
         <div id="cards-container">
           <Link to={'/browsepage?location=Mumbai'}>
             <div className="card" id="card1">
-              <div class="overlay">
+              <div className="overlay">
                 <h4>Mumbai</h4>
                 <p>
                   Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nulla
@@ -168,8 +146,8 @@ const LandingPage = () => {
             </div>
           </Link>
           <Link to={'/browsepage?location=Delhi'}>
-            <div class="card" id="card2">
-              <div class="overlay">
+            <div className="card" id="card2">
+              <div className="overlay">
                 <h4>Delhi</h4>
                 <p>
                   Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nulla
@@ -180,8 +158,8 @@ const LandingPage = () => {
             </div>
           </Link>
           <Link to={'/browsepage?location=Dehradun'}>
-            <div class="card" id="card3">
-              <div class="overlay">
+            <div className="card" id="card3">
+              <div className="overlay">
                 <h4>Uttarakhand</h4>
                 <p>
                   Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nulla
@@ -226,15 +204,15 @@ const LandingPage = () => {
       </div>
       <div id="page4">
         <h1>WHAT ARE YOU WAITING FOR?</h1>
-        <div class="elem">
+        <div className="elem">
           <h2>ENJOY WITH FAMILY</h2>
           <img src="" alt="" />
         </div>
-        <div class="elem">
+        <div className="elem">
           <h2>BUDGET TRAVEL</h2>
           <img src="../../../public/budget-travel.jpg" alt="" />
         </div>
-        <div class="elem">
+        <div className="elem">
           <h2>VISIT NEW PLACES</h2>
           <img src="../../../public/destinations-2.jpg" alt="" />
         </div>

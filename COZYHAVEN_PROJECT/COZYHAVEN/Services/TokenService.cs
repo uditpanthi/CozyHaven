@@ -19,28 +19,28 @@ namespace CozyHaven.Services
         }
         public async Task<string> GenerateToken(LoginUserDTO user)
         {
-            string token = string.Empty;
-            var claims = new List<Claim>
+            return await Task.Run(() =>
             {
-                new Claim(JwtRegisteredClaimNames.NameId,user.Username),
-                new Claim(ClaimTypes.Role,user.Role)
-            };
-            //Algorithm Signature with secret key
-            var cred = new SigningCredentials(_key, SecurityAlgorithms.HmacSha256);
+                string token = string.Empty;
+                var claims = new List<Claim>
+                {
+                    new Claim(JwtRegisteredClaimNames.NameId,user.Username),
+                    new Claim(ClaimTypes.Role,user.Role)
+                };
 
-            //Giving the token decription
-            var tokenDescription = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.Now.AddDays(1),
-                SigningCredentials = cred
-            };
-
-            //Putting the token together
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var myToken = tokenHandler.CreateToken(tokenDescription);
-            token = tokenHandler.WriteToken(myToken);
-            return token;
+                var cred = new SigningCredentials(_key, SecurityAlgorithms.HmacSha256);
+                var tokenDescription = new SecurityTokenDescriptor
+                {
+                    Subject = new ClaimsIdentity(claims),
+                    Expires = DateTime.Now.AddDays(1),
+                    SigningCredentials = cred
+                };
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var myToken = tokenHandler.CreateToken(tokenDescription);
+                token = tokenHandler.WriteToken(myToken);
+                return token;
+            });
         }
+
     }
 }

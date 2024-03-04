@@ -91,27 +91,33 @@ namespace CozyHaven.Services
             return Reservations.Count;
         }
 
-        public async Task<Reservation> UpdateReservationStatus(int id,BookingStatus status)
+        public async Task<Reservation> UpdateReservationStatus(int id, BookingStatus status)
         {
             _logger.LogInformation("Updating Reservation Status");
-            var newReservation=await GetReservation(id);
-            if(newReservation != null)
+            var newReservation = await GetReservation(id);
+            if (newReservation != null)
             {
                 newReservation.Status = status;
-                if (status == BookingStatus.CheckedOut || status==BookingStatus.Cancelled)
+                if (status == BookingStatus.CheckedOut || status == BookingStatus.Cancelled)
                 {
-                    newReservation.Room.Available = true;
+                    if (newReservation.Room != null) 
+                    {
+                        newReservation.Room.Available = true; 
+                    }
                 }
                 else if (status == BookingStatus.Approved)
                 {
-
-                    newReservation.Room.Available = false;
+                    if (newReservation.Room != null) 
+                    {
+                        newReservation.Room.Available = false;
+                    }
                 }
                 await _reservationrepository.Update(newReservation);
                 return newReservation;
             }
             throw new ReservationNotFoundException();
         }
+
         public async Task<List<Reservation>> GetHotelReservations(int hotelId)
         {
             _logger.LogInformation("Getting Hotel Reservations");

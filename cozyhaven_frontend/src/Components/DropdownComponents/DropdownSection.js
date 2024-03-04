@@ -46,7 +46,7 @@ const DropdownSection = () => {
       {/* Hotel Reservations Dropdown Section */}
       {/* <div className="dropdown-section">
         <h2 onClick={() => toggleDropdown("hotelReservations")} aria-expanded={dropdownVisible.hotelReservations} >
-          Hotel Reservations
+          Payments
         </h2>
         <div className={`dropdown-content ${ dropdownVisible.hotelReservations ? "open" : "" }`} >
           {dropdownVisible.hotelReservations && (

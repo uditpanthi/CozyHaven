@@ -121,7 +121,6 @@ namespace CozyHaven.Controllers
             }
             catch (Exception ex)
             {
-                // Log the exception or return an error response
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }

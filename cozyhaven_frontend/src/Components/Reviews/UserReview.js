@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Rating from "react-rating";
 import "../Reviews/Review.css";
-import ConfirmDelete from "../ConfirmDelete/ConfirmDelete";
+import ConfirmBox from "../ConfirmDelete/ConfirmDelete";
 
 const UserReviews = () => {
   const [reviews, setReviews] = useState([]);
   const [hotelNames, setHotelNames] = useState({});
   const [error, setError] = useState(null);
-  const [confirmationBoxVisible, setConfirmationBoxVisible] = useState(false);
-  const [reviewIdToDelete, setReviewIdToDelete] = useState(null);
 
   var username = sessionStorage.getItem("username");
 
@@ -58,15 +56,14 @@ const UserReviews = () => {
     }
   };
 
-  const handleDeleteReview = async (reviewId) => {
-    setReviewIdToDelete(reviewId);
-    setConfirmationBoxVisible(true);
+  const handleDeleteReview = (reviewId) => {
+    confirmDelete(reviewId); // Pass reviewId directly to confirmDelete
   };
 
-  const confirmDelete = async () => {
+  const confirmDelete = async (reviewId) => {
     try {
       const response = await fetch(
-        `http://localhost:5108/api/Review/DeleteReview?id=${reviewIdToDelete}`,
+        `http://localhost:5108/api/Review/DeleteReview?id=${reviewId}`,
         {
           method: "DELETE",
         }
@@ -74,16 +71,10 @@ const UserReviews = () => {
       if (!response.ok) {
         throw new Error("Failed to delete review");
       }
-      setReviews(reviews.filter((review) => review.reviewId !== reviewIdToDelete));
-      setConfirmationBoxVisible(false);
+      setReviews(reviews.filter((review) => review.reviewId !== reviewId)); // Update reviews after deletion
     } catch (error) {
       setError(error.message);
     }
-  };
-
-  const cancelDelete = () => {
-    setConfirmationBoxVisible(false);
-    setReviewIdToDelete(null);
   };
 
   const handleEditRating = async (reviewId, newRating) => {
@@ -115,7 +106,6 @@ const UserReviews = () => {
 
   return (
     <div className="user-reviews-container">
-      {/* <h2>User Reviews</h2> */}
       <ul className="review-list">
         {reviews.map((review) => (
           <li key={review.reviewId} className="review-item">
@@ -133,28 +123,14 @@ const UserReviews = () => {
             <p className="review-comment">Comment: {review.comment}</p>
             <p className="hotel-name">Hotel: {hotelNames[review.hotelId]}</p>
             <div className="review-buttons">
-              <ConfirmDelete
-                onDelete={() => handleDeleteReview(review.reviewId)}
-              >
-                Delete Review
-              </ConfirmDelete>
+              <ConfirmBox
+                confirmVar="Delete Review"
+                onConfirm={() => handleDeleteReview(review.reviewId)}
+              />
             </div>
           </li>
         ))}
       </ul>
-      {/* Confirmation box
-      {confirmationBoxVisible && (
-        <div className="confirmation-box">
-          <h3>Confirm Deletion</h3>
-          <p>Are you sure you want to delete this review?</p>
-          <div className="confirmation-box-buttons">
-            <button className="confirm-button" onClick={confirmDelete}>Delete</button>
-            <button className="cancel-button" onClick={cancelDelete}>
-              Cancel
-            </button>
-          </div>
-        </div>
-      )} */}
     </div>
   );
 };

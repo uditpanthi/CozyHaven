@@ -3868,19 +3868,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\being\\.nuget\\packages\\": {}
+    "C:\\Users\\win 10\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\CozyHaven\\COZYHAVEN_PROJECT\\COZYHAVENTEST\\COZYHAVENTEST.csproj",
+      "projectUniqueName": "D:\\PROJECTS\\COZYHAVEN_PROJECT\\COZYHAVENTEST\\COZYHAVENTEST.csproj",
       "projectName": "COZYHAVENTEST",
-      "projectPath": "D:\\CozyHaven\\COZYHAVEN_PROJECT\\COZYHAVENTEST\\COZYHAVENTEST.csproj",
-      "packagesPath": "C:\\Users\\being\\.nuget\\packages\\",
-      "outputPath": "D:\\CozyHaven\\COZYHAVEN_PROJECT\\COZYHAVENTEST\\obj\\",
+      "projectPath": "D:\\PROJECTS\\COZYHAVEN_PROJECT\\COZYHAVENTEST\\COZYHAVENTEST.csproj",
+      "packagesPath": "C:\\Users\\win 10\\.nuget\\packages\\",
+      "outputPath": "D:\\PROJECTS\\COZYHAVEN_PROJECT\\COZYHAVENTEST\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\being\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\win 10\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3894,8 +3894,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "D:\\CozyHaven\\COZYHAVEN_PROJECT\\COZYHAVEN\\COZYHAVEN.csproj": {
-              "projectPath": "D:\\CozyHaven\\COZYHAVEN_PROJECT\\COZYHAVEN\\COZYHAVEN.csproj"
+            "D:\\PROJECTS\\COZYHAVEN_PROJECT\\COZYHAVEN\\COZYHAVEN.csproj": {
+              "projectPath": "D:\\PROJECTS\\COZYHAVEN_PROJECT\\COZYHAVEN\\COZYHAVEN.csproj"
             }
           }
         }
@@ -3955,7 +3955,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }

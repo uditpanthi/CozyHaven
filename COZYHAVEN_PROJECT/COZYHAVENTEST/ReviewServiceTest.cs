@@ -46,7 +46,7 @@ namespace COZYHAVENTEST
             var reviewId = 1;
             var review = new Review();
             _mockRepository.Setup(repo => repo.GetById(reviewId)).ReturnsAsync(review);
-            _mockRepository.Setup(repo => repo.Delete(reviewId)).ReturnsAsync(review); // Change here
+            _mockRepository.Setup(repo => repo.Delete(reviewId)).ReturnsAsync(review); 
 
             // Act
             var result = await _reviewService.DeleteReview(reviewId);
@@ -94,7 +94,7 @@ namespace COZYHAVENTEST
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(rating, result.Rating);
+            Assert.That(result.Rating, Is.EqualTo(rating));
         }
     }
 }

@@ -19,10 +19,11 @@ namespace CozyHaven.Repository
         {
             _logger.LogInformation("Adding user: {Username}", item.Username);
             _context.Users.Add(item);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             _logger.LogInformation("User added successfully: {Username}", item.Username);
             return item;
         }
+
 
         public async Task<User> Delete(string key)
         {
@@ -41,21 +42,25 @@ namespace CozyHaven.Repository
         public async Task<List<User>> GetAll()
         {
             _logger.LogInformation("Getting all users");
-            var users = _context.Users.Include(u => u.Reservations)
+            var users = await _context.Users
+                .Include(u => u.Reservations)
                 .Include(u => u.Reviews)
-                .Include(u => u.Hotels).ToList();
+                .Include(u => u.Hotels)
+                .ToListAsync(); 
             return users;
         }
 
         public async Task<User> GetById(string key)
         {
             _logger.LogInformation("Getting user by username: {Username}", key);
-            var user = _context.Users.Include(u => u.Reservations)
+            var user = await _context.Users
+                .Include(u => u.Reservations)
                 .Include(u => u.Reviews)
-                .Include(u => u.Hotels).FirstOrDefault(u => u.Username == key);
+                .Include(u => u.Hotels)
+                .FirstOrDefaultAsync(u => u.Username == key);
             return user;
-
         }
+
 
         public async Task<User> Update(User item)
         {

@@ -29,7 +29,7 @@ namespace CozyHaven.Services
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error occurred while adding payment.");
-                throw; // Rethrow the exception for handling at upper levels
+                throw;
             }
         }
 

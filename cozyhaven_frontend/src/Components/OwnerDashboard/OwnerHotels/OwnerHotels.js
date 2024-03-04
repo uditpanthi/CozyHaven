@@ -5,7 +5,7 @@ import Button from "../../Button/Button";
 import "./Owner.css";
 import EditHotelForm from "./EditHotel";
 import { Link } from "react-router-dom";
-import ConfirmDelete from "../../ConfirmDelete/ConfirmDelete";
+import ConfirmBox from "../../ConfirmDelete/ConfirmDelete";
 
 const OwnerHotels = () => {
   const [hotels, setHotels] = useState([]);
@@ -117,11 +117,6 @@ const OwnerHotels = () => {
       setEditableHotel(null);
     }
   };
-
-  const handleHotelDetails = (hotelId) => {
-    console.log("View details for hotel with ID:", hotelId);
-  };
-
   const handleDeleteHotel = async (hotelId) => {
     try {
       // Confirm deletion with the user
@@ -207,13 +202,12 @@ const OwnerHotels = () => {
                     Edit
                   </Button>
                   <Link to={`/ownerHotelsRooms/${hotel.hotelId}`}>
-                    <Button onClick={() => handleHotelDetails(hotel.hotelId)}>
+                    <Button>
                       View Details
                     </Button>
                   </Link>
-                  <ConfirmDelete onDelete={() => handleDeleteHotel(hotel.hotelId)}>
-                    Delete
-                  </ConfirmDelete>
+                  <ConfirmBox confirmVar="delete" onConfirm={() => handleDeleteHotel(hotel.hotelId)}>
+                  </ConfirmBox>
                 </div>
               )}
             </div>

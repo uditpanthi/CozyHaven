@@ -59,4 +59,32 @@
   .update-button:hover {
     background-color: #0056b3;
   }
+  .hotel-reservations-container span{
+    -webkit-text-stroke: 2px white;
+    color: black;
+    font-size: 3rem;
+    font-family: 'Basement Grotesque';
+    transition: all 0.3s;
+  }
+  .hotel-reservations-container span:hover{
+    -webkit-text-stroke: 2px #95c11e;
+    color: #95c11e;
+  }
+  .reservations-container span{
+    -webkit-text-stroke: 2px white;
+    color: black;
+    font-size: 3rem;
+    font-family: 'Basement Grotesque';
+    transition: all 0.3s;
+  }
+  .reservations-container span:hover{
+    -webkit-text-stroke: 2px #95c11e;
+    color: #95c11e;
+  }
+  
+  
+
+ .reservations-container{
+    margin-left: 280px;
+  }
   

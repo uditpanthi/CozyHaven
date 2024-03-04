@@ -7,8 +7,47 @@ import Navigation from "../Navigation/Navigation";
 import Footer from "../Footer/Footer";
 import Rating from "react-rating";
 import { CursorAnimation } from "../CursorAnimation/CursorAnimation";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const HotelRooms = () => {
+
+  var settings = {
+    dots: true,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 3,
+    initialSlide: 0,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      }
+    ]
+  };
+
   useEffect(() => {
     CursorAnimation();
   }, []);
@@ -31,7 +70,9 @@ const HotelRooms = () => {
     const fetchUser = async () => {
       try {
         if (username) {
-          const userResponse = await fetch(`http://localhost:5108/api/User/GetByUsername?username=${username}`);
+          const userResponse = await fetch(
+            `http://localhost:5108/api/User/GetByUsername?username=${username}`
+          );
           if (!userResponse.ok) {
             throw new Error("Failed to fetch user data");
           }
@@ -50,7 +91,9 @@ const HotelRooms = () => {
       try {
         const [roomsResponse, hotelResponse, reviewResponse] =
           await Promise.all([
-            fetch(`http://localhost:5108/api/Hotel/GetRoomsByHotelId?hotelId=${hotelId}`),
+            fetch(
+              `http://localhost:5108/api/Hotel/GetRoomsByHotelId?hotelId=${hotelId}`
+            ),
             fetch(`http://localhost:5108/api/Hotel/GetById?id=${hotelId}`),
             fetch(`http://localhost:5108/api/Hotel/HotelReviews?id=${hotelId}`),
           ]);
@@ -84,6 +127,12 @@ const HotelRooms = () => {
 
   const handleSubmitReview = async () => {
     try {
+      if (!user) {
+        // If user is not logged in, redirect to the login page
+        window.location.href = '/login';
+        return;
+      }
+  
       const response = await fetch(
         "http://localhost:5108/api/Review/AddReview",
         {
@@ -109,7 +158,10 @@ const HotelRooms = () => {
         throw new Error("Failed to fetch updated reviews");
       }
       const updatedReviewData = await updatedReviewResponse.json();
-      setReviews(updatedReviewData.$values);
+      const sortedReviews = updatedReviewData.$values.sort(
+        (a, b) => new Date(b.datePosted) - new Date(a.datePosted)
+      );
+      setReviews(sortedReviews);
       setReviewForm({
         rating: 0,
         comment: "",
@@ -118,19 +170,19 @@ const HotelRooms = () => {
       setError(error.message);
     }
   };
+  
 
   return (
     <>
       <Navigation />
-      <div id="cursor-blur"></div>
-      .
+      <div id="cursor-blur"></div>.
       <div className="hotelrooms-container">
         <div className="hotel-info">
           {hotel && <h1>Welcome to {hotel.name}</h1>}
         </div>
-        <br/>
-          {hotel && <p>{hotel.description}</p>}
-        <br/>
+        <br />
+        {hotel && <p>{hotel.description}</p>}
+        <br />
         <div className="leftbig-and-rightsml">
           <div className="rooms-list">
             <ul>
@@ -151,7 +203,9 @@ const HotelRooms = () => {
                       <p>Room Size: {room.roomSize}</p>
                       <p>Capacity: {room.capacity}</p>
                       <p>Price per Night: {room.pricePerNight}</p>
-                      <Link to={`/reservation/${room.roomId}?username=${username}`}>
+                      <Link
+                        to={`/reservation/${room.roomId}?username=${username}`}
+                      >
                         <Button>Book now</Button>
                       </Link>
                     </div>
@@ -160,12 +214,16 @@ const HotelRooms = () => {
               ))}
             </ul>
           </div>
+          <br/>
+          <br/>
+          <h1>Reviews</h1>
+          <br/>
           {reviews.length > 0 && (
             <div className="reviews-list">
-              <div className="review-info">
-                <p>Total {reviews.length} Reviews</p>
-                <br />
-                {reviews.slice(0, 5).map((review, index) => (
+              <p>Total {reviews.length} Reviews</p>
+              <br />
+              <Slider {...settings} className="review-info">
+                {reviews.map((review, index) => (
                   <div className="review" key={index}>
                     <p className="comment">{review.comment}</p>
                     <Rating
@@ -174,39 +232,42 @@ const HotelRooms = () => {
                       fullSymbol={<i className="ri-star-fill"></i>}
                       readonly
                     />
+                    <p>
+                      date: {new Date(review.datePosted).toLocaleDateString()}
+                    </p>
                   </div>
                 ))}
-              </div>
-              <div className="put-review">
-                <h2>Add Your Review</h2>
-                <form>
-                  <div>
-                    <label htmlFor="rating">Rating:</label>
-                    <Rating
-                      initialRating={reviewForm.rating}
-                      emptySymbol={<i className="ri-star-line"></i>}
-                      fullSymbol={<i className="ri-star-fill"></i>}
-                      onChange={(value) =>
-                        setReviewForm({ ...reviewForm, rating: value })
-                      }
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="comment">Comment:</label>
-                    <textarea
-                      id="comment"
-                      name="comment"
-                      value={reviewForm.comment}
-                      onChange={handleInputChange}
-                    />
-                  </div>
-                  <Button type="button" onClick={handleSubmitReview}>
-                    Submit Review
-                  </Button>
-                </form>
-              </div>
+              </Slider>
             </div>
           )}
+        </div>
+        <div className="put-review">
+          <h2>Add Your Review</h2>
+          <form>
+            <div>
+              <label htmlFor="rating">Rating:</label>
+              <Rating
+                initialRating={reviewForm.rating}
+                emptySymbol={<i className="ri-star-line"></i>}
+                fullSymbol={<i className="ri-star-fill"></i>}
+                onChange={(value) =>
+                  setReviewForm({ ...reviewForm, rating: value })
+                }
+              />
+            </div>
+            <div>
+              <label htmlFor="comment">Comment:</label>
+              <textarea
+                id="comment"
+                name="comment"
+                value={reviewForm.comment}
+                onChange={handleInputChange}
+              />
+            </div>
+              <button type="button" onClick={handleSubmitReview}>
+                Submit Review
+              </button>
+          </form>
         </div>
       </div>
       <Footer />

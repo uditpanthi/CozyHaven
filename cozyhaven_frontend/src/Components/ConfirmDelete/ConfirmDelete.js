@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import Button from "../Button/Button";
 import "../ConfirmDelete/ConfirmDelete.css"
 
-const ConfirmDelete = ({ onDelete }) => {
+const ConfirmBox = ({confirmVar, onConfirm }) => {
   const [showConfirm, setShowConfirm] = useState(false);
 
-  const handleDelete = () => {
-    onDelete();
+  const handleConfirm = () => {
+    onConfirm();
     setShowConfirm(false);
   };
 
@@ -15,16 +15,16 @@ const ConfirmDelete = ({ onDelete }) => {
         <div>
         {showConfirm ? (
             <div className="confirm-delete">
-            <p>Are you sure you want to delete?</p>
-            <button className="confirm-button" onClick={handleDelete}>Yes</button>
+            <p>Are you sure you want to {confirmVar}?</p>
+            <button className="confirm-button" onClick={handleConfirm}>Yes</button>
             <button className="cancel-button" onClick={() => setShowConfirm(false)}>No</button>
             </div>
         ) : (
-            <Button onClick={() => setShowConfirm(true)}>Delete</Button>
+            <Button className="confirm-button" onClick={() => setShowConfirm(true)}>{confirmVar}</Button>
         )}
         </div>
     </>
   );
 };
 
-export default ConfirmDelete;
+export default ConfirmBox;

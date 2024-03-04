@@ -9,20 +9,23 @@ import PrivateRoute from "./Components/PrivateRouting/PrivateRoute";
 import ReservationPage from "./Components/ReservationPage/ReservationPage";
 import UserProfile from "./Components/UserProfile/UserProfile";
 import BrowseUsingSearch from "./Components/BrowsePageUsingSearch/BrowseUsingSearch";
-import OwnerDashboard from "./Components/OwnerDashboard/OwnerDashboard";
 import AddHotelForm from "./Components/OwnerDashboard/OwnerHotels/AddHotelForm";
 import AddRooms from "./Components/OwnerDashboard/AddRooms/AddRooms";
 import OwnerHotelsRooms from "./Components/OwnerDashboard/OwnerHotelRooms/OwnerHotelsRooms";
-import AdminDashboard from "./Components/AdminDashboard/Admindashboard";
+import ManageOwnerHotels from "./Components/OwnerDashboard/ManageHotels";
+import ManageReservations from "./Components/OwnerDashboard/ManageReservations";
+import ManageReviews from "./Components/OwnerDashboard/ManageReviews";
+import AdminManageHotel from "./Components/AdminDashboard/ManageHotels/AdminManageHotels";
+import AdminAmenity from "./Components/AdminDashboard/ManageAmenities/Amenity";
+import AdminManageUser from "./Components/AdminDashboard/ManageUsers/AdminManageUser";
+import Payment from "./Components/PaymentPage/Payment";
+import Reservations from "./Components/Reservations/Reservations";
 
 const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/userprofile" element={<UserProfile />} />
         <Route path="/" element={<LandingPage />} />
-        <Route path="/AdminDashboard" element={<AdminDashboard />} />
-        <Route path="/OwnerDashboard" element={<OwnerDashboard />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/browsepage" element={<BrowsePage />} />
@@ -30,13 +33,20 @@ const App = () => {
         <Route path="/browse-using-search" element={<BrowseUsingSearch />} />
         <Route path="/hotelrooms/:hotelId" element={<HotelRooms />} />
         <Route element={<PrivateRoute />}>
+          <Route path="/userprofile" element={<UserProfile />} />
+          <Route path="/allreservations" element={<Reservations />} />
           <Route path='/reservation/:roomId' element={<ReservationPage />} /> 
-          <Route path='/addReview' element={<ReservationPage />} />
+          <Route path='/payment/:reservationId' element={<Payment/>} />
+          <Route path="/manageHotels" element={<ManageOwnerHotels />} />
+          <Route path="/manageReservations/:hotelId" element={<ManageReservations />} />
+          <Route path="/manageReviews/:hotelId" element={<ManageReviews />} />
+          <Route path="/addHotel/:ownerId" element={<AddHotelForm/>}/>
+          <Route path="/addRooms/:hotelId" element={<AddRooms/>}/>
+          <Route path="/adminmanageHotels" element={<AdminManageHotel/>}/>
+          <Route path="/adminmanageusers" element={<AdminManageUser/>}/>
+          <Route path="/manageamenity" element={<AdminAmenity/>}/>
+          <Route path="/ownerHotelsRooms/:hotelId" element={<OwnerHotelsRooms/>}/>
         </Route>
-        <Route path="/ownerdashboard" element={<OwnerDashboard />} />
-        <Route path="/addHotel/:ownerId" element={<AddHotelForm/>}/>
-        <Route path="/addRooms/:hotelId" element={<AddRooms/>}/>
-        <Route path="/ownerHotelsRooms/:hotelId" element={<OwnerHotelsRooms/>}/>
       </Routes>
     </Router>
   );

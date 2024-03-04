@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './ReservationPage.css';
 import { useParams } from 'react-router-dom';
+import Button from '../Button/Button';
+import {CursorAnimation} from "../CursorAnimation/CursorAnimation";
 
 const ReservationPage = () => {
   const { roomId } = useParams(); // Extract roomId from URL params
@@ -16,7 +18,16 @@ const ReservationPage = () => {
     totalPrice: 0,
     status: 0
   });
+
+  useEffect(() => {
+    CursorAnimation();
+  }, []);
+
+  const handleProceedToPayment = () => {
+    window.location.href = `/payment/${reservation.reservationId}`; // Redirect to payment page
+  };
   const [confirmationBoxVisible, setConfirmationBoxVisible] = useState(false);
+  const [reservationStatus, setReservationStatus] = useState(null); // New state for reservation status
 
   useEffect(() => {
     const fetchUserByUsername = async () => {
@@ -24,7 +35,7 @@ const ReservationPage = () => {
         console.error('Username is null or empty.');
         return;
       }
-  
+
       try {
         const response = await fetch(`http://localhost:5108/api/User/GetByUsername?username=${username}`);
         if (!response.ok) {
@@ -43,7 +54,7 @@ const ReservationPage = () => {
         console.error('Error fetching user details:', error.message);
       }
     };
-  
+
     fetchUserByUsername();
   }, [username]);
 
@@ -77,14 +88,18 @@ const ReservationPage = () => {
     });
   };
 
-  const handleSubmitReservation = async () => {
+  const handleSubmitReservation = () => {
     if (reservation.checkInDate === reservation.checkOutDate) {
       alert("Check-out date cannot be the same as check-in date.");
-      return; 
+      return;
     }
     setConfirmationBoxVisible(true);
   };
-  
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault(); // Prevent the default form submission
+    // You can add additional logic here if needed
+  };
 
   const confirmReservation = async () => {
     try {
@@ -98,22 +113,26 @@ const ReservationPage = () => {
       if (!response.ok) {
         throw new Error('Failed to add reservation');
       }
-      console.log('Reservation added successfully');
+      const data = await response.json(); // Parse the response data
+      console.log('Reservation added successfully:', data); // Log the reservation data
+      setReservation({ ...reservation, reservationId: data.reservationId }); // Set reservation ID
+      setReservationStatus('success'); // Update reservation status to success
       setConfirmationBoxVisible(false);
     } catch (error) {
       console.error('Error adding reservation:', error.message);
+      setReservationStatus('fail'); // Update reservation status to fail
     }
   };
-
+  
   const cancelReservation = () => {
     setConfirmationBoxVisible(false);
   };
 
-
   return (
     <div className="reservation-page">
+      <div id='cursor-blur'></div>
       <h2>Reservation Page</h2>
-      <form className="reservation-form">
+      <form className="reservation-form" onSubmit={handleFormSubmit}>
         <div className="form-group">
           <label htmlFor="checkInDate">Check-In Date:</label>
           <input
@@ -121,7 +140,7 @@ const ReservationPage = () => {
             id="checkInDate"
             name="checkInDate"
             value={reservation.checkInDate}
-            min={new Date().toISOString().split('T')[0]} // Set min to today
+            min={new Date().toISOString().split('T')[0]} 
             onChange={(e) => handleCheckInDateChange(new Date(e.target.value))}
           />
         </div>
@@ -132,7 +151,7 @@ const ReservationPage = () => {
             id="checkOutDate"
             name="checkOutDate"
             value={reservation.checkOutDate}
-            min={reservation.checkInDate} // Set min to check-in date
+            min={reservation.checkInDate} 
             onChange={(e) => handleCheckOutDateChange(new Date(e.target.value))}
           />
         </div>
@@ -158,9 +177,9 @@ const ReservationPage = () => {
             onChange={handleInputChange}
           />
         </div>
-        <button className="submit-button" type="button" onClick={handleSubmitReservation}>
+        <Button className="submit-button" type="button" onClick={handleSubmitReservation}>
           Make Reservation
-        </button>
+        </Button>
         {confirmationBoxVisible && (
           <div className="confirmation-box">
             <h3>Confirm Reservation</h3>
@@ -170,6 +189,21 @@ const ReservationPage = () => {
               <button className="cancel-button" onClick={cancelReservation}>Cancel</button>
             </div>
           </div>
+        )}
+
+        {reservationStatus && (
+        <div className={`reservation-status ${reservationStatus}`}>
+          {reservationStatus === 'success' ? (
+            <>
+              <p>Reservation successful!</p>
+              <Button className="proceed-to-payment" onClick={handleProceedToPayment}>
+                Proceed to payment
+              </Button>
+            </>
+          ) : (
+            <p>Already reserved for this date!</p>
+          )}
+        </div>
         )}
       </form>
     </div>

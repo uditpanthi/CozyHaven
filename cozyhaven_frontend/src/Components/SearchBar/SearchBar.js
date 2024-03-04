@@ -67,7 +67,7 @@ const SearchBar = () => {
             <label>Destination</label>
             <input
               type="text"
-              placeholder=""
+              placeholder="Destination"
               value={destination}
               onChange={(e) => setDestination(e.target.value)}
             />

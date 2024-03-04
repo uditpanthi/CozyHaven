@@ -11,8 +11,9 @@ public static class PaymentMapping
         return new Payment
         {
             PaymentId = paymentDTO.PaymentID,
+            Amount=paymentDTO.Amount,
             ReservationId = paymentDTO.ReservationID,
-            Status= paymentDTO.PaymentStatus, // Cast enum
+            Status= paymentDTO.PaymentStatus, 
             PaymentMethod = paymentDTO.PaymentMethod,
             PaymentDate = paymentDTO.PaymentDate
         };
@@ -26,8 +27,9 @@ public static class PaymentMapping
         return new PaymentDTO
         {
             PaymentID = payment.PaymentId,
+            Amount = payment.Amount,
             ReservationID = payment.ReservationId,
-            PaymentStatus = PaymentStatus.Pending, // Cast enum
+            PaymentStatus = PaymentStatus.Pending,
             PaymentMethod= payment.PaymentMethod,
             PaymentDate = payment.PaymentDate
         };

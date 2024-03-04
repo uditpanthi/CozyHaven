@@ -44,10 +44,10 @@ namespace CozyHaven.Models
 
         
     }
-    public enum UserType
-    {
-        Customer,
-        Admin,
-        HotelOwner
-    }
+        public enum UserType
+        {
+            Customer,
+            Admin,
+            HotelOwner
+        }
 }

@@ -16,6 +16,7 @@ namespace CozyHaven.Mappers
                 throw new ArgumentNullException(nameof(registerUserDto));
 
             user = new User();
+            user.DateofBirth=registerUserDto.DateofBirth;
             user.Username = registerUserDto.Username;
             user.UserType = registerUserDto.UserType;
             user.FirstName = registerUserDto.FirstName;
@@ -23,11 +24,11 @@ namespace CozyHaven.Mappers
             user.Email = registerUserDto.Email;
             user.RegistrationDate = DateTime.Now.Date;
             user.ContactNumber = registerUserDto.ContactNumber;
-            // Generate salt
+            
             byte[] salt = GenerateSalt();
             user.Key = salt;
 
-            // Hash password with salt
+            
             user.Password = HashPassword(registerUserDto.Password, salt);
         }
 

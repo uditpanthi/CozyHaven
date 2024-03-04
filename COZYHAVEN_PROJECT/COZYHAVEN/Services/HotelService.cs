@@ -31,7 +31,6 @@ namespace CozyHaven.Services
                 throw new Exception("Image URLs are required when adding a hotel.");
             }
 
-            // Set the OwnerId of the hotel
             hotel.OwnerId = ownerId;
 
             Hotel newhotel = HotelMapping.MapDTOToHotel(hotel);
@@ -123,25 +122,31 @@ namespace CozyHaven.Services
             var hotel = await GetHotel(hotelId);
             if (hotel != null)
             {
-                return hotel.Reviews;
+                return hotel.Reviews ?? new List<Review>();
             }
             throw new HotelNotFoundException();
         }
+
         public async Task<List<HotelAmenityDTO>> GetHotelAmenities(int hotelId)
         {
             var hotel = await _repository.GetById(hotelId);
             if (hotel != null)
             {
-                var amenityDTOs = hotel.HotelAmenities.Select(ha => new HotelAmenityDTO
+                if (hotel.HotelAmenities != null)
                 {
-                    AmenityId = ha.AmenityId,
-                    AmenityName = ha.Amenity.Name
-                    // Map other properties if needed
-                }).ToList();
+                    var amenityDTOs = hotel.HotelAmenities
+                        .Select(ha => new HotelAmenityDTO
+                        {
+                            AmenityId = ha.AmenityId,
+                            AmenityName = ha.Amenity?.Name
+                                                          
+                        })
+                        .ToList();
 
-                return amenityDTOs;
+                    return amenityDTOs;
+                }
             }
-            return null;
+            return new List<HotelAmenityDTO>(); 
         }
 
 
@@ -209,8 +214,6 @@ namespace CozyHaven.Services
         }
         public async Task<List<Hotel>> GetHotelsByLocation(string location)
         {
-            // Implement logic to fetch hotels based on location
-            // Use the repository to query the database
             var hotels = await _repository.GetAll();
             return hotels.Where(h => h.City.ToLower() == location.ToLower()).ToList();
         }
@@ -218,23 +221,15 @@ namespace CozyHaven.Services
 
         public async Task<List<Hotel>> GetHotelsByCriteria(string location, DateTime checkin, DateTime checkout, int capacity)
         {
-            // Fetch hotels based on location
             var hotels = await GetHotelsByLocation(location);
-
-            // Filter hotels based on criteria
             var availableHotels = new List<Hotel>();
 
             foreach (var hotel in hotels)
             {
-                // Check if there are rooms available in the hotel with the desired capacity
                 var availableRooms = hotel.Rooms.Where(room => room.Capacity >= capacity).ToList();
-
-                // Check room availability for each available room
                 foreach (var room in availableRooms)
                 {
                     bool isRoomAvailable = await _reservationService.IsRoomAvailable(room.RoomId, checkin, checkout);
-
-                    // If the room is available, add the hotel to the list of available hotels and break out of the loop
                     if (isRoomAvailable)
                     {
                         availableHotels.Add(hotel);

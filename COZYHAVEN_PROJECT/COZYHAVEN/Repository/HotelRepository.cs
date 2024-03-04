@@ -28,50 +28,62 @@ namespace CozyHaven.Repository
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error occurred while adding hotel.");
-                throw; // Rethrow the exception for the caller to handle
+                throw; 
             }
         }
 
         public async Task<Hotel> Delete(int key)
         {
-            var hotel=await GetById(key);
-            if(hotel!=null)
+            var hotel = await GetById(key);
+            if (hotel != null)
             {
                 _context.Hotels.Remove(hotel);
                 _context.SaveChanges();
                 return hotel;
             }
-            return null;
+            else
+            {
+                throw new HotelNotFoundException($"Hotel with ID {key} not found.");
+            }
         }
+
 
         public async Task<List<Hotel>> GetAll()
         {
-            return _context.Hotels
+            return await Task.FromResult(_context.Hotels
                 .Include(h => h.Rooms)
                 .Include(h => h.Reviews)
                 .Include(h => h.HotelAmenities)
-                .ToList();
+                .ToList());
         }
 
         public async Task<Hotel> GetById(int key)
         {
-            var hotel=_context.Hotels.Include(h => h.Rooms)
+            var hotel = await Task.FromResult(_context.Hotels
+                .Include(h => h.Rooms)
                 .Include(h => h.Reviews)
-                .Include(h => h.HotelAmenities).FirstOrDefault(h=>h.HotelId==key);
-            return hotel;
-            
+                .Include(h => h.HotelAmenities)
+                .FirstOrDefault(h => h.HotelId == key));
+
+            if (hotel != null)
+            {
+                return hotel;
+            }
+            throw new HotelNotFoundException($"Hotel with ID {key} not found.");
         }
 
         public async Task<Hotel> Update(Hotel item)
         {
-            var hotel=await GetById(item.HotelId);
-            if(hotel!=null )
+            var hotel = await GetById(item.HotelId);
+
+            if (hotel != null)
             {
-                _context.Entry<Hotel>(item).State=EntityState.Modified;
+                _context.Entry<Hotel>(item).State = EntityState.Modified;
                 _context.SaveChanges();
                 return item;
             }
-            return null;
+            throw new HotelNotFoundException($"Hotel with ID {item.HotelId} not found for update.");
         }
+
     }
 }

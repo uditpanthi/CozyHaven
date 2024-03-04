@@ -3,8 +3,8 @@ import { CursorAnimation } from "../CursorAnimation/CursorAnimation";
 import "../Login/Login.css";
 import { Link } from "react-router-dom";
 import LandingPage from "../Landing Page/LandingPage";
-import OwnerDashboard from "../OwnerDashboard/OwnerDashboard";
-import AdminDashboard from "../AdminDashboard/Admindashboard";
+import AdminManageHotel from "../AdminDashboard/ManageHotels/AdminManageHotels";
+
 
 const Login = () => {
   useEffect(() => {
@@ -40,9 +40,17 @@ const Login = () => {
         sessionStorage.setItem("token", res.token);
         sessionStorage.setItem("username", res.username);
         sessionStorage.setItem("role", res.role);
-        // alert("Login success - " + res.username);
         setLoggedin(true);
         setRole(res.role);
+
+        // Redirect based on role
+        if (res.role === "Admin") {
+          window.location.href = "/adminmanageHotels";
+        } else if (res.role === "HotelOwner") {
+          window.location.href = "/manageHotels";
+        } else {
+          window.location.href = "/";
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -55,51 +63,45 @@ const Login = () => {
   };
 
   return (
-    loggedin ? (
-      role === "user" ? <LandingPage /> :
-      role === "HotelOwner" ? <OwnerDashboard /> :
-      role === "admin" && <AdminDashboard />
-    ) : (
-      <div id="login-page">
-        <div id="cursor-blur"></div>
-        <h2>Login to Cozy havens</h2>
-        <div id="login-form">
-          <form onSubmit={login}>
-            <label htmlFor="username">Username</label>
-            <input
-              type="text"
-              id="username"
-              name="username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
-            />
-            <br />
-            <br />
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-            <br />
-            <br />
-            <button type="submit" id="Login-btn" disabled={loading}>
-              {loading ? "Logging in..." : "Login"}
-            </button>
-          </form>
+    <div id="login-page">
+      <div id="cursor-blur"></div>
+      <h2>Login to Cozy havens</h2>
+      <div id="login-form">
+        <form onSubmit={login}>
+          <label htmlFor="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
           <br />
-          {loginError && <div>Login Failed. Retry</div>}
           <br />
-          <h6>
-            No account? <Link to="/register">Sign up here</Link>
-          </h6>
-        </div>
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <br />
+          <br />
+          <button type="submit" id="Login-btn" disabled={loading}>
+            {loading ? "Logging in..." : "Login"}
+          </button>
+        </form>
+        <br />
+        {loginError && <div>Login Failed. Retry</div>}
+        <br />
+        <h6>
+          No account? <Link to="/register">Sign up here</Link>
+        </h6>
       </div>
-    )
+    </div>
   );
 };
 

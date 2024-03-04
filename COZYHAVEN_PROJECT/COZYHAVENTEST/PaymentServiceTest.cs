@@ -33,73 +33,73 @@ namespace COZYHAVENTEST
         public async Task AddPayment_ValidPaymentDTO_ReturnsAddedPayment()
         {
             // Arrange
-            var paymentDto = new PaymentDTO(); // Example payment DTO
-            var addedPayment = new Payment(); // Example added payment
-            _mockRepository.Setup(repo => repo.Add(It.IsAny<Payment>())).ReturnsAsync(addedPayment); // Mock repository setup
+            var paymentDto = new PaymentDTO(); 
+            var addedPayment = new Payment(); 
+            _mockRepository.Setup(repo => repo.Add(It.IsAny<Payment>())).ReturnsAsync(addedPayment); 
 
             // Act
             var result = await _paymentService.AddPayment(paymentDto);
 
             // Assert
-            Assert.IsNotNull(result); // Check if the result is not null
+            Assert.IsNotNull(result);
         }
 
         [Test]
         public async Task DeletePayment_ExistingPaymentId_ReturnsDeletedPayment()
         {
             // Arrange
-            var paymentId = 1; // Example payment ID
-            var paymentToDelete = new Payment(); // Example payment to delete
-            _mockRepository.Setup(repo => repo.Delete(paymentId)).ReturnsAsync(paymentToDelete); // Mock repository setup
+            var paymentId = 1;  
+            var paymentToDelete = new Payment();  
+            _mockRepository.Setup(repo => repo.Delete(paymentId)).ReturnsAsync(paymentToDelete);  
 
             // Act
             var result = await _paymentService.DeletePayment(paymentId);
 
             // Assert
-            Assert.IsNotNull(result); // Check if the result is not null
+            Assert.IsNotNull(result);  
         }
 
         [Test]
         public async Task GetPayment_ExistingPaymentId_ReturnsPayment()
         {
             // Arrange
-            var paymentId = 1; // Example payment ID
-            var payment = new Payment(); // Example payment
-            _mockRepository.Setup(repo => repo.GetById(paymentId)).ReturnsAsync(payment); // Mock repository setup
+            var paymentId = 1;  
+            var payment = new Payment(); 
+            _mockRepository.Setup(repo => repo.GetById(paymentId)).ReturnsAsync(payment);  
 
             // Act
             var result = await _paymentService.GetPayment(paymentId);
 
             // Assert
-            Assert.IsNotNull(result); // Check if the result is not null
+            Assert.IsNotNull(result);  
         }
 
         [Test]
         public async Task GetAllPayments_ReturnsListOfPayments()
         {
             // Arrange
-            var payments = new List<Payment>(); // Example list of payments
-            _mockRepository.Setup(repo => repo.GetAll()).ReturnsAsync(payments); // Mock repository setup
+            var payments = new List<Payment>(); 
+            _mockRepository.Setup(repo => repo.GetAll()).ReturnsAsync(payments);  
 
             // Act
             var result = await _paymentService.GetAllPayments();
 
             // Assert
-            Assert.IsNotNull(result); // Check if the result is not null
+            Assert.IsNotNull(result);  
         }
 
         [Test]
         public async Task UpdatePayment_ValidPayment_ReturnsUpdatedPayment()
         {
             // Arrange
-            var payment = new Payment(); // Example payment
-            _mockRepository.Setup(repo => repo.Update(It.IsAny<Payment>())).ReturnsAsync(payment); // Mock repository setup
+            var payment = new Payment(); 
+            _mockRepository.Setup(repo => repo.Update(It.IsAny<Payment>())).ReturnsAsync(payment);  
 
             // Act
             var result = await _paymentService.UpdatePayment(payment);
 
             // Assert
-            Assert.IsNotNull(result); // Check if the result is not null
+            Assert.IsNotNull(result);  
         }
     }
 }

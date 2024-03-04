@@ -33,8 +33,8 @@ namespace CozyHaven.Contexts
                 DateofBirth = new DateTime(1990, 1, 1),
                 Email = "john@example.com",
                 ContactNumber = "1234567890",
-                Password = new byte[] { }, // Your hashed password here
-                Key = new byte[] { }, // Your encryption key here
+                Password = new byte[] { }, 
+                Key = new byte[] { }, 
                 UserType = UserType.HotelOwner,
                 RegistrationDate = DateTime.Now
             },
@@ -47,8 +47,8 @@ namespace CozyHaven.Contexts
                     DateofBirth = new DateTime(1985, 5, 15),
                     Email = "jane@example.com",
                     ContactNumber = "9876543210",
-                    Password = new byte[] { }, // Your hashed password here
-                    Key = new byte[] { }, // Your encryption key here
+                    Password = new byte[] { }, 
+                    Key = new byte[] { }, 
                     UserType = UserType.Admin,
                     RegistrationDate = DateTime.Now
                 }
@@ -120,8 +120,8 @@ namespace CozyHaven.Contexts
             modelBuilder.Entity<Review>().HasData(new Review
             {
                 ReviewId = 1,
-                HotelId = 1, // Assuming Hotel with Id = 1 exists
-                UserId = 1, // Assuming User with Id = 1 exists
+                HotelId = 1, 
+                UserId = 1, 
                 Rating = 4.5f,
                 Comment = "Great experience!",
                 DatePosted = DateTime.Now
@@ -129,8 +129,8 @@ namespace CozyHaven.Contexts
                 new Review
                 {
                     ReviewId = 2,
-                    HotelId = 2, // Assuming Hotel with Id = 2 exists
-                    UserId = 2, // Assuming User with Id = 2 exists
+                    HotelId = 2, 
+                    UserId = 2,
                     Rating = 5.0f,
                     Comment = "Excellent service!",
                     DatePosted = DateTime.Now
@@ -140,8 +140,8 @@ namespace CozyHaven.Contexts
                 new Reservation
                 {
                     ReservationId = 1,
-                    UserId = 1, // Assuming User with Id = 1 exists
-                    RoomId = 1, // Assuming Room with Id = 1 exists
+                    UserId = 1, 
+                    RoomId = 1, 
                     CheckInDate = DateTime.Today,
                     CheckOutDate = DateTime.Today.AddDays(2),
                     Adults = 2,
@@ -154,7 +154,7 @@ namespace CozyHaven.Contexts
             modelBuilder.Entity<Payment>().HasData(new Payment
             {
                 PaymentId = 1,
-                ReservationId = 1, // Assuming Reservation with Id = 1 exists
+                ReservationId = 1, 
                 Amount = 250.0f,
                 PaymentDate = DateTime.Now,
                 PaymentMethod = "Credit Card",
@@ -281,7 +281,7 @@ namespace CozyHaven.Contexts
             modelBuilder.Entity<Payment>()
                 .Property(p => p.Amount)
                 .HasColumnType("float")
-                .HasPrecision(10, 2); // 10 is the maximum number of digits, 2 is the number of decimal places
+                .HasPrecision(10, 2); 
 
             modelBuilder.Entity<Reservation>()
                 .Property(r => r.TotalPrice)

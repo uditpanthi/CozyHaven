@@ -43,7 +43,7 @@ namespace CozyHaven.Repository
             {
                 return amenity;
             }
-            throw new AmenityNotFoundException(); // Throw exception if amenity is not found
+            throw new AmenityNotFoundException(); 
         }
 
         public async Task<List<Amenity>> GetAll()

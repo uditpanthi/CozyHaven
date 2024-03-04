@@ -92,11 +92,17 @@ const HotelReservations = ({ hotelId }) => {
     }
   };
 
+  // Sort reservations by check-in date, with the latest ones at the top
+  const sortedReservations = [...reservations].sort((a, b) => {
+    return new Date(b.checkInDate) - new Date(a.checkInDate);
+  });
+
   return (
     <div className="hotel-reservations-container">
       {error && <p className="error-message">Error: {error}</p>}
       {message && <p className="success-message">{message}</p>}
       {/* <h2 className="hotel-reservations-title">All Reservations in Hotel</h2> */}
+      <span>Reservations</span>
       <table className="reservation-table">
         <thead>
           <tr>
@@ -112,7 +118,7 @@ const HotelReservations = ({ hotelId }) => {
           </tr>
         </thead>
         <tbody>
-          {reservations.map((reservation) => (
+          {sortedReservations.map((reservation) => (
             <tr key={reservation.reservationId}>
               <td>{reservation.reservationId}</td>
               <td>{BookingStatus[reservation.status]}</td>

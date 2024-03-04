@@ -46,7 +46,7 @@ namespace COZYHAVENTEST
             var result = await _amenityService.AddAmenity(amenityDto);
 
             // Assert
-            Assert.AreEqual(expectedAmenity, result);
+            Assert.That(result, Is.EqualTo(expectedAmenity));
         }
 
         [Test]
@@ -65,7 +65,7 @@ namespace COZYHAVENTEST
             var result = await _amenityService.DeleteAmenity(amenityId);
 
             // Assert
-            Assert.AreEqual(expectedAmenity, result);
+            Assert.That(result, Is.EqualTo(expectedAmenity));
         }
 
         [Test]
@@ -102,7 +102,7 @@ namespace COZYHAVENTEST
             var result = await _amenityService.GetAmenity(amenityId);
 
             // Assert
-            Assert.AreEqual(expectedAmenity, result);
+            Assert.That(result, Is.EqualTo(expectedAmenity));
         }
 
         [Test]
@@ -123,8 +123,8 @@ namespace COZYHAVENTEST
             var result = await _amenityService.UpdateAmenity(amenityId, updatedName);
 
             // Assert
-            Assert.AreEqual(amenityId, result.Id);
-            Assert.AreEqual(updatedName, result.Name);
+            Assert.That(result.Id, Is.EqualTo(amenityId));
+            Assert.That(result.Name, Is.EqualTo(updatedName));
         }
 
         [Test]
@@ -132,7 +132,7 @@ namespace COZYHAVENTEST
         {
             // Arrange
             var amenityId = 1;
-            _mockRepository.Setup(repo => repo.GetById(amenityId)).ReturnsAsync((Amenity)null);
+            _mockRepository.Setup(repo => repo.GetById(amenityId)).ReturnsAsync((Amenity)null!);
 
             // Act & Assert
             Assert.ThrowsAsync<AmenityNotFoundException>(() => _amenityService.UpdateAmenity(amenityId, "Spa"));

@@ -1,4 +1,5 @@
 ﻿using CozyHaven.Contexts;
+using CozyHaven.Exceptions;
 using CozyHaven.Interfaces;
 using CozyHaven.Models;
 using Microsoft.EntityFrameworkCore;
@@ -16,41 +17,57 @@ namespace CozyHaven.Repository
         public async Task<Review> Add(Review item)
         {
             _context.Reviews.Add(item);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return item;
         }
 
         public async Task<Review> Delete(int key)
         {
-            var review=await GetById(key);
-            if(review != null) { 
+            var review = await GetById(key);
+            if (review != null)
+            {
                 _context.Reviews.Remove(review);
                 _context.SaveChanges();
                 return review;
             }
-            return null;
+            else
+            {
+                throw new ReviewNotFoundException($"Review with ID {key} not found.");
+            }
         }
 
         public async Task<List<Review>> GetAll()
         {
-            return _context.Reviews.ToList();
+            return await Task.FromResult(_context.Reviews.ToList());
         }
 
         public async Task<Review> GetById(int key)
         {
-            var review= _context.Reviews.FirstOrDefault(r=>r.ReviewId==key);
-            return review;
+            var review = await _context.Reviews
+                .FirstOrDefaultAsync(r => r.ReviewId == key);
+            if (review != null)
+            {
+                return review;
+            }
+            else
+            {
+                throw new ReviewNotFoundException($"Review with ID {key} not found.");
+            }
         }
+
 
         public async Task<Review> Update(Review item)
         {
-            var review=await GetById(item.ReviewId);
-            if(review != null)
+            var review = await GetById(item.ReviewId);
+            if (review != null)
             {
-                _context.Entry<Review>(item).State=EntityState.Modified;
+                _context.Entry<Review>(item).State = EntityState.Modified;
                 return item;
             }
-            return null;
+            else
+            {
+                throw new ReviewNotFoundException($"Review with ID {item.ReviewId} not found.");
+            }
         }
     }
 }

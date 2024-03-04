@@ -23,7 +23,9 @@ const UserReservations = () => {
         }
         const data = await response.json();
         if (data && data.$values) {
-          setReservations(data.$values);
+          // Sort reservations by booked date in descending order
+          const sortedReservations = data.$values.sort((a, b) => new Date(b.bookedDate) - new Date(a.bookedDate));
+          setReservations(sortedReservations);
         } else {
           setReservations([]);
         }
@@ -34,11 +36,9 @@ const UserReservations = () => {
   
     fetchReservationsByUser();
   }, [username]);
-  
 
   return (
     <div className="user-reservations-container">
-      {/* <h2 className="user-reservations-title">All Reservations by User: {username}</h2> */}
       {error && <p className="error-message">Error: {error}</p>}
       <table className="reservation-table">
         <thead>
@@ -73,4 +73,3 @@ const UserReservations = () => {
 };
 
 export default UserReservations;
-

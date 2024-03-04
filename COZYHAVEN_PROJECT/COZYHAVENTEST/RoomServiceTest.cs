@@ -56,22 +56,22 @@ namespace COZYHAVENTEST
             var result = await _roomService.AddRoom(roomDto);
 
             // Assert
-            Assert.AreEqual(expectedRoom, result);
+            Assert.That(result, Is.EqualTo(expectedRoom));
         }
 
         [Test]
         public async Task DeleteRoom_ExistingRoomId_ReturnsDeletedRoom()
         {
             // Arrange
-            var roomId = 1; // Example room ID
-            var roomToDelete = new Room { RoomId = roomId }; // Example room to delete
-            _mockRepository.Setup(repo => repo.GetById(roomId)).ReturnsAsync(roomToDelete); // Mock repository setup
+            var roomId = 1; 
+            var roomToDelete = new Room { RoomId = roomId }; 
+            _mockRepository.Setup(repo => repo.GetById(roomId)).ReturnsAsync(roomToDelete); 
 
             // Act
             var result = await _roomService.DeleteRoom(roomId);
 
             // Assert
-            Assert.AreEqual(roomToDelete, result); // Check if the deleted room matches the expected room
+            Assert.That(result, Is.EqualTo(roomToDelete)); 
         }
 
         [Test]
@@ -112,7 +112,7 @@ namespace COZYHAVENTEST
             var result = await _roomService.GetRoom(roomId);
 
             // Assert
-            Assert.AreEqual(expectedRoom, result);
+            Assert.That(result, Is.EqualTo(expectedRoom));
         }
 
         [Test]
@@ -132,10 +132,10 @@ namespace COZYHAVENTEST
             // Arrange
             var roomId = 1;
             var reservations = new List<Reservation>
-    {
-        new Reservation { ReservationId = 1, RoomId = roomId, CheckInDate = DateTime.Now, CheckOutDate = DateTime.Now.AddDays(3) },
-        new Reservation { ReservationId = 2, RoomId = roomId, CheckInDate = DateTime.Now.AddDays(5), CheckOutDate = DateTime.Now.AddDays(7) }
-    };
+            {
+                new Reservation { ReservationId = 1, RoomId = roomId, CheckInDate = DateTime.Now, CheckOutDate = DateTime.Now.AddDays(3) },
+                new Reservation { ReservationId = 2, RoomId = roomId, CheckInDate = DateTime.Now.AddDays(5), CheckOutDate = DateTime.Now.AddDays(7) }
+            };
             var room = new Room { RoomId = roomId, RoomSize = 20, RoomType = "Double", PricePerNight = 100, Capacity = 2, Available = true, Reservations = reservations };
             _mockRepository.Setup(repo => repo.GetById(roomId)).ReturnsAsync(room);
 
@@ -174,15 +174,15 @@ namespace COZYHAVENTEST
         public async Task UpdateRoomPrice_ExistingRoomId_ReturnsUpdatedRoom()
         {
             // Arrange
-            var roomId = 1; // Example room ID
-            var updatedRoom = new Room(); // Example updated room
-            _mockRepository.Setup(repo => repo.GetById(roomId)).ReturnsAsync(updatedRoom); // Mock repository setup
+            var roomId = 1; 
+            var updatedRoom = new Room(); 
+            _mockRepository.Setup(repo => repo.GetById(roomId)).ReturnsAsync(updatedRoom); 
 
             // Act
-            var result = await _roomService.UpdateRoomPrice(roomId, 100); // Assuming the price to update is 100
+            var result = await _roomService.UpdateRoomPrice(roomId, 100); 
 
             // Assert
-            Assert.AreEqual(updatedRoom, result); // Check if the updated room matches the expected room
+            Assert.That(result, Is.EqualTo(updatedRoom)); 
         }
 
         [Test]
@@ -201,15 +201,15 @@ namespace COZYHAVENTEST
         public async Task UpdateRoomDetails_ExistingRoomDto_ReturnsUpdatedRoom()
         {
             // Arrange
-            var roomDTO = new RoomDTO { RoomId = 1 }; // Example room DTO
-            var updatedRoom = new Room(); // Example updated room
-            _mockRepository.Setup(repo => repo.GetById(roomDTO.RoomId)).ReturnsAsync(updatedRoom); // Mock repository setup
+            var roomDTO = new RoomDTO { RoomId = 1 }; 
+            var updatedRoom = new Room(); 
+            _mockRepository.Setup(repo => repo.GetById(roomDTO.RoomId)).ReturnsAsync(updatedRoom); 
 
             // Act
             var result = await _roomService.UpdateRoomDetails(roomDTO);
 
             // Assert
-            Assert.AreEqual(updatedRoom, result); // Check if the updated room matches the expected room
+            Assert.That(result, Is.EqualTo(updatedRoom)); 
         }
 
         [Test]
@@ -247,7 +247,7 @@ namespace COZYHAVENTEST
             var result = await _roomService.GetAvailableRooms();
 
             // Assert
-            Assert.AreEqual(2, result.Count);
+            Assert.That(result.Count, Is.EqualTo(2));
             Assert.IsTrue(result.All(r => r.Available));
         }
 

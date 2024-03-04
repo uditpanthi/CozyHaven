@@ -218,10 +218,8 @@ namespace CozyHaven.Controllers
             {
                 return NotFound(ex.Message);
             }
-            catch (Exception ex)
+            catch
             {
-                // Log any other unexpected errors
-                // Log.Error("An error occurred while getting user by ID", ex);
                 return StatusCode(500, "An error occurred while getting user by ID");
             }
         }

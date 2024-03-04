@@ -3,7 +3,7 @@
 namespace CozyHaven.Exceptions
 {
     [Serializable]
-    internal class ReviewNotFoundException : Exception
+    public class ReviewNotFoundException : Exception
     {
         public ReviewNotFoundException()
         {
