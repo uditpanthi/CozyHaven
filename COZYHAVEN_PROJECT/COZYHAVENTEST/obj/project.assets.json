@@ -3873,11 +3873,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\PROJECTS\\COZYHAVEN_PROJECT\\COZYHAVENTEST\\COZYHAVENTEST.csproj",
+      "projectUniqueName": "D:\\PROJECTS\\FINAL COZY HAVEN\\COZYHAVEN_PROJECT\\COZYHAVENTEST\\COZYHAVENTEST.csproj",
       "projectName": "COZYHAVENTEST",
-      "projectPath": "D:\\PROJECTS\\COZYHAVEN_PROJECT\\COZYHAVENTEST\\COZYHAVENTEST.csproj",
+      "projectPath": "D:\\PROJECTS\\FINAL COZY HAVEN\\COZYHAVEN_PROJECT\\COZYHAVENTEST\\COZYHAVENTEST.csproj",
       "packagesPath": "C:\\Users\\win 10\\.nuget\\packages\\",
-      "outputPath": "D:\\PROJECTS\\COZYHAVEN_PROJECT\\COZYHAVENTEST\\obj\\",
+      "outputPath": "D:\\PROJECTS\\FINAL COZY HAVEN\\COZYHAVEN_PROJECT\\COZYHAVENTEST\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\win 10\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -3894,8 +3894,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "D:\\PROJECTS\\COZYHAVEN_PROJECT\\COZYHAVEN\\COZYHAVEN.csproj": {
-              "projectPath": "D:\\PROJECTS\\COZYHAVEN_PROJECT\\COZYHAVEN\\COZYHAVEN.csproj"
+            "D:\\PROJECTS\\FINAL COZY HAVEN\\COZYHAVEN_PROJECT\\COZYHAVEN\\COZYHAVEN.csproj": {
+              "projectPath": "D:\\PROJECTS\\FINAL COZY HAVEN\\COZYHAVEN_PROJECT\\COZYHAVEN\\COZYHAVEN.csproj"
             }
           }
         }

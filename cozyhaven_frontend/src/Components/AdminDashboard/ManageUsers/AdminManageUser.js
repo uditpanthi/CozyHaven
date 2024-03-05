@@ -146,7 +146,7 @@ const AdminManageUser = () => {
   return (
     <div>
       <div id="cursor-blur" />
-      <Navigation />.
+      <Navigation />
       <AdminSidebar />
       <div className="manage-user">
         <div className="search-user">

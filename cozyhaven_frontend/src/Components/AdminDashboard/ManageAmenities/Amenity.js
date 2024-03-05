@@ -133,11 +133,11 @@ const AdminAmenity = () => {
   return (
     <>
       <div id="cursor-blur"></div>
-      <Navigation />.
+      <Navigation />
       <AdminSidebar />
       <div
         className="manage-amenity"
-        style={{ marginTop: "120px", minHeight: "100vh" }}
+        style={{ padding:"120px 0px 0px 0px", minHeight: "100vh" }}
       >
         <span>Amenities</span>
         <div className="card-header admin-amenity-header">

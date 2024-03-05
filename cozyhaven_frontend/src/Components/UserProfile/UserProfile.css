@@ -1,9 +1,13 @@
 .user-profile-container {
-    max-width: 600px;
-    margin: 0 auto;
-    margin-top: 100px;
-    padding: 20px;
+    max-width: 1200px;
+    /* margin: 0 auto; */
+    /* margin-top: 100px; */
+    /* padding: 20px; */
+    padding: 120px 0px 0px 480px;
     /* background-color: rgba(255, 255, 255, 0.9); */
+  }
+  .user-details{
+    padding: 20px;
     border: 2px solid white;
     border-radius: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);

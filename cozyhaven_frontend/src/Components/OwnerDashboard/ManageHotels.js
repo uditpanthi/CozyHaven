@@ -60,10 +60,10 @@ const ManageOwnerHotels = () => {
   const userRole = sessionStorage.getItem('role')
   return (
     <div>
-        <Navigation/>.
+        <Navigation/>
         {userRole === 'HotelOwner' ? <OwnerSidebar /> : <AdminSidebar />}
         <div id='cursor-blur'></div>
-        <div className='manage-sidebar'  style={{ marginTop: '100px' }}>
+        <div className='manage-sidebar'  style={{ padding:"120px 0px 0px 0px" }}>
             <OwnerHotels/>
         </div>
         <Footer/>

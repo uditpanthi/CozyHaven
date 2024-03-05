@@ -53,8 +53,25 @@
 .sidebar .nav-links li {
   position: relative;
   list-style: none;
-  transition: ease-in-out 0.3s ease; /* Transition background for hover effect */
+  transition: ease-in-out 0.3s ease;
 }
+
+.remove-amenity {
+  cursor: pointer;
+  color: #423f3f; 
+  font-size: 18px; 
+  margin-left: 5px; 
+  border-radius: 45%; 
+  padding: 5px; 
+  transition: all 0.3s;
+}
+
+.remove-amenity:hover {
+  background-color: #5c5b5b; 
+  color: #423f3f; 
+}
+
+
 
 .sidebar .nav-links li:hover {
   background: #95cc1e;

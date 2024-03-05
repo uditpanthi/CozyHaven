@@ -2838,11 +2838,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\PROJECTS\\COZYHAVEN_PROJECT\\COZYHAVEN\\COZYHAVEN.csproj",
+      "projectUniqueName": "D:\\PROJECTS\\FINAL COZY HAVEN\\COZYHAVEN_PROJECT\\COZYHAVEN\\COZYHAVEN.csproj",
       "projectName": "COZYHAVEN",
-      "projectPath": "D:\\PROJECTS\\COZYHAVEN_PROJECT\\COZYHAVEN\\COZYHAVEN.csproj",
+      "projectPath": "D:\\PROJECTS\\FINAL COZY HAVEN\\COZYHAVEN_PROJECT\\COZYHAVEN\\COZYHAVEN.csproj",
       "packagesPath": "C:\\Users\\win 10\\.nuget\\packages\\",
-      "outputPath": "D:\\PROJECTS\\COZYHAVEN_PROJECT\\COZYHAVEN\\obj\\",
+      "outputPath": "D:\\PROJECTS\\FINAL COZY HAVEN\\COZYHAVEN_PROJECT\\COZYHAVEN\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\win 10\\AppData\\Roaming\\NuGet\\NuGet.Config",

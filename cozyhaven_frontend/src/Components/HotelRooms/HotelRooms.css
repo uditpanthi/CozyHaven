@@ -15,9 +15,8 @@
 .hotelrooms-container {
   gap: 30px;
   min-height: 100vh;
-  margin-top: 80px;
-  margin-left: 280px;
-  padding: 30px;
+  padding: 120px 0px 0px 280px;
+  /* padding: 30px; */
 }
 
 /* Hotel info */
@@ -30,6 +29,7 @@
 .leftbig-and-rightsml{
   /* display: flex; */
   /* justify-content: space-between; */
+  margin-bottom: 50px;
   gap: 50px;
 }
 

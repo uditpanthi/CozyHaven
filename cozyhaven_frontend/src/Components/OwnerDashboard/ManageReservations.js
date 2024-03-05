@@ -12,9 +12,9 @@ const ManageReservations = () => {
 
   return (
     <>
-      <Navigation />.
+      <Navigation />
       {userRole === 'HotelOwner' ? <OwnerSidebar /> : <AdminSidebar />} {/* Conditionally render sidebar */}
-      <div className='manage-sidebar' style={{ marginLeft: '280px', marginTop: '100px', minHeight:"100vh" }}>
+      <div className='manage-sidebar' style={{ padding:"120px 0px 0px 280px", minHeight:"100vh" }}>
         <HotelReservations hotelId={hotelId} />
       </div>
       <Footer/>

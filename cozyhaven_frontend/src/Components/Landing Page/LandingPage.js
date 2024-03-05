@@ -9,6 +9,10 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Footer from "../Footer/Footer";
 import SearchBar from "../SearchBar/SearchBar";
+import budget from '../../Assets/budget-travel.jpg';
+import destinations from '../../Assets/destinations-1.jpg'
+import family from '../../Assets/family.jpg'
+
 
 const LandingPage = () => {
   // useEffect(()=>{
@@ -206,15 +210,15 @@ const LandingPage = () => {
         <h1>WHAT ARE YOU WAITING FOR?</h1>
         <div className="elem">
           <h2>ENJOY WITH FAMILY</h2>
-          <img src="" alt="" />
+          <img src={family} alt="" />
         </div>
         <div className="elem">
           <h2>BUDGET TRAVEL</h2>
-          <img src="../../../public/budget-travel.jpg" alt="" />
+          <img src={budget} alt="" />
         </div>
         <div className="elem">
           <h2>VISIT NEW PLACES</h2>
-          <img src="../../../public/destinations-2.jpg" alt="" />
+          <img src={destinations} alt="" />
         </div>
       </div>
       <Footer/>

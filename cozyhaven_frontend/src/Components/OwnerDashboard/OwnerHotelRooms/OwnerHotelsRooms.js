@@ -169,10 +169,11 @@ const OwnerHotelsRooms = () => {
 
       setSuccessMessage("Amenity added successfully!");
     } catch (error) {
-      setSuccessMessage("Error adding amenity to hotel. Please try again later.");
+      setSuccessMessage(
+        "Error adding amenity to hotel. Please try again later."
+      );
     }
   };
-  
 
   const handleClosePopup = () => {
     setShowSuccessPopup(false);
@@ -186,16 +187,43 @@ const OwnerHotelsRooms = () => {
     }));
   };
 
+  const handleRemoveAmenityFromHotel = async (amenityId) => {
+    try {
+      const response = await fetch(
+        `http://localhost:5108/api/Amenity/delete-amenity-from-hotel?hotelId=${hotelId}&amenityId=${amenityId}`,
+        {
+          method: "POST",
+        }
+      );
+  
+      if (!response.ok) {
+        throw new Error("Failed to remove amenity from hotel");
+      }
+  
+      const updatedHotelAmenities = hotelAmenities.filter(
+        (amenity) => amenity.amenityId !== amenityId
+      );
+      setHotelAmenities(updatedHotelAmenities);
+  
+      setSuccessMessage("Amenity removed successfully!");
+    } catch (error) {
+      setSuccessMessage(
+        "Error removing amenity from hotel. Please try again later."
+      );
+    }
+  };
+  
+
   if (error) {
     return <p>Error: {error}</p>;
   }
 
-  const userRole = sessionStorage.getItem('role')
+  const userRole = sessionStorage.getItem("role");
 
   return (
     <div id="ownerHotel">
-      <Navigation />.
-      {userRole === 'HotelOwner' ? <OwnerSidebar /> : <AdminSidebar />}
+      <Navigation />
+      {userRole === "HotelOwner" ? <OwnerSidebar /> : <AdminSidebar />}
       <div id="cursor-blur"></div>
       <div className="hotelrooms-container">
         <div className="hotel-info">
@@ -209,7 +237,17 @@ const OwnerHotelsRooms = () => {
           <h2>Hotel Amenities</h2>
           <ul>
             {hotelAmenities.map((amenity) => (
-              <li key={amenity.amenityId}>{amenity.amenity.name}</li>
+              <li key={amenity.amenityId}>
+                {amenity.amenity.name}
+                <span
+                  className="remove-amenity"
+                  onClick={() =>
+                    handleRemoveAmenityFromHotel(amenity.amenityId)
+                  }
+                >
+                  &#10006; {/* Cross icon */}
+                </span>
+              </li>
             ))}
           </ul>
         </div>
@@ -256,8 +294,7 @@ const OwnerHotelsRooms = () => {
                       <ConfirmBox
                         confirmVar="delete"
                         onConfirm={() => handleDeleteRoom(room.roomId)}
-                      >
-                      </ConfirmBox>
+                      ></ConfirmBox>
                     </div>
                   </div>
                 </li>
@@ -265,26 +302,26 @@ const OwnerHotelsRooms = () => {
             </ul>
           </div>
           <div className="amenities">
-          <h2>Add Amenities</h2>
-          <select onChange={(e) => setSelectedAmenity(e.target.value)}>
-            <option value="">Select an amenity</option>
-            {amenities.map((amenity) => (
-              <option key={amenity.amenityId} value={amenity.amenityId}>
-                {amenity.name}
-              </option>
-            ))}
-          </select>
-          <br />
-          <br />
-          <Button onClick={handleAddAmenityToHotel}>
-            Add Amenity to Hotel
-          </Button>
-          {successMessage && (
-            <div className="success-message">
-              <p>{successMessage}</p>
-            </div>
-          )}
-        </div>
+            <h2>Add Amenities</h2>
+            <select onChange={(e) => setSelectedAmenity(e.target.value)}>
+              <option value="">Select an amenity</option>
+              {amenities.map((amenity) => (
+                <option key={amenity.amenityId} value={amenity.amenityId}>
+                  {amenity.name}
+                </option>
+              ))}
+            </select>
+            <br />
+            <br />
+            <Button onClick={handleAddAmenityToHotel}>
+              Add Amenity to Hotel
+            </Button>
+            {successMessage && (
+              <div className="success-message">
+                <p>{successMessage}</p>
+              </div>
+            )}
+          </div>
         </div>
       </div>
       <Footer />

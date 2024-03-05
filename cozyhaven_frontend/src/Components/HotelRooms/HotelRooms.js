@@ -175,7 +175,7 @@ const HotelRooms = () => {
   return (
     <>
       <Navigation />
-      <div id="cursor-blur"></div>.
+      <div id="cursor-blur"></div>
       <div className="hotelrooms-container">
         <div className="hotel-info">
           {hotel && <h1>Welcome to {hotel.name}</h1>}

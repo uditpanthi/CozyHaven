@@ -46,7 +46,7 @@ const AdminManageHotel = () => {
 
   return (
     <div>
-      <Navigation />.
+      <Navigation />
       <div id='cursor-blur'></div>
       <AdminSidebar/>
       <div className="hotel-list">

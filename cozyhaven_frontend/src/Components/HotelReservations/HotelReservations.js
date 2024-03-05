@@ -1,3 +1,4 @@
+import { CursorAnimation } from "../CursorAnimation/CursorAnimation";
 import "../HotelReservations/HotelReservation.css";
 import React, { useState, useEffect } from "react";
 
@@ -14,6 +15,10 @@ const HotelReservations = ({ hotelId }) => {
   const [error, setError] = useState(null);
   const [message, setMessage] = useState("");
 
+
+  useEffect(()=>{
+    CursorAnimation();
+  },[]);
   useEffect(() => {
     const fetchReservations = async () => {
       try {
@@ -99,6 +104,7 @@ const HotelReservations = ({ hotelId }) => {
 
   return (
     <div className="hotel-reservations-container">
+      <div id="cursor-blur"></div>
       {error && <p className="error-message">Error: {error}</p>}
       {message && <p className="success-message">{message}</p>}
       {/* <h2 className="hotel-reservations-title">All Reservations in Hotel</h2> */}

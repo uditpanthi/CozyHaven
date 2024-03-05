@@ -17,11 +17,11 @@ const ManageReviews = () => {
   return (
     <div>
       <div id='cursor-blur'></div>
-      <Navigation />.
+      <Navigation />
       <OwnerSidebar />
       <div
         className="manage-sidebar"
-        style={{ marginLeft: "280px", marginTop: "100px", minHeight: "100vh" }}
+        style={{ padding:"120px 0px 0px 280px", minHeight: "100vh" }}
       >
         <HotelReviews hotelId={hotelId} />
       </div>
