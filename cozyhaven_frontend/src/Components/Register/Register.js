@@ -1,105 +1,164 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import { CursorAnimation } from "../CursorAnimation/CursorAnimation";
-import '../Register/Register.css'
-import { Link } from 'react-router-dom';
+import "../Register/Register.css";
+import { Link } from "react-router-dom";
 
 const Registration = () => {
-    useEffect(() => {
-        CursorAnimation();
-    }, []);
+  const [formData, setFormData] = useState({
+    username: "",
+    firstName: "",
+    lastName: "",
+    contactNumber: "",
+    email: "",
+    password: "",
+    dateOfBirth: "",
+    userType: 0,
+  });
+  const [responseMessage, setResponseMessage] = useState("");
 
-    const handleRegister = async (event) => {
-        event.preventDefault();
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
-        // Fetch form data
-        const formData = new FormData(event.target);
+  const handleRegister = async (event) => {
+    event.preventDefault();
+  
+    try {
+      const response = await fetch("http://localhost:5108/api/User/Register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        setResponseMessage("User registered successfully");
+        console.log("User registered successfully:", data);
+  
+        // Redirect to login page after 3 seconds
+        setTimeout(() => {
+          window.location.href = "/login"; // Change the URL to your login page
+        }, 3000);
+      } else {
+        const errorData = await response.json();
+        setResponseMessage(`Failed to register user: ${errorData}`);
+        console.error("Failed to register user:", errorData);
+      }
+    } catch (error) {
+      setResponseMessage(`Error registering user: ${error.message}`);
+      console.error("Error registering user:", error);
+    }
+  };
 
-        // Convert form data to JSON object
-        const formDataJSON = {};
-        formData.forEach((value, key) => {
-            formDataJSON[key] = value;
-        });
+  return (
+    <div>
+      <div id="cursor-blur"></div>
+      <div id="registration-page">
+        <h2>Register</h2>
+        <form id="registration-form" onSubmit={handleRegister}>
+          <div className="input-group">
+            <label htmlFor="firstName">First Name</label>
+            <input
+              type="text"
+              id="firstName"
+              name="firstName"
+              value={formData.firstName}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="input-group">
+            <label htmlFor="lastName">Last Name</label>
+            <input
+              type="text"
+              id="lastName"
+              name="lastName"
+              value={formData.lastName}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="input-group">
+            <label htmlFor="username">Username</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              value={formData.username}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="input-group">
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="input-group">
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="input-group">
+            <label htmlFor="dateOfBirth">Date of Birth</label>
+            <input
+              type="date"
+              id="dateOfBirth"
+              name="dateOfBirth"
+              value={formData.dateOfBirth}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-        // Post user details
-        try {
-            const response = await fetch('http://localhost:5108/api/User/Register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formDataJSON)
-            });
-
-            if (response.ok) {
-                console.log('User registered successfully');
-                // Redirect or show a success message here
-            } else {
-                console.error('Failed to register user:', response.status);
-                // Handle error, show error message, etc.
-            }
-        } catch (error) {
-            console.error('Error registering user:', error);
-            // Handle network errors, etc.
-        }
-    };
-
-    return (
-        <div>
-            <div id="cursor-blur"></div>
-            <div id="registration-page">
-                <h2>Register</h2>
-                <form id="registration-form" onSubmit={handleRegister}>
-                    <div className="input-group">
-                        <label htmlFor="firstname">First Name</label>
-                        <input type="text" id="firstname" name="firstName" required />
-                    </div>
-                    <div className="input-group">
-                        <label htmlFor="lastname">Last Name</label>
-                        <input type="text" id="lastname" name="lastName" required />
-                    </div>
-                    <div className="input-group">
-                        <label htmlFor="username">Username</label>
-                        <input type="text" id="username" name="username" required />
-                    </div>
-                    <div className="input-group">
-                        <label htmlFor="email">Email</label>
-                        <input type="email" id="email" name="email" required />
-                    </div>
-                    <div className="input-group">
-                        <label htmlFor="password">Password</label>
-                        <input type="password" id="password" name="password" required />
-                    </div>
-                    <div className="input-group">
-                        <label htmlFor="dateOfBirth">Date of Birth</label>
-                        <input type="date" id="dateOfBirth" name="dateOfBirth" required />
-                    </div>
-                    <div className="input-group">
-                        <label htmlFor="gender">Gender</label>
-                        <select id="gender" name="gender" required>
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </div>
-                    <div className="input-group">
-                        <label htmlFor="contact">Contact No</label>
-                        <input type="tel" id="contact" name="contactNumber" required />
-                    </div>
-                    <div className="input-group">
-                        <label htmlFor="userType">User Type</label>
-                        <select id="userType" name="userType" required>
-                            <option value="0">Regular User</option>
-                            <option value="1">Hotel Owner</option>
-                        </select>
-                    </div>
-                    <button type="submit" >Register</button>
-                </form>
-                <h6>
-                    Already have an Account? <Link to="/Login">Sign in here</Link>
-                </h6>
-            </div>
-        </div>
-    );
-}
+          <div className="input-group">
+            <label htmlFor="contactNumber">Contact Number</label>
+            <input
+              type="tel"
+              id="contactNumber"
+              name="contactNumber"
+              value={formData.contactNumber}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="input-group">
+            <label htmlFor="userType">User Type</label>
+            <select
+              id="userType"
+              name="userType"
+              value={formData.userType}
+              onChange={handleChange}
+              required
+            >
+              <option value="0">Regular User</option>
+              <option value="1">Hotel Owner</option>
+            </select>
+          </div>
+          <button type="submit">Register</button>
+        </form>
+        <p>{responseMessage}</p>
+        <h6>
+          Already have an Account? <Link to="/Login">Sign in here</Link>
+        </h6>
+      </div>
+    </div>
+  );
+};
 
 export default Registration;

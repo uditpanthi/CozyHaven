@@ -14,6 +14,19 @@ body {
   height: 100%;
 }
 
+.notfound {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  font-size: 24px;
+}
+.notfound img {
+  max-width: 100%;
+  height: auto;
+}
+
 /* ---------home-------- */
 /* #cursor {
   height: 20px;

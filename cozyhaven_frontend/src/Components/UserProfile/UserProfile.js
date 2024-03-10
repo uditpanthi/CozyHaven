@@ -86,7 +86,7 @@ const UserProfile = () => {
   return (
     <>
       <div id="cursor-blur"></div>
-      <Navigation />
+      <Navigation />.
       <div className="user-profile-container">
         <div className="user-details">
           <h2>User Profile</h2>

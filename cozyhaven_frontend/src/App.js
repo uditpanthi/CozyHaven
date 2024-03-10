@@ -20,6 +20,7 @@ import AdminAmenity from "./Components/AdminDashboard/ManageAmenities/Amenity";
 import AdminManageUser from "./Components/AdminDashboard/ManageUsers/AdminManageUser";
 import Payment from "./Components/PaymentPage/Payment";
 import Reservations from "./Components/Reservations/Reservations";
+import NotFound from "./Components/NotFound";
 
 const App = () => {
   return (
@@ -37,16 +38,19 @@ const App = () => {
           <Route path="/allreservations" element={<Reservations />} />
           <Route path='/reservation/:roomId' element={<ReservationPage />} /> 
           <Route path='/payment/:reservationId' element={<Payment/>} />
+          {/* Owner Manage */}
           <Route path="/manageHotels" element={<ManageOwnerHotels />} />
           <Route path="/manageReservations/:hotelId" element={<ManageReservations />} />
           <Route path="/manageReviews/:hotelId" element={<ManageReviews />} />
           <Route path="/addHotel/:ownerId" element={<AddHotelForm/>}/>
           <Route path="/addRooms/:hotelId" element={<AddRooms/>}/>
+          {/* Admin Manage */}
           <Route path="/adminmanageHotels" element={<AdminManageHotel/>}/>
           <Route path="/adminmanageusers" element={<AdminManageUser/>}/>
           <Route path="/manageamenity" element={<AdminAmenity/>}/>
           <Route path="/ownerHotelsRooms/:hotelId" element={<OwnerHotelsRooms/>}/>
         </Route>
+        <Route path="*" element={<NotFound/>}/>
       </Routes>
     </Router>
   );

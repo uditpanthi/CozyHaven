@@ -3,8 +3,8 @@ import React, { useState, useEffect } from 'react';
 
 // Define the BookingStatus enum
 const BookingStatus = {
-  0: 'Checkout',
-  1: 'Pending',
+  0: 'Pending',
+  1: 'Checkout',
   2: 'Approved',
   3: 'Cancelled'
 };

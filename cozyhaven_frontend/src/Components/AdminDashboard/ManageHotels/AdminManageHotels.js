@@ -45,26 +45,28 @@ const AdminManageHotel = () => {
   };
 
   return (
-    <div>
-      <Navigation />
-      <div id='cursor-blur'></div>
-      <AdminSidebar/>
-      <div className="hotel-list">
-        <input
-          type="text"
-          placeholder="Search hotels..."
-          value={query}
-          onChange={handleInputChange}
-          className="search-input"
-        />
-        {hotels.length === 0 ? (
-          <p>No hotels available</p>
-        ) : (
-          <Hotels hotels={hotels} />
-        )}
+    <>
+      <div className='browse-page'>
+        <Navigation />
+        <div id='cursor-blur'></div>
+        <AdminSidebar/>
+        <div className="hotel-list">
+          <input
+            type="text"
+            placeholder="Search hotels..."
+            value={query}
+            onChange={handleInputChange}
+            className="search-input"
+          />
+          {hotels.length === 0 ? (
+            <p><br/><br/><br/>No hotels available</p>
+          ) : (
+            <Hotels hotels={hotels} />
+          )}
+        </div>
       </div>
-      <Footer/>
-    </div>
+        <Footer/>
+    </>
   );
 };
 

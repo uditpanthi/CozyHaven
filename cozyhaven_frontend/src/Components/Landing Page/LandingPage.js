@@ -9,10 +9,9 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Footer from "../Footer/Footer";
 import SearchBar from "../SearchBar/SearchBar";
-import budget from '../../Assets/budget-travel.jpg';
-import destinations from '../../Assets/destinations-1.jpg'
-import family from '../../Assets/family.jpg'
-
+import budget from "../../Assets/budget-travel.jpg";
+import destinations from "../../Assets/destinations-1.jpg";
+import family from "../../Assets/family.jpg";
 
 const LandingPage = () => {
   // useEffect(()=>{
@@ -21,8 +20,7 @@ const LandingPage = () => {
   useEffect(() => {
     CursorAnimation();
   }, []);
-  
-  
+
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
     gsap.to(".main", {
@@ -81,7 +79,6 @@ const LandingPage = () => {
     //   gsap.killTweensOf("#page4 h1");
     // };
   }, []);
-  
 
   return (
     <div className="main">
@@ -107,8 +104,7 @@ const LandingPage = () => {
         <br />
         <br />
 
-      <SearchBar/>  
-      
+        <SearchBar />
       </div>
       <div id="page2">
         <div id="scroller">
@@ -137,38 +133,35 @@ const LandingPage = () => {
           </div>
         </div>
         <div id="cards-container">
-          <Link to={'/browsepage?location=Mumbai'}>
+          <Link to={"/browsepage?location=Mumbai"}>
             <div className="card" id="card1">
               <div className="overlay">
                 <h4>Mumbai</h4>
                 <p>
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nulla
-                  quam molestias magni cupiditate architecto et enim quas facere
-                  ipsum tempora?
+                  Bam bam bam bambai Bambai humko zam gayi. Dekh ke ie bambai ka
+                  Nazara dil ki dhadkan tham gayi
                 </p>
               </div>
             </div>
           </Link>
-          <Link to={'/browsepage?location=Delhi'}>
+          <Link to={"/browsepage?location=Delhi"}>
             <div className="card" id="card2">
               <div className="overlay">
                 <h4>Delhi</h4>
                 <p>
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nulla
-                  quam molestias magni cupiditate architecto et enim quas facere
-                  ipsum tempora?
+                  Basti hai mastaano ki dilli dilli, Gali hai deewano ki dilli 6
                 </p>
               </div>
             </div>
           </Link>
-          <Link to={'/browsepage?location=Dehradun'}>
+          <Link to={"/browsepage?location=Dehradun"}>
             <div className="card" id="card3">
               <div className="overlay">
                 <h4>Uttarakhand</h4>
                 <p>
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nulla
-                  quam molestias magni cupiditate architecto et enim quas facere
-                  ipsum tempora?
+                  MAI DEVON KI HUN NAGRI SE, BAWA KI NAGRI YE, HAWA MEIN BEHTA
+                  HAR VISHAY, AY DEVI! HAI SWAAGAT DEV NAGRI MEIN MAI
+                  DEKHUN TAAREY BAITHA PARWATON SE GARDISH MEIN YA
                 </p>
               </div>
             </div>
@@ -221,7 +214,7 @@ const LandingPage = () => {
           <img src={destinations} alt="" />
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };

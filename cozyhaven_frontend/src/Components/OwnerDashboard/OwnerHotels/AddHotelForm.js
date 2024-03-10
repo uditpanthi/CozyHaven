@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "../../Button/Button";
 import { Link, useParams } from "react-router-dom";
+import OwnerSidebar from "../OwnerSidebar/OwnerSidebar";
+import { CursorAnimation } from "../../CursorAnimation/CursorAnimation";
 
 const AddHotelForm = ({ onAddHotel }) => {
   const { ownerId } = useParams();
@@ -30,6 +32,9 @@ const AddHotelForm = ({ onAddHotel }) => {
       [field]: value,
     }));
   };
+  useEffect(()=>{
+    CursorAnimation();
+  },[]);
 
   const handleImageChange = (event) => {
     const images = Array.from(event.target.files);
@@ -95,6 +100,8 @@ const AddHotelForm = ({ onAddHotel }) => {
 
   return (
     <div className="add-form">
+      <OwnerSidebar/>
+      <div id="cursor-blur"></div>
       <h2>Add New Hotel</h2>
       <input
         type="text"

@@ -133,7 +133,8 @@ const AdminManageUser = () => {
       const lastName = user.lastName.toLowerCase().includes(query);
       const email = user.email.toLowerCase().includes(query);
       const username = user.username.toLowerCase().includes(query);
-      return firstName || lastName || email || username;
+      const role = getUserTypeLabel(user.userType).toLowerCase().includes(query);
+      return firstName || lastName || email || username || role;
     });
     setQuery(query);
     if (query === "") {
@@ -160,142 +161,146 @@ const AdminManageUser = () => {
             className="search-input"
           />
         </div>
-        <table>
-          <thead>
-            <tr>
-              <th>User ID</th>
-              <th>Username</th>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Email</th>
-              <th>Contact Number</th>
-              <th>User Type</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {users.map((user) => (
-              <tr key={user.userId}>
-                <td>{user.userId}</td>
-                <td>{user.username}</td>
-                <td>
-                  {editingUsername === user.username ? (
-                    <input
-                      type="text"
-                      value={
-                        editedUserInfo[user.username]?.firstName ||
-                        user.firstName
-                      }
-                      onChange={(e) =>
-                        handleEditUserInfo(
-                          user.username,
-                          "firstName",
-                          e.target.value
-                        )
-                      }
-                    />
-                  ) : (
-                    user.firstName
-                  )}
-                </td>
-                <td>
-                  {editingUsername === user.username ? (
-                    <input
-                      type="text"
-                      value={
-                        editedUserInfo[user.username]?.lastName || user.lastName
-                      }
-                      onChange={(e) =>
-                        handleEditUserInfo(
-                          user.username,
-                          "lastName",
-                          e.target.value
-                        )
-                      }
-                    />
-                  ) : (
-                    user.lastName
-                  )}
-                </td>
-                <td>
-                  {editingUsername === user.username ? (
-                    <input
-                      type="text"
-                      value={editedUserInfo[user.username]?.email || user.email}
-                      onChange={(e) =>
-                        handleEditUserInfo(
-                          user.username,
-                          "email",
-                          e.target.value
-                        )
-                      }
-                    />
-                  ) : (
-                    user.email
-                  )}
-                </td>
-                <td>
-                  {editingUsername === user.username ? (
-                    <input
-                      type="number"
-                      value={
-                        editedUserInfo[user.username]?.contactNumber ||
-                        user.contactNumber
-                      }
-                      onChange={(e) => {
-                        const inputValue = e.target.value;
-                        // Limit input to maximum 10 characters
-                        if (inputValue.length <= 10) {
+        {users.length === 0 ? (
+          <p>No users found.</p>
+        ) : (
+          <table>
+            <thead>
+              <tr>
+                <th>User ID</th>
+                <th>Username</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Contact Number</th>
+                <th>User Type</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {users.map((user) => (
+                <tr key={user.userId}>
+                  <td>{user.userId}</td>
+                  <td>{user.username}</td>
+                  <td>
+                    {editingUsername === user.username ? (
+                      <input
+                        type="text"
+                        value={
+                          editedUserInfo[user.username]?.firstName ||
+                          user.firstName
+                        }
+                        onChange={(e) =>
                           handleEditUserInfo(
                             user.username,
-                            "contactNumber",
-                            inputValue
-                          );
+                            "firstName",
+                            e.target.value
+                          )
                         }
-                      }}
-                    />
-                  ) : (
-                    user.contactNumber
-                  )}
-                </td>
-
-                <td>{getUserTypeLabel(user.userType)}</td>
-                <td>
-                  {editingUsername === user.username ? (
-                    <>
-                      <ConfirmBox
-                        confirmVar="save"
-                        onConfirm={() => saveEditedUserInfo(user.username)}
-                      >
-                        Save
-                      </ConfirmBox>
-                      <Button onClick={() => cancelEditUserInfo(user.username)}>
-                        Cancel
-                      </Button>
-                    </>
-                  ) : (
-                    <>
-                      <ConfirmBox
-                        confirmVar="delete"
-                        onConfirm={() => deleteUser(user.username)}
                       />
-                      <Button
-                        className="edit-button"
-                        onClick={() => setEditingUsername(user.username)}
-                      >
-                        Edit
-                      </Button>
-                    </>
-                  )}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                    ) : (
+                      user.firstName
+                    )}
+                  </td>
+                  <td>
+                    {editingUsername === user.username ? (
+                      <input
+                        type="text"
+                        value={
+                          editedUserInfo[user.username]?.lastName || user.lastName
+                        }
+                        onChange={(e) =>
+                          handleEditUserInfo(
+                            user.username,
+                            "lastName",
+                            e.target.value
+                          )
+                        }
+                      />
+                    ) : (
+                      user.lastName
+                    )}
+                  </td>
+                  <td>
+                    {editingUsername === user.username ? (
+                      <input
+                        type="text"
+                        value={editedUserInfo[user.username]?.email || user.email}
+                        onChange={(e) =>
+                          handleEditUserInfo(
+                            user.username,
+                            "email",
+                            e.target.value
+                          )
+                        }
+                      />
+                    ) : (
+                      user.email
+                    )}
+                  </td>
+                  <td>
+                    {editingUsername === user.username ? (
+                      <input
+                        type="number"
+                        value={
+                          editedUserInfo[user.username]?.contactNumber ||
+                          user.contactNumber
+                        }
+                        onChange={(e) => {
+                          const inputValue = e.target.value;
+                          // Limit input to maximum 10 characters
+                          if (inputValue.length <= 10) {
+                            handleEditUserInfo(
+                              user.username,
+                              "contactNumber",
+                              inputValue
+                            );
+                          }
+                        }}
+                      />
+                    ) : (
+                      user.contactNumber
+                    )}
+                  </td>
+                  <td>{getUserTypeLabel(user.userType)}</td>
+                  <td>
+                    {editingUsername === user.username ? (
+                      <>
+                        <ConfirmBox
+                          confirmVar="save"
+                          onConfirm={() => saveEditedUserInfo(user.username)}
+                        >
+                          Save
+                        </ConfirmBox>
+                        <Button onClick={() => cancelEditUserInfo(user.username)}>
+                          Cancel
+                        </Button>
+                      </>
+                    ) : (
+                      <>
+                        <ConfirmBox
+                          confirmVar="delete"
+                          onConfirm={() => deleteUser(user.username)}
+                        />
+                        <Button
+                          className="edit-button"
+                          onClick={() => setEditingUsername(user.username)}
+                        >
+                          Edit
+                        </Button>
+                      </>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
       </div>
       <Footer />
     </div>
   );
+  
 };
 
 export default AdminManageUser;

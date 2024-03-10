@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Navigation from "../Navigation/Navigation";
 import AdminSidebar from "../AdminDashboard/AdminSidebar/AdminSidebar";
 import { CursorAnimation } from "../CursorAnimation/CursorAnimation";
+import ConfirmBox from "../ConfirmDelete/ConfirmDelete";
 
 const Reservations = () => {
   const [reservations, setReservations] = useState([]);
@@ -26,9 +27,27 @@ const Reservations = () => {
   };
 
   useEffect(() => {
-    CursorAnimation()
+    CursorAnimation();
     fetchReservations();
   }, []); // Empty dependency array to fetch reservations only once when the component mounts
+
+  const handleDeleteReservation = async (id) => {
+    try {
+      const response = await fetch(
+        `http://localhost:5108/api/Reservation/DeleteReservation?id=${id}`,
+        {
+          method: "DELETE"
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Failed to delete reservation");
+      }
+      // Remove the deleted reservation from the reservations state
+      setReservations(reservations.filter((reservation) => reservation.reservationId !== id));
+    } catch (error) {
+      console.error("Error deleting reservation:", error);
+    }
+  };
 
   return (
     <>
@@ -46,6 +65,7 @@ const Reservations = () => {
                 <th>Check-in Date</th>
                 <th>Check-out Date</th>
                 <th>Price</th>
+                <th>Action</th> {/* Added Action column for delete button */}
               </tr>
             </thead>
             <tbody>
@@ -56,6 +76,9 @@ const Reservations = () => {
                   <td>{reservation.checkInDate}</td>
                   <td>{reservation.checkOutDate}</td>
                   <td>{reservation.totalPrice}</td>
+                  <td>
+                    <ConfirmBox confirmVar="delete" onConfirm={() => handleDeleteReservation(reservation.reservationId)}>Delete</ConfirmBox>
+                  </td> {/* Delete button */}
                 </tr>
               ))}
             </tbody>

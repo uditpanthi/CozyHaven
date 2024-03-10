@@ -181,7 +181,7 @@ namespace CozyHaven.Services
             float totalPrice = (float)span.TotalDays * room.PricePerNight;
 
             Reservation.TotalPrice = totalPrice;
-            Reservation.Status = BookingStatus.Approved;
+            Reservation.Status = BookingStatus.Pending;
             Reservation.BookedDate = DateTime.UtcNow;
             Reservation.UserId = user.UserId;
             var addedReservation=await _reservationrepository.Add(Reservation);

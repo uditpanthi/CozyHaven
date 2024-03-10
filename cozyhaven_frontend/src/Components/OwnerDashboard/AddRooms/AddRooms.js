@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Button from "../../Button/Button";
 import OwnerHotelsRooms from "../OwnerHotelRooms/OwnerHotelsRooms";
+import OwnerSidebar from "../OwnerSidebar/OwnerSidebar";
+import { CursorAnimation } from "../../CursorAnimation/CursorAnimation";
 
 const AddRooms = () => {
   const { hotelId } = useParams(); // Get hotelId from URL params
@@ -55,9 +57,14 @@ const AddRooms = () => {
       console.error("Error adding room:", error);
     }
   };
+  useEffect(()=>{
+    CursorAnimation();
+  },[]);
 
   return (
     <div className="add-form">
+      <OwnerSidebar/>
+      <div id="cursor-blur"></div>
       <h2>Add Room</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">

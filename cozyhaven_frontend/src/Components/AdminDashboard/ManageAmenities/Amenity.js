@@ -223,17 +223,17 @@ const AdminAmenity = () => {
                       >
                         Update
                       </Button>
-                      <Button
-                        className="admin-amenity-btn"
-                        onClick={() => addAmenityToHotel(1, amenity.amenityId)} // Assuming hotel ID is 1, change accordingly
-                      >
-                        Add to Hotel
-                      </Button>
-
                       <ConfirmBox
                         confirmVar="delete"
                         onConfirm={() => deleteAmenity(amenity.amenityId)}
                       ></ConfirmBox>
+                      {/* <Button
+                        className="admin-amenity-btn"
+                        onClick={() => addAmenityToHotel(1, amenity.amenityId)} // Assuming hotel ID is 1, change accordingly
+                      >
+                        Add to Hotel
+                      </Button> */}
+
                     </div>
                   </li>
                 ))}
