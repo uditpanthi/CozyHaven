@@ -4,6 +4,14 @@ import AdminSidebar from "../AdminDashboard/AdminSidebar/AdminSidebar";
 import { CursorAnimation } from "../CursorAnimation/CursorAnimation";
 import ConfirmBox from "../ConfirmDelete/ConfirmDelete";
 
+const formatDate=(dateString)=>{
+  const date=new Date(dateString);
+  const day=date.getDate();
+  const month=date.getMonth()+1;
+  const year=date.getFullYear();
+  return `${day}-${month < 10 ? '0' + month:month}-${year}`
+};
+
 const Reservations = () => {
   const [reservations, setReservations] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -55,38 +63,30 @@ const Reservations = () => {
       <AdminSidebar />
       <div id="cursor-blur"></div>
       <div className="reservations-container">
-        <span>Reservations</span>
-        <div className="reservation-table">
-          <table className="table">
-            <thead>
-              <tr>
-                <th>Reservation ID</th>
-                <th>Status</th>
-                <th>Check-in Date</th>
-                <th>Check-out Date</th>
-                <th>Price</th>
-                <th>Action</th> {/* Added Action column for delete button */}
-              </tr>
-            </thead>
-            <tbody>
-              {reservations.map((reservation) => (
-                <tr key={reservation.reservationId}>
-                  <td>{reservation.reservationId}</td>
-                  <td>{reservation.status}</td>
-                  <td>{reservation.checkInDate}</td>
-                  <td>{reservation.checkOutDate}</td>
-                  <td>{reservation.totalPrice}</td>
-                  <td>
-                    <ConfirmBox confirmVar="delete" onConfirm={() => handleDeleteReservation(reservation.reservationId)}>Delete</ConfirmBox>
-                  </td> {/* Delete button */}
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <div className="reservation-heading-tile">
+          <p>Reservation ID</p>
+          <p>Status</p>
+          <p>Check-in Date</p>
+          <p>Check-out Date</p>
+          <p>Price</p>
+          <p>Action</p>
+        </div>
+        <div className="reservation-tiles">
+          {reservations.map((reservation) => (
+              <div key={reservation.reservationId} className="reservation-tile-data">
+                <p>{reservation.reservationId}</p>
+                <p>{reservation.status}</p>
+                <p>{formatDate(reservation.checkInDate)}</p>
+                <p>{formatDate(reservation.checkOutDate)}</p>
+                <p>{reservation.totalPrice}</p>
+                <ConfirmBox confirmVar="delete" onConfirm={() => handleDeleteReservation(
+                  reservation.reservationId)}>
+                  Delete</ConfirmBox> </div>
+            ))}
         </div>
       </div>
     </>
   );
-};
 
+};
 export default Reservations;

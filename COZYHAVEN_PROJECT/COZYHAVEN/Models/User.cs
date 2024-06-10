@@ -41,13 +41,12 @@ namespace CozyHaven.Models
         public ICollection<Review>? Reviews { get; set; }
         [JsonIgnore]
         public ICollection<Hotel>? Hotels { get; set; }
-
-        
+     
     }
         public enum UserType
         {
             Customer,
-            Admin,
-            HotelOwner
+            HotelOwner,
+            Admin
         }
 }

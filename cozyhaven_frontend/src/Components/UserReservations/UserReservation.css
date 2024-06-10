@@ -1,5 +1,68 @@
 /* UserReservations.css */
 
+
+/* .reservation-tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+} */
+
+.reservation-tile {
+  background-color: none;
+  border: 2px solid black;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+.reservation-heading-tile {
+  display: grid;
+  grid-template-columns: repeat(6,1fr);
+  gap: 10px ;
+  background-color: #96c11ec0;
+  color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  margin-right: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.reservation-tile-data {
+  display: grid;
+  grid-template-columns: repeat(6,1fr);
+  gap: 10px ;
+  margin-right: 8px;
+  color: #fff;
+  padding: 20px;
+  border: 2px solid rgba(155, 151, 151, 0.842);
+  border-radius: 8px;
+  margin-bottom: 40px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.reservation-heading-tile p {
+  font-weight: bold;
+  text-align: center;
+}
+
+.reservation-tile:hover {
+  transform: translateY(-5px);
+}
+
+.reservation-tile p {
+  margin: 5px 0;
+  font-size: 16px;
+}
+
+.confirm-delete {
+  color: #e74c3c;
+  cursor: pointer;
+}
+
+.confirm-delete:hover {
+  text-decoration: underline;
+}
+
 .user-reservations-container {
     margin: 20px;
     padding: 20px;

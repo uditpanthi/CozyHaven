@@ -1,35 +1,40 @@
 {
   "format": 1,
   "restore": {
-    "D:\\PROJECTS\\FINAL COZY HAVEN\\COZYHAVEN_PROJECT\\COZYHAVENTEST\\COZYHAVENTEST.csproj": {}
+    "C:\\Users\\2000123701\\PROJECTS\\CozyHaven\\COZYHAVEN_PROJECT\\COZYHAVENTEST\\COZYHAVENTEST.csproj": {}
   },
   "projects": {
-    "D:\\PROJECTS\\FINAL COZY HAVEN\\COZYHAVEN_PROJECT\\COZYHAVENTEST\\COZYHAVENTEST.csproj": {
+    "C:\\Users\\2000123701\\PROJECTS\\CozyHaven\\COZYHAVEN_PROJECT\\COZYHAVENTEST\\COZYHAVENTEST.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\PROJECTS\\FINAL COZY HAVEN\\COZYHAVEN_PROJECT\\COZYHAVENTEST\\COZYHAVENTEST.csproj",
+        "projectUniqueName": "C:\\Users\\2000123701\\PROJECTS\\CozyHaven\\COZYHAVEN_PROJECT\\COZYHAVENTEST\\COZYHAVENTEST.csproj",
         "projectName": "COZYHAVENTEST",
-        "projectPath": "D:\\PROJECTS\\FINAL COZY HAVEN\\COZYHAVEN_PROJECT\\COZYHAVENTEST\\COZYHAVENTEST.csproj",
-        "packagesPath": "C:\\Users\\win 10\\.nuget\\packages\\",
-        "outputPath": "D:\\PROJECTS\\FINAL COZY HAVEN\\COZYHAVEN_PROJECT\\COZYHAVENTEST\\obj\\",
+        "projectPath": "C:\\Users\\2000123701\\PROJECTS\\CozyHaven\\COZYHAVEN_PROJECT\\COZYHAVENTEST\\COZYHAVENTEST.csproj",
+        "packagesPath": "C:\\Users\\2000123701\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\2000123701\\PROJECTS\\CozyHaven\\COZYHAVEN_PROJECT\\COZYHAVENTEST\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\win 10\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\2000123701\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net6.0"
+          "net8.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net6.0": {
-            "targetAlias": "net6.0",
+          "net8.0": {
+            "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\PROJECTS\\FINAL COZY HAVEN\\COZYHAVEN_PROJECT\\COZYHAVEN\\COZYHAVEN.csproj": {
-                "projectPath": "D:\\PROJECTS\\FINAL COZY HAVEN\\COZYHAVEN_PROJECT\\COZYHAVEN\\COZYHAVEN.csproj"
+              "C:\\Users\\2000123701\\PROJECTS\\CozyHaven\\COZYHAVEN_PROJECT\\COZYHAVEN\\COZYHAVEN.csproj": {
+                "projectPath": "C:\\Users\\2000123701\\PROJECTS\\CozyHaven\\COZYHAVEN_PROJECT\\COZYHAVEN\\COZYHAVEN.csproj"
               }
             }
           }
@@ -38,11 +43,16 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
+        "net8.0": {
+          "targetAlias": "net8.0",
           "dependencies": {
             "Microsoft.EntityFrameworkCore.InMemory": {
               "target": "Package",
@@ -89,33 +99,38 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\PROJECTS\\FINAL COZY HAVEN\\COZYHAVEN_PROJECT\\COZYHAVEN\\COZYHAVEN.csproj": {
+    "C:\\Users\\2000123701\\PROJECTS\\CozyHaven\\COZYHAVEN_PROJECT\\COZYHAVEN\\COZYHAVEN.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\PROJECTS\\FINAL COZY HAVEN\\COZYHAVEN_PROJECT\\COZYHAVEN\\COZYHAVEN.csproj",
+        "projectUniqueName": "C:\\Users\\2000123701\\PROJECTS\\CozyHaven\\COZYHAVEN_PROJECT\\COZYHAVEN\\COZYHAVEN.csproj",
         "projectName": "COZYHAVEN",
-        "projectPath": "D:\\PROJECTS\\FINAL COZY HAVEN\\COZYHAVEN_PROJECT\\COZYHAVEN\\COZYHAVEN.csproj",
-        "packagesPath": "C:\\Users\\win 10\\.nuget\\packages\\",
-        "outputPath": "D:\\PROJECTS\\FINAL COZY HAVEN\\COZYHAVEN_PROJECT\\COZYHAVEN\\obj\\",
+        "projectPath": "C:\\Users\\2000123701\\PROJECTS\\CozyHaven\\COZYHAVEN_PROJECT\\COZYHAVEN\\COZYHAVEN.csproj",
+        "packagesPath": "C:\\Users\\2000123701\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\2000123701\\PROJECTS\\CozyHaven\\COZYHAVEN_PROJECT\\COZYHAVEN\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\win 10\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\2000123701\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net6.0"
+          "net8.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net6.0": {
-            "targetAlias": "net6.0",
+          "net8.0": {
+            "targetAlias": "net8.0",
             "projectReferences": {}
           }
         },
@@ -123,33 +138,38 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
+        "net8.0": {
+          "targetAlias": "net8.0",
           "dependencies": {
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
-              "version": "[6.0.26, )"
+              "version": "[8.0.6, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[6.0.26, )"
+              "version": "[8.0.6, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[6.0.26, )"
+              "version": "[8.0.6, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[6.0.26, )"
+              "version": "[8.0.6, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
-              "version": "[6.5.0, )"
+              "version": "[6.6.2, )"
             }
           },
           "imports": [
@@ -171,7 +191,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

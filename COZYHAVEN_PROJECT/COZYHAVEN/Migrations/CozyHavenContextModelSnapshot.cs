@@ -17,10 +17,10 @@ namespace COZYHAVEN.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.26")
+                .HasAnnotation("ProductVersion", "8.0.6")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("CozyHaven.Models.Amenity", b =>
                 {
@@ -28,7 +28,7 @@ namespace COZYHAVEN.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AmenityId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AmenityId"));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -45,7 +45,7 @@ namespace COZYHAVEN.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("HotelId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("HotelId"));
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -148,11 +148,11 @@ namespace COZYHAVEN.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PaymentId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PaymentId"));
 
                     b.Property<float>("Amount")
                         .HasPrecision(10, 2)
-                        .HasColumnType("float(10)");
+                        .HasColumnType("float");
 
                     b.Property<DateTime>("PaymentDate")
                         .HasColumnType("datetime2");
@@ -178,7 +178,7 @@ namespace COZYHAVEN.Migrations
                         {
                             PaymentId = 1,
                             Amount = 250f,
-                            PaymentDate = new DateTime(2024, 3, 2, 11, 34, 17, 514, DateTimeKind.Local).AddTicks(9548),
+                            PaymentDate = new DateTime(2024, 6, 6, 14, 7, 37, 675, DateTimeKind.Local).AddTicks(4767),
                             PaymentMethod = "Credit Card",
                             ReservationId = 1,
                             Status = 1
@@ -191,7 +191,7 @@ namespace COZYHAVEN.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ReservationId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ReservationId"));
 
                     b.Property<int>("Adults")
                         .HasColumnType("int");
@@ -216,7 +216,7 @@ namespace COZYHAVEN.Migrations
 
                     b.Property<float>("TotalPrice")
                         .HasPrecision(10, 2)
-                        .HasColumnType("float(10)");
+                        .HasColumnType("float");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -234,9 +234,9 @@ namespace COZYHAVEN.Migrations
                         {
                             ReservationId = 1,
                             Adults = 2,
-                            BookedDate = new DateTime(2024, 3, 2, 11, 34, 17, 514, DateTimeKind.Local).AddTicks(9534),
-                            CheckInDate = new DateTime(2024, 3, 2, 0, 0, 0, 0, DateTimeKind.Local),
-                            CheckOutDate = new DateTime(2024, 3, 4, 0, 0, 0, 0, DateTimeKind.Local),
+                            BookedDate = new DateTime(2024, 6, 6, 14, 7, 37, 675, DateTimeKind.Local).AddTicks(4739),
+                            CheckInDate = new DateTime(2024, 6, 6, 0, 0, 0, 0, DateTimeKind.Local),
+                            CheckOutDate = new DateTime(2024, 6, 8, 0, 0, 0, 0, DateTimeKind.Local),
                             Children = 0,
                             RoomId = 1,
                             Status = 2,
@@ -251,7 +251,7 @@ namespace COZYHAVEN.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ReviewId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ReviewId"));
 
                     b.Property<string>("Comment")
                         .HasColumnType("nvarchar(max)");
@@ -281,7 +281,7 @@ namespace COZYHAVEN.Migrations
                         {
                             ReviewId = 1,
                             Comment = "Great experience!",
-                            DatePosted = new DateTime(2024, 3, 2, 11, 34, 17, 514, DateTimeKind.Local).AddTicks(9495),
+                            DatePosted = new DateTime(2024, 6, 6, 14, 7, 37, 675, DateTimeKind.Local).AddTicks(4663),
                             HotelId = 1,
                             Rating = 4.5f,
                             UserId = 1
@@ -290,7 +290,7 @@ namespace COZYHAVEN.Migrations
                         {
                             ReviewId = 2,
                             Comment = "Excellent service!",
-                            DatePosted = new DateTime(2024, 3, 2, 11, 34, 17, 514, DateTimeKind.Local).AddTicks(9497),
+                            DatePosted = new DateTime(2024, 6, 6, 14, 7, 37, 675, DateTimeKind.Local).AddTicks(4666),
                             HotelId = 2,
                             Rating = 5f,
                             UserId = 2
@@ -303,7 +303,7 @@ namespace COZYHAVEN.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RoomId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RoomId"));
 
                     b.Property<bool>("Available")
                         .HasColumnType("bit");
@@ -319,7 +319,7 @@ namespace COZYHAVEN.Migrations
 
                     b.Property<float>("PricePerNight")
                         .HasPrecision(10, 2)
-                        .HasColumnType("float(10)");
+                        .HasColumnType("float");
 
                     b.Property<float>("RoomSize")
                         .HasColumnType("real");
@@ -387,7 +387,7 @@ namespace COZYHAVEN.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"));
 
                     b.Property<string>("ContactNumber")
                         .IsRequired()
@@ -447,7 +447,7 @@ namespace COZYHAVEN.Migrations
                             Key = new byte[0],
                             LastName = "Doe",
                             Password = new byte[0],
-                            RegistrationDate = new DateTime(2024, 3, 2, 11, 34, 17, 514, DateTimeKind.Local).AddTicks(9210),
+                            RegistrationDate = new DateTime(2024, 6, 6, 14, 7, 37, 675, DateTimeKind.Local).AddTicks(4226),
                             UserType = 2,
                             Username = "john_doe"
                         },
@@ -461,7 +461,7 @@ namespace COZYHAVEN.Migrations
                             Key = new byte[0],
                             LastName = "Smith",
                             Password = new byte[0],
-                            RegistrationDate = new DateTime(2024, 3, 2, 11, 34, 17, 514, DateTimeKind.Local).AddTicks(9214),
+                            RegistrationDate = new DateTime(2024, 6, 6, 14, 7, 37, 675, DateTimeKind.Local).AddTicks(4230),
                             UserType = 1,
                             Username = "jane_smith"
                         });

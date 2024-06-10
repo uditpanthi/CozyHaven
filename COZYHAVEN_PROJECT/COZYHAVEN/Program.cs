@@ -71,7 +71,7 @@ namespace CozyHaven
             {
                 options.AddPolicy("ReactPolicy", opts =>
                 {
-                    opts.WithOrigins("http://localhost:3000", "null").AllowAnyMethod().AllowAnyHeader();
+                    opts.WithOrigins("http://localhost:3003", "null").AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin();
                 });
             });
 

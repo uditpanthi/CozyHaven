@@ -68,16 +68,6 @@ const LandingPage = () => {
         scrub: 3,
       },
     });
-
-    // return () => {
-    //   // Kill any ongoing animations
-    //   gsap.killTweensOf(".main");
-    //   gsap.killTweensOf("#about-us img,#about-us-in");
-    //   gsap.killTweensOf(".card");
-    //   gsap.killTweensOf("#colon1");
-    //   gsap.killTweensOf("#colon2");
-    //   gsap.killTweensOf("#page4 h1");
-    // };
   }, []);
 
   return (
